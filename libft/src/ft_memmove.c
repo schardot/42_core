@@ -9,7 +9,6 @@ void    *ft_memmove(void *dst, const void *src, size_t len)
         aux[len - size] = src[len - size];
         size --;
     }
-    ft_memcpy(dst, aux, len);
-
+    return (ft_memcpy(dst, aux, len));
 }
 
