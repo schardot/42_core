@@ -21,7 +21,7 @@ Description: Write your own library, a collection of functions that will be a us
 | memset | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | bzero | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | memcpy | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
-| memmove | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| memmove | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strlcpy | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | strlcat | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | toupper | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
