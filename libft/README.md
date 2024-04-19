@@ -24,7 +24,7 @@ Description: Write your own library, a collection of functions that will be a us
 | memmove | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strlcpy | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strlcat | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
-| toupper | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| toupper | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | tolower | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | strrchr | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | memchr | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
