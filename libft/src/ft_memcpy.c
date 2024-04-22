@@ -1,27 +1,30 @@
 #include "libft.h"
 
-void    *ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-    char    *d = dest;
-    const char    *s = src;
-    while (n > 0)
-    {
-        *d++ = *s++;
-        n --;
-    }
-    return (dest);
+	char	*d;
+	const char	*s;
+
+	d = dest;
+	s = src;
+	while (n > 0)
+	{
+		*d++ = *s++;
+		n --;
+	}
+	return (dest);
 }
 
-// #include <stdio.h>
+#include <stdio.h>
 
-// int main(void)
-// {
-//     char dest[] = "Hello";
-//     char src[] = "abc";
+int main(void)
+{
+    char dest[] = "Hello";
+    char src[] = "abc";
 
-//     printf("Before memcpy, dest: %s\n", dest);
-//     printf("After memcpy, dest: %s\n", (char *)ft_memcpy(dest, src, ft_strlen(dest)));
-// }
+    printf("Before memcpy, dest: %s\n", dest);
+    printf("After memcpy, dest: %s\n", (char *)ft_memcpy(dest, src, ft_strlen(dest)));
+}
 
 // In C, when dealing with pointers and memory manipulation functions like memcpy, it 's essential to handle the types correctly to avoid potential issues related to pointer arithmetic and type safety. Let' s delve into why using separate pointers d and s is necessary :
 
