@@ -18,7 +18,7 @@ Description: Write your own library, a collection of functions that will be a us
 | isascii | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | isprint | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | strlen | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
-| memset | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
+| memset | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | bzero | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | memcpy | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | memmove | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
