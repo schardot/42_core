@@ -1,0 +1,9 @@
+ok!
+
+In memcpy and memmove, the difference is that memmove stores the thing to be copied in a different place, and checks from there. It sounds pointless when you think of just copying array1 to array2, but if you decide to change things inside ONE array... it can overlap and get weird quickly.
+
+char src[] = "Hello, World!";
+char dest[20];
+
+ft_memcpy(array + 8, array, 7)
+array[] ==
