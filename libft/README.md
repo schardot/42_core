@@ -19,7 +19,7 @@ Description: Write your own library, a collection of functions that will be a us
 | isprint | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | strlen | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | memset | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
-| bzero | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
+| bzero | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | memcpy | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | memmove | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strlcpy | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
