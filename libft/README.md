@@ -52,3 +52,17 @@ Description: Write your own library, a collection of functions that will be a us
 | ft_putstr_fd | write | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_putendl_fd | write | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_putnbr_fd | write | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+
+### BONUS PART
+
+| File name | Allowed Functions | Status | Written | Tested | Norminetted | Final check | Included in tester |
+| --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
+| ft_lstnew | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstadd_front | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstsize | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstlast | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstadd_back | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstdelone | free | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstclear | free | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstiter | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_lstmap | malloc, free | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
