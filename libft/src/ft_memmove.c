@@ -12,7 +12,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	size = len;
 	ft_bzero(aux,  sizeof(char) * len);
 	ft_memcpy(aux, src, sizeof(char) * len);
-
 	while (len > 0)
 	{
 		*d = *aux;
