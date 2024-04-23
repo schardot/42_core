@@ -5,11 +5,18 @@ char    *ft_strchr(const char *s, int c)
 	while (*s != '\0')
 	{
 		if (*s == c)
-			return (s);
+			return ((char *)s);
 		s ++;
 	}
 	if (c == '\0')
-		return (s);
+		return ((char *)s);
 	else
 		return (NULL);
+}
+#include <stdio.h>
+
+int	main(void)
+{
+	char	s[] = "hello";
+	printf("%s", ft_strchr(s, 'l'));
 }
