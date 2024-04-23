@@ -31,7 +31,7 @@ Description: Write your own library, a collection of functions that will be a us
 | strchr | No | 🟡 | 🟢  | 🟢 | 🔴 | 🔴 | 🔴 |
 | strrchr | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | memchr | No | 🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
-| memcmp | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
+| memcmp | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strnstr | No |  🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
 | atoi | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | calloc | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
