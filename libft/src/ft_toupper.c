@@ -1,11 +1,18 @@
 #include "libft.h"
+#include <stdio.h>
 
-int toupper(int c)
+int ft_toupper(int c)
 {
-	if (isalpha(c) && (c >= 'a' && c <= 'z'))
-	{
-		c -= 32;
-		return (0);   
-	}
-	return (1);
+	if (ft_isalpha(c) && (c >= 'a' && c <= 'z'))
+		return (c -= 32);   
+	return (c);
+}
+
+int	main(void)
+{
+	//char a = 'a'; - should upper
+	//char a = 'A'; - should leave it alone
+	char a = '0'; // - should leave it alone
+	a = ft_toupper(a);
+	printf("%c", a);
 }
