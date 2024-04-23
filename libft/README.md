@@ -10,6 +10,8 @@
 
 Description: Write your own library, a collection of functions that will be a useful tool for your cursus.
 
+### IN LIBC 
+
 | File name | Allowed Functions | Status | Written | Tested | Norminetted | Final check | Included in tester |
 | --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
 | isalpha | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
@@ -35,8 +37,10 @@ Description: Write your own library, a collection of functions that will be a us
 | calloc | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | strdup | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 
-NOT IN LIBC - check pdf for prototype
+### NOT IN LIBC - check pdf for prototype
 
+| File name | Allowed Functions | Status | Written | Tested | Norminetted | Final check | Included in tester |
+| --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
 | ft_substr | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_strjoin | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_strtrim | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
