@@ -15,14 +15,14 @@ Description: Write your own library, a collection of functions that will be a us
 | File name | Allowed Functions | Status | Written | Tested | Norminetted | Final check | Included in tester |
 | --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
 | isalpha | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| isdigit | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| isalnum | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| isascii | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| isprint | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| strlen | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| memset | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| bzero | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| memcpy | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
+| isdigit | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| isalnum | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| isascii | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| isprint | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| strlen | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| memset | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| bzero | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| memcpy | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
 | memmove | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
 | strlcpy | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strlcat | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
