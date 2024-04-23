@@ -23,7 +23,7 @@ Description: Write your own library, a collection of functions that will be a us
 | memcpy | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | memmove | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strlcpy | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
-| strlcat | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
+| strlcat | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 |
 | toupper | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | tolower | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strchr | No | 🟡 | 🟢  | 🔴 | 🔴 | 🔴 |
