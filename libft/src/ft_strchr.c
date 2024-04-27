@@ -13,10 +13,10 @@ char    *ft_strchr(const char *s, int c)
 	else
 		return (NULL);
 }
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-	char	s[] = "hello";
-	printf("%s", ft_strchr(s, 'l'));
-}
+// int	main(void)
+// {
+// 	char	s[] = "hello";
+// 	printf("%s", ft_strchr(s, 'l'));
+// }
