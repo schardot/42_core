@@ -35,7 +35,7 @@ Description: Write your own library, a collection of functions that will be a us
 | strnstr | No |  🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
 | atoi | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
 | calloc | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| strdup | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| strdup | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 
 ### NOT IN LIBC - check pdf for prototype
 
