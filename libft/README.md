@@ -10,7 +10,7 @@
 
 Description: Write your own library, a collection of functions that will be a useful tool for your cursus.
 
-### IN LIBC 
+### IN LIBC
 
 | File name | Allowed Functions | Status | Written | Tested | Norminetted | Final check | Included in tester |
 | --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
@@ -33,8 +33,8 @@ Description: Write your own library, a collection of functions that will be a us
 | memchr | No | 🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
 | memcmp | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strnstr | No |  🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
-| atoi | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
-| calloc | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| atoi | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| calloc | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strdup | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 
 ### NOT IN LIBC - check pdf for prototype
