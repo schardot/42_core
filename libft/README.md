@@ -42,7 +42,7 @@ Description: Write your own library, a collection of functions that will be a us
 | File name | Allowed Functions | Status | Written | Tested | Norminetted | Final check | Included in tester |
 | --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
 | ft_substr | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| ft_strjoin | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_strjoin | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | ft_strtrim | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_split | malloc, free | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_itoa | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
