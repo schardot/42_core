@@ -20,11 +20,11 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		return (dstlen + srclen);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int	main(void)
-{
-		char	dst[8] = "oi";
-		printf("the return value is %ld\n", ft_strlcat(dst, "hello", 8));
-		printf("this is dst: %s", dst);
-}
+// int	main(void)
+// {
+// 		char	dst[8] = "oi";
+// 		printf("the return value is %ld\n", ft_strlcat(dst, "hello", 8));
+// 		printf("this is dst: %s", dst);
+// }
