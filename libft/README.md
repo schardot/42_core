@@ -46,7 +46,7 @@ Description: Write your own library, a collection of functions that will be a us
 | ft_strtrim | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | ft_split | malloc, free | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | ft_itoa | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| ft_strmapi | malloc | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_strmapi | malloc | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_striteri | No | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_putchar_fd | write | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_putstr_fd | write | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
