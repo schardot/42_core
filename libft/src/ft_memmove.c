@@ -16,13 +16,13 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return (&d[0]);
 }
 
- #include <stdio.h>
+//  #include <stdio.h>
 
-int	main(void)
-{
-	char	dest[] = "Hello";
-	char	src[] = "abc";
+// int	main(void)
+// {
+// 	char	dest[] = "Hello";
+// 	char	src[] = "abc";
 
-	printf("Before memmove, dest: %s\n", dest);
-	printf("After memmove, dest: %s\n", (char *)ft_memmove(dest, src, ft_strlen(dest)));
-}
+// 	printf("Before memmove, dest: %s\n", dest);
+// 	printf("After memmove, dest: %s\n", (char *)ft_memmove(dest, src, ft_strlen(dest)));
+// }
