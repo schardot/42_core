@@ -34,9 +34,9 @@ Description: Write your own library, a collection of functions that will be a us
 | memchr | No | 🟡 | 🟢  | 🟢 | 🔴 | 🟢 | 🔴 |
 | memcmp | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strnstr | No |  🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
-| atoi | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| atoi | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
 | calloc | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| strdup | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
+| strdup | malloc | 🟡 | 🟢 | 🟢 | 🔴 | 🟢 | 🔴 |
 
 ### NOT IN LIBC - check pdf for prototype
 
