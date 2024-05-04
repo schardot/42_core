@@ -7,9 +7,9 @@ void	*memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (s[i] == c)
+		if (((unsigned char *)s)[i] == (unsigned char)c)
 		{
-			return (&s[i]);
+			return ((void *)&((char *)s)[i]);
 		}
 		i ++;
 	}
