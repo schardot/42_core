@@ -4,7 +4,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -std=c99 -std=gnu99
 
 NAME = libft.a
 
@@ -13,11 +13,10 @@ all: $(NAME)
 $(NAME): $(OBJS)
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 
-fclean:
-	clean
-	rm -f $(NAME)
+fclean: clean
+	$(RM) $(NAME)
 
 re: fclean all
 
