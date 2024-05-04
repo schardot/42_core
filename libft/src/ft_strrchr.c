@@ -17,7 +17,6 @@ char	*ft_strrchr(const char *s, int c)
 }
 
 // #include <stdio.h>
-
 // int	main(void)
 // {
 // 	char	s[] = "hello";

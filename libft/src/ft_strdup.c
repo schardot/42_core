@@ -17,7 +17,6 @@ char    *ft_strdup(const char *str)
 }
 
 // #include <stdio.h>
-
 // int main(void)
 // {
 //     char arr[] = "oi beleza";

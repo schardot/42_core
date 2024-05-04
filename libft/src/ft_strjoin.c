@@ -19,7 +19,6 @@ char    *ft_strjoin(char const *s1, char const *s2)
         return (NULL);
 }
 // #include <stdio.h>
-
 // int main(void)
 // {
 //     printf("%s\n", ft_strjoin("oi ", "blz"));
