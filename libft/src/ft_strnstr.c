@@ -15,7 +15,7 @@ char	*strnstr(const char *big, const char *little, size_t len)
 		if (big[b] == little[l])
 		{
 			foundit = (char *)big + b;
-			while (big[b] == little[l] && little[l] != '\0' && i < len))
+			while (big[b] == little[l] && little[l] != '\0' && i < len)
 			{
 				b ++;
 				l ++;
