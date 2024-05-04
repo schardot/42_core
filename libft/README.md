@@ -50,7 +50,7 @@ Description: Write your own library, a collection of functions that will be a us
 | ft_striteri | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_putchar_fd | write | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_putstr_fd | write | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
-| ft_putendl_fd | write | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
+| ft_putendl_fd | write | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
 | ft_putnbr_fd | write | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 | 🔴 |
 
 ### BONUS PART
