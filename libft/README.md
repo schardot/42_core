@@ -30,6 +30,7 @@ Description: Write your own library, a collection of functions that will be a us
 | tolower | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strchr | No | 🟡 | 🟢  | 🟢 | 🔴 | 🔴 | 🔴 |
 | strrchr | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
+| strncmp | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | memchr | No | 🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
 | memcmp | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strnstr | No |  🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |

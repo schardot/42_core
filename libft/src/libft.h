@@ -19,6 +19,7 @@ size_t  ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
 size_t  ft_strlen(const char *s);
 char    *ft_strnstr(const char *big, const char *little, size_t len);
 char    *ft_strrchr(const char *s, int c);
+int strncmp(const char *str1, const char *str2, size_t n);
 int ft_tolower(int c);
 int ft_toupper(int c);
 void *ft_calloc(size_t count, size_t size);
