@@ -4,12 +4,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	char	aux[len];
 	char	*d;
-	const char	*s;
-	size_t	size;
 
 	d = dst;
-	s = src;
-	size = len;
 	ft_bzero(aux,  sizeof(char) * len);
 	ft_memcpy(aux, src, sizeof(char) * len);
 	while (len > 0)
