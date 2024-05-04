@@ -26,10 +26,10 @@ char    *ft_strtrim(char const *s1, char const *set)
     //printf("start: %d, end: %d, strlen: %ld\n", start, end, ft_strlen(s1));
     return (ft_substr(s1, start, (ft_strlen(s1) - start - end)));
 }
-//#include <stdio.h>
+// //#include <stdio.h>
 
-int main(void)
-{
-    printf("%s\n", ft_strtrim(",    hello, sdsds,    ", "s ,"));
-    // printf("%s\n", ft_strtrim(",    hello, sdsds,     ", "s ,"));
-}
+// int main(void)
+// {
+//     printf("%s\n", ft_strtrim(",    hello, sdsds,    ", "s ,"));
+//     // printf("%s\n", ft_strtrim(",    hello, sdsds,     ", "s ,"));
+// }
