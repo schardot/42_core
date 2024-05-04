@@ -12,26 +12,26 @@ Description: Write your own library, a collection of functions that will be a us
 
 ### IN LIBC
 
-| File name | Allowed Functions | Status | Written | Tested | Norminetted | Final check | Included in tester |
+| File name | Allowed Functions | Status | Written | Tested | Norminetted | Passed tester | Final check |
 | --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
-| isalpha | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| isdigit | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| isalnum | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| isascii | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| isprint | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| strlen | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| memset | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| bzero | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
-| memcpy | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
+| isalpha | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| isdigit | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| isalnum | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| isascii | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| isprint | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| strlen | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| memset | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| bzero | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
+| memcpy | No | 🟡 | 🟢 | 🟢 | 🟢 | 🟢 | 🔴 |
 | memmove | No | 🟡 | 🟢 | 🔴 | 🔴 | 🔴 | 🔴 |
 | strlcpy | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strlcat | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| toupper | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| tolower | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
+| toupper | No | 🟡 | 🟢 | 🟢 | 🔴 | 🟢 | 🔴 |
+| tolower | No | 🟡 | 🟢 | 🟢 | 🔴 | 🟢 | 🔴 |
 | strchr | No | 🟡 | 🟢  | 🟢 | 🔴 | 🔴 | 🔴 |
 | strrchr | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strncmp | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
-| memchr | No | 🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
+| memchr | No | 🟡 | 🟢  | 🟢 | 🔴 | 🟢 | 🔴 |
 | memcmp | No | 🟡 | 🟢 | 🟢 | 🔴 | 🔴 | 🔴 |
 | strnstr | No |  🟡 | 🟢  | 🔴 | 🔴 | 🔴 | 🔴 |
 | atoi | No | 🟡 | 🟢 | 🟢 | 🟢 | 🔴 | 🔴 |
