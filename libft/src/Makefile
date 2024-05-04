@@ -2,15 +2,16 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strle
 
 OBJS = $(SRCS:.c=.o)
 
-CC = gcc
+CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -std=c99 -std=gnu99
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS)
