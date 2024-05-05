@@ -51,7 +51,7 @@ size_t intlen(long  n)
     return (len);
 }
 
-int main(void)
-{
-    printf("%s\n", ft_itoa(INT_MIN));
-}
+// int main(void)
+// {
+//     printf("%s\n", ft_itoa(INT_MIN));
+// }
