@@ -9,8 +9,10 @@ char **ft_split(char const *s, char c)
     while (s[i] != c)
         i ++;
     if ((test[0] = ft_substr(s, 0, i)) == NULL)
+        free(test);
         return (NULL);
     if ((test[1] = ft_substr(s, i + 1, ft_strlen(s) - i - 1)) == NULL)
+        free(test);
         return (NULL);
     return (test);
 }

@@ -1,4 +1,5 @@
 #include "libft.h"
+#include <stdio.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -6,17 +7,20 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		size_t srclen;
 		size_t i;
 
-		srclen = ft_strlen(src);
-		dstlen = ft_strlen(dst);
+		srclen = ft_strlen(src); //AAAAAAA... 10
+		dstlen = ft_strlen(dst); //B000000... 30
+		//printf("%zu %zu\n", dstlen, srclen);
+		int j = 0;
 		i = dstlen;
-		dst += dstlen;
-		while (*src != '\0' && i < size)
+		if (size <= dstlen)
+			return (srclen + size);
+		while (i < size - 1)
 		{
-			*dst ++ = *src ++;
+			dst[i] = src[j];
 			i ++;
+			j++;
 		}
-		*dst = '\0';
-		dst -= (dstlen + srclen);
+		dst[i + 1] = '\0';
 		return (dstlen + srclen);
 }
 
