@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stddef.h>
+#include <limits.h>
 
 int ft_isalpha(int c);
 int ft_isdigit(int c);
