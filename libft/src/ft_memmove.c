@@ -8,10 +8,11 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	d = dst;
 	ft_bzero(aux,  sizeof(char) * len);
 	ft_memcpy(aux, src, sizeof(char) * len);
-	while (len > 0)
+	size_t i = 0;
+	while (i < len)
 	{
-		*d = *aux;
-		len --;
+		d[i] = aux[i];
+		i++;
 	}
 	return (&d[0]);
 }
@@ -20,9 +21,9 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 // int	main(void)
 // {
-// 	char	dest[] = "Hello";
-// 	char	src[] = "abc";
+// 	char s[] = {65, 66, 67, 68, 69, 0, 45};
+// 	char s0[] = {0, 0, 0, 0, 0, 0, 0};
 
-// 	printf("Before memmove, dest: %s\n", dest);
-// 	printf("After memmove, dest: %s\n", (char *)ft_memmove(dest, src, ft_strlen(dest)));
+// 	printf("Before memmove, dest: %s\n", s0);
+// 	printf("After memmove, dest: %s\n", (char *)ft_memmove(s0, s, 7));
 // }
