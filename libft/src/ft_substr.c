@@ -4,14 +4,20 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
 {
     char    *substr;
 
-    substr = (char *)malloc(len + 1);
-    if (substr != NULL)
+    if (len > ft_strlen(s) - start)
+        len = ft_strlen(s) - start;
+    if (start >= ft_strlen(s))
     {
-        ft_strlcpy(substr, s + start, len + 1);
+        substr = (char *)malloc(1);
+        if (substr != NULL)
+            substr[0] = '\0';
         return (substr);
     }
-    else
+    substr = (char *)malloc(len + 1);
+    if (substr == NULL)
         return (NULL);
+    ft_strlcpy(substr, s + start, len + 1);
+    return (substr);
 }
 // #include <stdio.h>
 
