@@ -1,15 +1,25 @@
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void *ft_calloc(size_t count, size_t size)
 {
-	void	*arr;
+	void *arr;
 
-	arr = malloc(count * size);
-	if (arr != NULL)
-		ft_bzero(arr, count * size);
+	if (count == 0 && size != 0)
+	{
+		arr = malloc(size);
+		if (arr != NULL)
+			ft_bzero(arr, size);
+	}
+	else
+	{
+		if (count == 0 || size == 0 || (SIZE_MAX / count) < size)
+			return (NULL);
+		arr = malloc(count * size);
+		if (arr != NULL)
+			ft_bzero(arr, count * size);
+	}
 	return (arr);
 }
-
 
 // #include <stdio.h>
 
