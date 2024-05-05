@@ -1,14 +1,24 @@
 #include "libft.h"
-// #include <stdio.h>
-// #include <string.h>
+#include <stdio.h>
+#include <string.h>
 
 size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-    if (dstsize == 0)
-        return (ft_strlen(src));
-    ft_memcpy(dst, src, dstsize - 1);
-    dst[dstsize - 1] = '\0';
-    return (ft_strlen(src));
+    size_t    len;
+    size_t  clen;
+
+    if (!src || !dst)
+        return (0);
+    len = ft_strlen(src);
+    if (dstsize <= 0)
+        return (len);
+    if (len < dstsize - 1)
+        clen = len;
+    else
+        clen = dstsize - 1;
+    ft_memcpy(dst, src, clen);
+    dst[clen] = '\0';
+    return (len);
 }
 
 // int main(void)
