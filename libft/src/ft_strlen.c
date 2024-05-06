@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 18:38:20 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/04/23 18:38:23 by nleite-s         ###   ########.fr       */
+/*   Created: 2024/05/06 16:29:24 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 16:29:25 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	ft_strlen(const char *s)
 {
 	size_t	length;
-	int	i;
+	int		i;
 
 	i = 0;
 	length = 0;

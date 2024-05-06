@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 18:43:10 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/04/23 18:43:11 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/05/06 17:10:40 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-
-// #include <stdio.h>
-
-// int main(void)
-// {
-//     char dest[] = "Hello";
-//     char src[] = "abc";
-
-//     printf("Before memcpy, dest: %s\n", dest);
-//     printf("After: %s\n", (char *)ft_memcpy(dest, src, ft_strlen(dest)));
-// }

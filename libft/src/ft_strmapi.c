@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 14:38:13 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/05/06 14:38:18 by nleite-s         ###   ########.fr       */
+/*   Created: 2024/05/06 16:40:32 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 17:06:09 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*result;
 	unsigned int	i;
+	char			*result;
 
 	i = 0;
-	if(!(result = (char *)malloc(ft_strlen(s) + 1)))
+	result = (char *)malloc(ft_strlen(s) + 1);
+	if (result == NULL)
 		return (NULL);
 	while (s[i] != '\0')
 	{

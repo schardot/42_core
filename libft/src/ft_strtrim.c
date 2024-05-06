@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:39:39 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/05/06 14:39:40 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:45:13 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	start;
-	int	end;
-	int	i;
 	const char	*s2;
+	int			start;
+	int			end;
+	int			i;
 
 	i = ft_strlen(s1) - 1;
 	s2 = s1;
@@ -35,4 +35,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	return (ft_substr(s1, start, (ft_strlen(s1) - start - end)));
 }
-

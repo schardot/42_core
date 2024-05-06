@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:32:56 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/05/06 14:32:57 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:33:13 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void *arr;
+	void	*arr;
 
 	if (count == 0 || size == 0)
 		return (NULL);
