@@ -1,34 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 14:37:48 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 14:37:49 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 		size_t dstlen;
 		size_t srclen;
 		size_t i;
+		int	j;
 
-		srclen = ft_strlen(src); //AAAAAAA... 10
-		dstlen = ft_strlen(dst); //B000000... 30
-		//printf("%zu %zu\n", dstlen, srclen);
-		int j = 0;
+		srclen = ft_strlen(src);
+		dstlen = ft_strlen(dst);
+		j = 0;
 		i = dstlen;
 		if (size <= dstlen)
 			return (srclen + size);
-		while (i < size - 1)
+		while (i < size - 1 && src[j] != '\0')
 		{
 			dst[i] = src[j];
 			i ++;
-			j++;
+			j ++;
 		}
-		dst[i + 1] = '\0';
+		dst[i] = '\0';
 		return (dstlen + srclen);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 		char	dst[8] = "oi";
-// 		printf("the return value is %ld\n", ft_strlcat(dst, "hello", 8));
-// 		printf("this is dst: %s", dst);
-// }

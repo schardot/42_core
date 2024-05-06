@@ -1,7 +1,18 @@
-#include "libft.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 14:37:17 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 14:37:18 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_strjoin(const char *s1, const char *s2)
+#include "libft.h"
+
+char    *ft_strjoin(const char *s1, const char *s2)
 {
     char    *big;
     int len1;
@@ -23,8 +34,3 @@ char *ft_strjoin(const char *s1, const char *s2)
 
     return (big);
 }
-
-// int main(void)
-// {
-//     printf("%s\n", ft_strjoin("", "42"));
-// }

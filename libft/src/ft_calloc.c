@@ -1,32 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 14:32:56 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 14:32:57 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
 	void *arr;
 
-	if (count == 0 && size != 0)
-	{
-		arr = malloc(size);
-		if (arr != NULL)
-			ft_bzero(arr, size);
-	}
-	else
-	{
-		if (count == 0 || size == 0 || (SIZE_MAX / count) < size)
-			return (NULL);
-		arr = malloc(count * size);
-		if (arr != NULL)
-			ft_bzero(arr, count * size);
-	}
+	if (count == 0 || size == 0)
+		return (NULL);
+	arr = malloc (count * size);
+	if (arr != NULL)
+		ft_bzero(arr, count * size);
 	return (arr);
 }
-
-// #include <stdio.h>
-
-// int main(void)
-// {
-// 	int	*arr;
-
-// 	arr = (int	*)ft_calloc(5, sizeof(int));
-// 	printf("%d", *arr);
-// }

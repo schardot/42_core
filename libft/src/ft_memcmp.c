@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 09:42:54 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 09:42:55 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t  i;
+	size_t			i;
 	unsigned char	*one;
 	unsigned char	*two;
 
@@ -23,11 +35,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char s1[] = "abc";
-// 	char s2[] = "abb";
-// 	printf("%d", ft_memcmp(s1, s2, 3));
-// }

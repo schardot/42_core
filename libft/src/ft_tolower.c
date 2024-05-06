@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 09:31:38 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 09:31:40 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (ft_isalpha(c) && (c >= 'A' && c <= 'Z'))
 	{
@@ -8,12 +20,3 @@ int ft_tolower(int c)
 	}
 	return (c);
 }
-// #include <stdio.h>
-// int	main(void)
-// {
-// 	char a = 'a';// - should leave it alone
-// 	//char a = 'A'; //- should lower
-// 	//char a = '0'; // - should leave it alone
-// 	a = ft_tolower(a);
-// 	printf("%c", a);
-// }

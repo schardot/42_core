@@ -1,25 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 14:36:16 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 14:36:17 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char **ft_split(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
-    int i;
-    char    **test = (char **)malloc(2 * (sizeof(char *)));
+	int	count;
+	int	in_word;
 
-    i = 0;
-    while (s[i] != c)
-        i ++;
-    if ((test[0] = ft_substr(s, 0, i)) == NULL)
-        free(test);
-        return (NULL);
-    if ((test[1] = ft_substr(s, i + 1, ft_strlen(s) - i - 1)) == NULL)
-        free(test);
-        return (NULL);
-    return (test);
+	count = 0;
+	in_word = 0;
+	while (*s) 
+	{
+		if (*s == c)
+		{
+			in_word = 0;
+		}
+		else if (in_word == 0)
+		{
+			in_word = 1;
+			count++;
+		}
+		s ++;
+	}
+	return (count);
 }
-// #include <stdio.h>
-// int main(void)
-// {
-//     char **bbig = ft_split(",blz", ',');
-//     printf("s1: %s\n", bbig[0]);
-//     printf("s2: %s\n", bbig[1]);
-// }
+
+char	**ft_split(char const *s, char c)
+{
+	char	**result;
+	int		words;
+	int		i;
+	int		len;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	words = count_words(s, c);
+	result = (char **)malloc((words + 1) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	while (i < words) 
+	{
+		while (*s == c)
+			s ++;
+		len = 0;
+		while (s[len] && s[len] != c)
+			len ++;
+		result[i] = (char *)malloc((len + 1) * sizeof(char));
+		if (!result[i])
+			return (NULL);
+		ft_strlcpy(result[i], s, len + 1);
+		s += len;
+		i++;
+	}
+	result[i] = NULL;
+	return (result);
+}

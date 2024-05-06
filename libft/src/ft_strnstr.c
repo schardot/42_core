@@ -1,11 +1,21 @@
-#include "libft.h"
+/******************************************************************************/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 09:43:56 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 14:38:47 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/******************************************************************************/
 
 #include "libft.h"
 
-char *ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t i;
-	size_t little_len;
+	size_t	i;
+	size_t	little_len;
 
 	if (*little == '\0')
 		return ((char *)big);
@@ -24,34 +34,3 @@ char *ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-
-	// char	*ft_strnstr(const char *big, const char *little, size_t len)
-	// {
-	// 	size_t	l;
-	// 	size_t	i;
-	// 	// char	*foundit;
-
-	// 	l = 0;
-	// 	i = 0;
-	// 	while (big[i] != '\0')
-	// 	{
-	// 		if (big[i] == little[l])
-	// 		{
-	// 			foundit = &big[i];
-	// 			while (big[i] == little[l] && little[l] != '\0')
-	// 			{
-	// 				l ++;
-	// 				i ++;
-	// 			}
-	// 			if (little[l] != '\0')
-	// 			{
-	// 				l = 0;
-	// 				foundit = NULL;
-	// 			}
-	// 			else
-	// 				return (foundit);
-	// 		}
-	// 		i ++;
-	// 	}
-	// 	return (NULL);
-	// }

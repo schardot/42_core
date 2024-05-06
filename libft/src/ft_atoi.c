@@ -1,19 +1,19 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 15:00:46 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/04/25 15:00:48 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/04/25 15:00:46 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/05/06 11:53:45 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "libft.h"
 #include <stdlib.h>
 
-int	ft_isspace(int c);
+static int	ft_isspace(int c);
 
 int	ft_atoi(const char *nptr)
 {
@@ -39,7 +39,7 @@ int	ft_atoi(const char *nptr)
 	return (r);
 }
 
-int	ft_isspace(int c)
+static int	ft_isspace(int c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f')
 		return (1);

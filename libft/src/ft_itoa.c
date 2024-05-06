@@ -1,8 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 14:34:18 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/06 14:34:23 by nleite-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-size_t intlen(long n);
+
+static size_t intlen(long n);
+static char    *iszero(long n);
+static long sign(int n, char *str);
 
 char *ft_itoa(int n)
 {
@@ -11,17 +22,15 @@ char *ft_itoa(int n)
     size_t len;
     long    longn;
 
-    longn = n;
-    len = intlen(longn);
-    result = (char *)malloc(len + 1);
-    i = 0;
-    if (result == NULL)
+    if ((result = iszero(n)) != NULL)
+        return (result);
+    else
+        free (result);
+    len = intlen(n);
+    if (!(result = (char *)malloc(len + 1)))
         return (NULL);
-    if (longn < 0)
-    {
-        result[0] = '-';
-        longn *= -1;
-    }
+    longn = sign(n, result);
+    i = 0;
     while (longn > 0)
     {
         result[(len - 1) - i] = (longn % 10) + '0';
@@ -32,12 +41,12 @@ char *ft_itoa(int n)
     return (result);
 }
 
-size_t intlen(long  n)
+static size_t intlen(long  n)
 {
     size_t len;
 
     len = 0;
-    if (n < 0) //se for negativo alocar espaco pro sinal
+    if (n < 0)
     {
         len ++;
         n *= -1;
@@ -51,7 +60,34 @@ size_t intlen(long  n)
     return (len);
 }
 
-// int main(void)
-// {
-//     printf("%s\n", ft_itoa(INT_MIN));
-// }
+static char    *iszero(long n)
+{
+    char    *result;
+
+    result = NULL;
+    if (n == 0)
+    {
+        result = (char *)malloc(2 * sizeof(char));
+        if (result == NULL)
+        {
+            free (result);
+            return (NULL);
+        }
+        result[0] = '0';
+        result[1] = '\0';
+    }
+    return (result);
+}
+
+static long sign(int n, char *str)
+{
+    long longn;
+
+    longn = n;
+    if (longn < 0)
+    {
+        str[0] = '-';
+        longn *= -1;
+    }
+    return (longn);
+}
