@@ -19,7 +19,7 @@ static int	count_words(char const *s, char c)
 
 	count = 0;
 	in_word = 0;
-	while (*s) 
+	while (*s)
 	{
 		if (*s == c)
 		{
@@ -35,27 +35,23 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split2(int words, char const *s, char c)
 {
 	char	**result;
-	int		words;
 	int		i;
 	int		len;
 
 	i = 0;
-	if (!s)
-		return (NULL);
-	words = count_words(s, c);
 	result = (char **)malloc((words + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
-	while (i < words) 
+	while (i < words)
 	{
 		while (*s == c)
-			s ++;
+			s++;
 		len = 0;
 		while (s[len] && s[len] != c)
-			len ++;
+			len++;
 		result[i] = (char *)malloc((len + 1) * sizeof(char));
 		if (!result[i])
 			return (NULL);
@@ -65,4 +61,12 @@ char	**ft_split(char const *s, char c)
 	}
 	result[i] = NULL;
 	return (result);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int	words;
+
+	words = count_words(s, c);
+	return (ft_split2(words, s, c));
 }
