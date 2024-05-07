@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 09:36:35 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/05/06 09:36:36 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:33:42 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	len;
 	size_t	clen;
+
 	len = ft_strlen(src);
 	if (dstsize <= 0)
 		return (len);
