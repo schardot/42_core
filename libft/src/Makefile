@@ -12,10 +12,9 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
 
-
 all: $(NAME)
 
-bonus: $(OBJS_B)
+bonus: $(OBJS_B) $(OBJS_S)
 	ar rcs $(NAME) $(OBJS_B) $(OBJS_S)
 
 $(NAME): $(OBJS_S)
