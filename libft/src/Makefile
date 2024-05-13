@@ -8,6 +8,8 @@ OBJS_B = $(BONUS:.c=.o)
 
 CC = cc
 
+RM = rm -f
+
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = libft.a
@@ -15,10 +17,10 @@ NAME = libft.a
 all: $(NAME)
 
 bonus: $(OBJS_B) $(OBJS_S)
-	ar rcs $(NAME) $(OBJS_B) $(OBJS_S)
+	ar rfc $(NAME) $(OBJS_B) $(OBJS_S)
 
 $(NAME): $(OBJS_S)
-	ar rcs $(NAME) $(OBJS_S)
+	ar rfc $(NAME) $(OBJS_S)
 
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
