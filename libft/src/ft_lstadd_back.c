@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 14:40:55 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/05/13 14:40:57 by nleite-s         ###   ########.fr       */
+/*   Created: 2024/05/13 18:13:14 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/13 18:13:15 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *last;
+	t_list	*last;
 
 	if (!new)
 		return ;
