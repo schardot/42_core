@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 10:40:08 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/05/07 10:40:09 by nleite-s         ###   ########.fr       */
+/*   Created: 2024/05/13 10:34:30 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/05/13 10:36:38 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0')
+	size_t	i;
+	char	temp_c;
+
+	i = 0;
+	temp_c = (char)c;
+	while (s[i] != '\0')
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s ++;
+		if (s[i] == temp_c)
+			return ((char *)&s[i]);
+		i ++;
 	}
-	if (c == '\0')
-		return ((char *)s);
+	if (s[i] == temp_c)
+		return ((char *)&s[i]);
 	else
 		return (NULL);
 }
