@@ -2,6 +2,8 @@
 
  ## Program name: 🟢 libft.a
 
+ Passed moulinette? 🟡
+
  Turn in files: 🟢 Makefile, 🟢 libft.h, 🟢 ft_*.c
 
  Makefile: NAME, all, clean, fclean, re
