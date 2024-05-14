@@ -1,16 +1,8 @@
-#include "libft.h"
+#include "libft/libft.h"
 
 int ft_printf(const char *s, ...)
 {
-    char *aux;
+    va_list args;
+    va_start(args, s);
 
-    aux = s;
-
-    while (*aux ++ != '%' && *aux ++ != '\0')
-        write(1, aux, 1);
-    if (*aux == %)
-    {
-        aux ++;
-        
-    }
 }
