@@ -2,7 +2,7 @@
 
  ## Program name: 🟢 libft.a
 
- Passed moulinette? 🟡
+ Passed moulinette? 🟢 - 125%!
 
  Turn in files: 🟢 Makefile, 🟢 libft.h, 🟢 ft_*.c
 
