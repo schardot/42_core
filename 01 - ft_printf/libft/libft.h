@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:12:49 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/05/14 16:22:23 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:33:36 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <limits.h>
-# include <stdarg.h>
 
 typedef struct s_list
 {
