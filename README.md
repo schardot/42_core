@@ -1,0 +1,20 @@
+# 42 Core Curriculum (School Projects Repository)
+
+This repository contains a collection of my assignments and coursework from my studies at 42, starting in February 2024 and ongoing. Please note that some projects may still be incomplete and have not yet been checked by Moulinette. Make sure to read the README file in each directory for specific details and updates before using any of the code.
+
+## Projects
+
+Here is a list of some of the projects included in this repository:
+
+1. **Rank 00 - Libft** :green_circle:
+   - **Description:** Write your own library, a collection of functions that will be a useful tool for your cursus.
+   - **Technologies Used:** C, Shell, Makefile.
+   - **Folder:** [rank00/libft](./rank00/libft)
+
+2. **Rank 01 - ft_printf** :yellow_circle:
+   - **Description:** Write a library that contains ft_printf(), a function that will mimic the original printf()
+   - **Technologies Used:** C, Shell, Makefile.
+   - **Folder:** [rank01/ft_printf](./rank01/ft_printf)
+
+
+
