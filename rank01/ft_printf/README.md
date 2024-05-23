@@ -18,8 +18,8 @@ Description: Write a library that contains ft_printf(), a function that will mim
 
 | Conversion | Description | Format function | Written | Manually tested | Norminetted | Final check | Francinetted |
 | --------- | ------ | --- | ------- | ------ | ----------- | ----------- | ----------- |
-| %c | Prints a single character. | 🔴 | 🔴 | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
-| %s | Prints a string (as defined by the common C convention). | 🔴 | 🔴 | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
+| %c | Prints a single character. | ft_printchar | :green_circle: | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
+| %s | Prints a string (as defined by the common C convention). | ft_printstr | :green_circle: | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
 | %p | The void * pointer argument has to be printed in hexadecimal format. | 🔴 | 🔴 | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
 | %d | Prints a decimal (base 10) number. | 🔴 | 🔴 | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
 | %i | Prints an integer in base 10. | 🔴 | 🔴 | :red_circle: | :red_circle: | :red_circle: | :red_circle: |
