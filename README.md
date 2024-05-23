@@ -6,6 +6,11 @@ This repository contains a collection of my assignments and coursework from my s
 
 Here is a list of some of the projects included in this repository:
 
+0. **Rank -01 - Piscine Reloaded** :red_circle:
+   - **Description:** The Piscine Reloaded is a best-of of the exercises you did during the C Piscine to remind you all the basics of the C programming language.
+   - **Technologies Used:** C, Shell.
+   - **Folder:** [piscine_reloaded](./piscine_reloaded)
+
 1. **Rank 00 - Libft** :green_circle:
    - **Description:** Write your own library, a collection of functions that will be a useful tool for your cursus.
    - **Technologies Used:** C, Shell, Makefile.
