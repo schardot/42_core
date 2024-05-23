@@ -1,4 +1,4 @@
-SRCS = ft_printf.c ft_putaddr.c ft_putnbr_base.c
+SRCS = ft_printf.c format_functions.c ft_putnbr_base.c
 
 OBJS_S = $(SRCS:.c=.o)
 
@@ -18,7 +18,7 @@ libft:
 	$(MAKE) -C libft
 
 $(NAME): libft $(OBJS_S)
-	ar rcs $(NAME) $(OBJS_S)
+	ar r $(NAME) $(OBJS_S)
 	${RN} ${NAME}
 
 %.o: %.c

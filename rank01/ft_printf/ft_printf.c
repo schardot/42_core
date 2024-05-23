@@ -17,9 +17,7 @@ int ft_printf(const char *s, ...)
 	while (*aux != '\0')
 	{
 		if (*aux == '%' && ft_strchr("cspdiuxX%", aux[1]))
-		{
 			count += ft_format(&aux, args);
-		}
 		else
 		{
 			write(1, aux, 1);
