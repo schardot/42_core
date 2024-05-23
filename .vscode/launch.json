@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/nataliaschardosim/42_core/libft/src",
+      "program": "/Users/nataliaschardosim/42_core/libft/src/build/Debug/outDebug"
+    }
+  ]
+}
