@@ -12,6 +12,6 @@ int ft_putaddr(long long ptr, char *base);
 int ft_putnbr_base(int nbr, char *base);
 long putnegative(int nbr, int *len);
 long long ft_expo(long n, long powerof);
-int ft_printnbr(int nb);
+int ft_printnbr(long nb);
 
 #endif

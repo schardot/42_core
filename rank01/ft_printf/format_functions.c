@@ -40,28 +40,22 @@ int ft_putaddr(long long ptr, char *base)
 	return (i);
 }
 
-int ft_printnbr(int nb)
+int ft_printnbr(long nb)
 {
-	long longnb;
 	int	len;
 
 	len = 0;
-	longnb = nb;
-	if (longnb < 0)
+	if (nb < 0)
 	{
-		longnb = -longnb;
-		ft_printchar('-');
-		len ++;
+		nb = -nb;
+		len += ft_printchar('-');
 	}
-	if (longnb < 10)
-	{
-		ft_printchar('0' + longnb);
-		len ++;
-	}
+	if (nb < 10)
+		len += ft_printchar('0' + nb);
 	else
 	{
-		ft_printnbr(longnb / 10);
-		ft_printnbr(longnb % 10);
-		len ++; //keep an eye on this
+		len += ft_printnbr(nb / 10);
+		len += ft_printnbr(nb % 10);
 	}
+	return (len);
 }
