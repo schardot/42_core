@@ -45,15 +45,15 @@ int ft_format(const char **aux_ptr, va_list args)
 	else if (*aux == 'p')
 		len = ft_putaddr((long long)va_arg(args, void *), "0123456789abcdef");
 	else if (*aux == 'd' || *aux == 'i')
-		len = ft_putnbr_fd(va_arg(args, int), 1);
-	else if (*aux == 'u')
-		len = ft_putnbr_base(va_arg(args, unsigned int), "0123456789");
+		len = ft_putnbr_fd(va_arg(args, int));
+	//else if (*aux == 'u')
+		//len = ft_putnbr_base(va_arg(args, unsigned int), "0123456789");
 	else if (*aux == 'x')
 		len = ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef");
 	else if (*aux == 'X')
 		len = ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF");
 	else if (*aux == '%')
-		len = ft_putchar_fd('%', 1);
+		len = ft_printchar('%');
 
 	*aux_ptr = aux + 1; // Update the pointer to move past the format specifier
 	return (len);

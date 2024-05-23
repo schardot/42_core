@@ -1,14 +1,16 @@
-#include "ft_printf.h"
+#include "printf.h"
 #include "libft/libft.h"
 
-void	ft_putnbr_base(int nbr, char *base)
+int	ft_putnbr_base(int nbr, char *base)
 {
 	int		div;
 	int		round;
+	int	len;
 	long long	number;
 
+	len = 0;
 	round = 0;
-	number = putnegative(nbr);
+	number = putnegative(nbr, &len);
 	if (number == 0)
 	{
 		write(1, &base[0], 1);
@@ -21,10 +23,12 @@ void	ft_putnbr_base(int nbr, char *base)
 		div = number / (ft_expo(16, round));
 		number %= (ft_expo(16, round));
 		write(1, &base[div], 1);
+		len ++;
 	}
+	return (len);
 }
 
-long putnegative(int nbr)
+long putnegative(int nbr, int *len)
 {
 	long n;
 
@@ -32,6 +36,7 @@ long putnegative(int nbr)
 	if (n < 0)
 	{
 		write(1, "-", 1);
+		*len ++;
 		n = -n;
 	}
 	return (n);

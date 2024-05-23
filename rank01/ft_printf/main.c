@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <limits.h>
-#include "ft_printf.h"
+#include "printf.h"
 
 int main()
 {
@@ -67,7 +67,7 @@ int main()
 	//ret[1] = printf("___printf: %d\n", INT_MAX + 1);
 	// if (ret[0] != ret[1])
 	// 	printf("Difference found: ret[0]=%d ret[1]=%d\n", ret[0], ret[1]);
-	
+
 	// Test avec INT_MIN - 1
 	// ret[0] = ft_printf("ft_printf: %d\n", INT_MIN - 1);
 	// ret[1] = printf("___printf: %d\n", INT_MIN - 1);
@@ -85,7 +85,7 @@ int main()
 	ret[1] = printf("___printf: %x\n", INT_MIN);
 	if (ret[0] != ret[1])
 		printf("Difference found: ret[0]=%d ret[1]=%d\n",ret[0], ret[1]);
-	
+
 	// Test avec INT_MAX + 1 en hexadécimal
 	// ret[0] = ft_printf("ft_printf: %x\n", INT_MAX + 1);
 	// ret[1] = printf("___printf: %x\n", INT_MAX + 1);
@@ -97,13 +97,13 @@ int main()
 	// ret[1] = printf("___printf: %x\n", INT_MIN - 1);
 	// if (ret[0] != ret[1])
 	// 	printf("Difference found: ret[0]=%d ret[1]=%d\n",ret[0], ret[1]);
-	
+
 	// Test avec nb = base (10 et 16)
 	ret[0] = ft_printf("ft_printf: %d %x\n", 10, 16);
 	ret[1] = printf("___printf: %d %x\n", 10, 16);
 	if (ret[0] != ret[1])
 		printf("Difference found: ret[0]=%d ret[1]=%d\n",ret[0], ret[1]);
-	
+
 	// Test avec nb = base + 1 (10 et 16)
 	ret[0] = ft_printf("ft_printf: %d %x\n", 11, 17);
 	ret[1] = printf("___printf: %d %x\n", 11, 17);
@@ -127,7 +127,7 @@ int main()
 	ret[1] = printf("___printf: %d %x\n", -11, -17);
 	if (ret[0] != ret[1])
 		printf("Difference found: ret[0]=%d ret[1]=%d\n",ret[0],ret[1]);
-	
+
 	// Test avec nb = -base + 1 (10 et 16)
 	ret[0] = ft_printf("ft_printf: %d %x\n", -9, -15);
 	ret[1] = printf("___printf: %d %x\n", -9, -15);
