@@ -39,3 +39,29 @@ int ft_putaddr(long long ptr, char *base)
 	}
 	return (i);
 }
+
+int ft_printnbr(int nb)
+{
+	long longnb;
+	int	len;
+
+	len = 0;
+	longnb = nb;
+	if (longnb < 0)
+	{
+		longnb = -longnb;
+		ft_printchar('-');
+		len ++;
+	}
+	if (longnb < 10)
+	{
+		ft_printchar('0' + longnb);
+		len ++;
+	}
+	else
+	{
+		ft_printnbr(longnb / 10);
+		ft_printnbr(longnb % 10);
+		len ++; //keep an eye on this
+	}
+}

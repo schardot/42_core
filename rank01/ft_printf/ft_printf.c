@@ -45,7 +45,7 @@ int ft_format(const char **aux_ptr, va_list args)
 	else if (*aux == 'p')
 		len = ft_putaddr((long long)va_arg(args, void *), "0123456789abcdef");
 	else if (*aux == 'd' || *aux == 'i')
-		len = ft_putnbr_fd(va_arg(args, int));
+		len = ft_printnbr(va_arg(args, int));
 	//else if (*aux == 'u')
 		//len = ft_putnbr_base(va_arg(args, unsigned int), "0123456789");
 	else if (*aux == 'x')
