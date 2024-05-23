@@ -1,6 +1,6 @@
 # 42 Core Curriculum (School Projects Repository)
 
-This repository contains a collection of my assignments and coursework from my studies at 42, starting in February 2024 and ongoing. Please note that some projects may still be incomplete and have not yet been checked by Moulinette. Make sure to read the README file in each directory for specific details and updates before using any of the code.
+This repository contains a collection of my assignments and coursework from my studies at 42, starting in April 2024 and ongoing. Please note that some projects may still be incomplete and have not yet been checked by Moulinette. Make sure to read the README file in each directory for specific details and updates before using any of the code.
 
 ## Projects
 
