@@ -1,4 +1,4 @@
-SRCS = ft_printf.c format_functions.c ft_putnbr_base.c
+SRCS = ft_printf.c format_csp.c format_diuxX.c
 
 OBJS_S = $(SRCS:.c=.o)
 
@@ -8,16 +8,13 @@ RM = rm -f
 
 RN = ranlib
 
-CFLAGS = -Wall -Wextra -Werror -I./libft
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
 all: $(NAME)
 
-libft:
-	$(MAKE) -C libft
-
-$(NAME): libft $(OBJS_S)
+$(NAME): $(OBJS_S)
 	ar r $(NAME) $(OBJS_S)
 	${RN} ${NAME}
 
@@ -25,7 +22,6 @@ $(NAME): libft $(OBJS_S)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(MAKE) -C libft clean
 	$(RM) $(OBJS_S)
 
 fclean: clean

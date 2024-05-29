@@ -1,17 +1,22 @@
-#ifndef PRINTF_H
-# define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-#include <stdarg.h>
-#include "libft/libft.h"
+# include <stdarg.h>
+# include <unistd.h>
+# include <limits.h>
+# include <stdio.h>
+# include <stddef.h>
+# include <stdbool.h>
 
-int	ft_printf(const char *s, ...);
-
-int ft_printchar(char c);
-int ft_printstr(char *s);
-int ft_putaddr(long long ptr, char *base);
-int ft_putnbr_base(int nbr, char *base);
-long putnegative(int nbr, int *len);
-long long ft_expo(long n, long powerof);
-int ft_printnbr(long nb);
+int		ft_printf(const char *s, ...);
+int		ft_format(int c, va_list *args);
+int		ft_printchar(int c);
+int		ft_printstr(char *s);
+int		ft_printaddr(void *ptr, char *base, bool first);
+int		ft_printnbr(int nb);
+int		ft_printnbr_unsigned(unsigned int nb);
+int		ft_putnbr_base(unsigned int nbr, const char *base);
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
 
 #endif
