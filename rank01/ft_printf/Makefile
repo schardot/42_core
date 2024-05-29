@@ -1,32 +1,29 @@
 SRCS = ft_printf.c format_csp.c format_diuxX.c
-
-OBJS_S = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 CC = cc
-
-RM = rm -f
-
-RN = ranlib
-
 CFLAGS = -Wall -Wextra -Werror
+
+AR = ar
+ARFLAGS = rcs
+RM = rm -f
 
 NAME = libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS_S)
-	ar r $(NAME) $(OBJS_S)
-	${RN} ${NAME}
+$(NAME): $(OBJS)
+	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS_S)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re
