@@ -1,28 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 22:23:23 by nataliaschard     #+#    #+#             */
+/*   Updated: 2024/05/29 22:23:24 by nataliaschard    ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
-	char	*aux;
 	int		len;
 	int		i;
 
 	i = 0;
 	len = 0;
 	va_start(args, s);
-	aux = (char *)s;
 	if (!s)
 		return (-1);
-	while (aux[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (aux[i] == '%' && ft_strchr("cspdiuxX%", aux[i + 1]))
+		if (s[i] == '%' && ft_strchr("cspdiuxX%", s[i + 1]))
 		{
 			i++;
-			len += ft_format(aux[i], &args);
+			len += ft_format(s[i], &args);
 		}
 		else
 		{
-			ft_printchar(aux[i]);
+			ft_printchar(s[i]);
 			len++;
 		}
 		i++;
