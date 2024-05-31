@@ -20,6 +20,11 @@ Here is a list of some of the projects included in this repository:
    - **Description:** Write a library that contains ft_printf(), a function that will mimic the original printf()
    - **Technologies Used:** C, Shell, Makefile.
    - **Folder:** [rank01/ft_printf](./rank01/ft_printf)
+  
+2. **Rank 01 - get_next_line** :yellow_circle:
+   - **Description:** Write a function that returns a line read from a file descriptor
+   - **Technologies Used:** C, Shell.
+   - **Folder:** [rank01/get_next_line](./rank01/get_next_line)
 
 
 
