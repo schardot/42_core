@@ -12,7 +12,9 @@ char *get_next_line(int fd)
 	int i;
 	int linelen;
 	int x;
+	int flag;
 
+	flag = 0;
 	if (fd < 0)
 		return (NULL);
 	x = 0;
@@ -34,7 +36,7 @@ char *get_next_line(int fd)
 		}
 		free(extra);
 	}
-	buffer = (char *)malloc(BUFFER_SIZE);
+	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 	if (!buffer)
 	{
 		if (line)
@@ -46,17 +48,19 @@ char *get_next_line(int fd)
 		b = read(fd, buffer, BUFFER_SIZE);
 		if (b <= 0)
 		{
-			free (buffer);
-			if (line)
-			 	free (line);
+			free(buffer);
+			if (flag > 0)
+				return (line);
+			free (line);
 			return (NULL);
 		}
 		i = 0;
-		while (i < BUFFER_SIZE)
+		while (i < b)
 		{
 			line = ft_realloc(line, 1 + linelen);
 			line[linelen] = buffer[i];
-			if (line[linelen] == '\n' || line[linelen] == EOF)
+			flag ++;
+			if (line[linelen] == '\n')
 			{
 				while (b > i + 1)
 				{
@@ -73,6 +77,11 @@ char *get_next_line(int fd)
 			i++;
 			linelen ++;
 		}
+		if (i == b && b < BUFFER_SIZE)
+		{
+			free (buffer);
+			return (line);
+		}
 	}
 }
 
@@ -80,13 +89,12 @@ char *get_next_line(int fd)
 // {
 //     char *r;
 //     int fd;
-
 // 	r = "";
-//     fd = open("empty.txt", O_RDONLY);
+// 	fd = open("41_no_nl.txt", O_RDWR);
 // 	while (r)
 // 	{
 // 		r = get_next_line(fd);
-// 		printf("%s", r);
+// 		printf("%s\n", r);
 // 	}
 //     close(fd);
 // }
@@ -103,6 +111,7 @@ void *ft_realloc(void *ptr, size_t size)
 		return (NULL);
 	}
 	newptr = ft_memcpy(newptr, ptr, size);
+	free (ptr);
 	return (newptr);
 }
 
