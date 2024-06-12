@@ -3,28 +3,18 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void *ft_realloc(void *ptr, size_t size)
-{
-	if (!ptr)
-		return (malloc(size));
-	void *newptr;
-	newptr = malloc(size);
-	if (!newptr)
-		return (NULL);
-	newptr = ft_memcpy(newptr, ptr, size);
-	return (newptr);
-}
-
 char *get_next_line(int fd)
 {
-	static char	*extra;
+	static char *extra;
 	char *buffer;
-	char	*line;
-	int	b;
+	char *line;
+	int b;
 	int i;
 	int linelen;
 	int x;
 
+	if (fd < 0)
+		return (NULL);
 	x = 0;
 	linelen = 0;
 	if (extra)
@@ -36,13 +26,13 @@ char *get_next_line(int fd)
 			line[linelen] = *extra;
 			if (line[linelen] == '\n' || line[linelen] == EOF)
 			{
-				extra ++;
+				extra++;
 				return (line);
 			}
 			linelen++;
 			extra++;
 		}
-		//free(extra);
+		// free(extra);
 	}
 	buffer = (char *)malloc(BUFFER_SIZE);
 	if (!buffer)
@@ -50,8 +40,11 @@ char *get_next_line(int fd)
 	while (1)
 	{
 		b = read(fd, buffer, BUFFER_SIZE);
-		if (b == 0)
+		if (b <= 0)
+		{
+			free (buffer);
 			return (NULL);
+		}
 		i = 0;
 		while (i < BUFFER_SIZE)
 		{
@@ -77,19 +70,31 @@ char *get_next_line(int fd)
 	}
 }
 
-int main(void)
-{
-    char *r;
-    int fd;
+// int main(void)
+// {
+//     char *r;
+//     int fd;
 
-	r = "";
-    fd = open("test.txt", O_RDONLY);
-	while (r)
-	{
-		r = get_next_line(fd);
-		printf("%s", r);
-	}
-    close(fd);
+// 	r = "";
+//     fd = open("empty.txt", O_RDONLY);
+// 	while (r)
+// 	{
+// 		r = get_next_line(fd);
+// 		printf("%s", r);
+// 	}
+//     close(fd);
+// }
+
+void *ft_realloc(void *ptr, size_t size)
+{
+	if (!ptr)
+		return (malloc(size));
+	void *newptr;
+	newptr = malloc(size);
+	if (!newptr)
+		return (NULL);
+	newptr = ft_memcpy(newptr, ptr, size);
+	return (newptr);
 }
 
 void *ft_memcpy(void *dest, const void *src, size_t n)
@@ -108,8 +113,8 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
 	while (n > 0)
 	{
 		d[i] = s[i];
-		n --;
-		i ++;
+		n--;
+		i++;
 	}
 	return (dest);
 }
