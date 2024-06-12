@@ -16,10 +16,10 @@ char *get_next_line(int fd)
 	if (fd < 0)
 		return (NULL);
 	x = 0;
+	line = NULL;
 	linelen = 0;
 	if (extra)
 	{
-		line = NULL;
 		line = ft_realloc(line, 1 + linelen);
 		while (*extra != '\0')
 		{
@@ -32,17 +32,23 @@ char *get_next_line(int fd)
 			linelen++;
 			extra++;
 		}
-		// free(extra);
+		free(extra);
 	}
 	buffer = (char *)malloc(BUFFER_SIZE);
 	if (!buffer)
+	{
+		if (line)
+			free(line);
 		return (NULL);
+	}
 	while (1)
 	{
 		b = read(fd, buffer, BUFFER_SIZE);
 		if (b <= 0)
 		{
 			free (buffer);
+			if (line)
+			 	free (line);
 			return (NULL);
 		}
 		i = 0;
@@ -92,7 +98,10 @@ void *ft_realloc(void *ptr, size_t size)
 	void *newptr;
 	newptr = malloc(size);
 	if (!newptr)
+	{
+		free (ptr);
 		return (NULL);
+	}
 	newptr = ft_memcpy(newptr, ptr, size);
 	return (newptr);
 }
