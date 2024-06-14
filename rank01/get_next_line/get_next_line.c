@@ -54,7 +54,7 @@ char	*get_next_line(int fd)
 			free(buffer);
 			if (flag > 0)
 			{
-				linelen++;
+				// linelen++;
 				line[linelen] = '\0';
 				return (line);
 			}
@@ -99,15 +99,17 @@ char	*get_next_line(int fd)
 //     char	*r;
 //     int	fd;
 // 	int i;
+// 	int round = 0;
 
 // 	r = "";
 // 	fd = open("41_no_nl.txt", O_RDWR);
 // 	while (r)
 // 	{
+// 		round ++;
 // 		r = get_next_line(fd);
-// 		// i = strcmp(r, "01234567890123456789012345678901234567890");
-// 		printf("%s", r);
-// 		// printf("%d", i);
+// 		printf("Round %d, gnl result: %s\n", round, r);
+// 		i = strcmp(r, "01234567890123456789012345678901234567890");
+// 		printf("Round %d, strcmp: %d\n", round, i);
 // 	}
 //     close(fd);
 // }
