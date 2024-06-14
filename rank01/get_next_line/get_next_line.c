@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h> //pra usar strcmp, dps apagar
 
 char	*get_next_line(int fd)
 {
@@ -29,6 +30,8 @@ char	*get_next_line(int fd)
 			if (line[linelen] == '\n' || line[linelen] == EOF)
 			{
 				extra++;
+				linelen++;
+				line[linelen] = '\0';
 				return (line);
 			}
 			linelen++;
@@ -36,7 +39,7 @@ char	*get_next_line(int fd)
 		}
 		// free(extra);
 	}
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 	if (!buffer)
 	{
 		if (line)
@@ -50,7 +53,11 @@ char	*get_next_line(int fd)
 		{
 			free(buffer);
 			if (flag > 0)
+			{
+				linelen++;
+				line[linelen] = '\0';
 				return (line);
+			}
 			free (line);
 			return (NULL);
 		}
@@ -70,6 +77,8 @@ char	*get_next_line(int fd)
 					i ++;
 				}
 				free(buffer);
+				linelen++;
+				line[linelen] = '\0';
 				return (line);
 			}
 			i++;
@@ -78,25 +87,30 @@ char	*get_next_line(int fd)
 		if (i == b && b < BUFFER_SIZE)
 		{
 			free (buffer);
+			//linelen++;
+			line[linelen] = '\0';
 			return (line);
 		}
 	}
 }
 
-int	main(void)
-{
-    char	*r;
-    int	fd;
+// int	main(void)
+// {
+//     char	*r;
+//     int	fd;
+// 	int i;
 
-	r = "";
-	fd = open("42_no_nl.txt", O_RDWR);
-	while (r)
-	{
-		r = get_next_line(fd);
-		printf("%s\n", r);
-	}
-    close(fd);
-}
+// 	r = "";
+// 	fd = open("41_no_nl.txt", O_RDWR);
+// 	while (r)
+// 	{
+// 		r = get_next_line(fd);
+// 		// i = strcmp(r, "01234567890123456789012345678901234567890");
+// 		printf("%s", r);
+// 		// printf("%d", i);
+// 	}
+//     close(fd);
+// }
 
 char	*ft_realloc(char *ptr, size_t size)
 {
@@ -104,8 +118,8 @@ char	*ft_realloc(char *ptr, size_t size)
 	size_t	i;
 
 	if (!ptr)
-		return (malloc(size));
-	newptr = malloc(size);
+		return ((char *)malloc(size));
+	newptr = (char *)malloc(size + 1);
 	if (!newptr)
 	{
 		free (ptr);
@@ -117,7 +131,7 @@ char	*ft_realloc(char *ptr, size_t size)
 		newptr[i] = ptr[i];
 		i++;
 	}
-	newptr[i] = '\0';
+	//newptr[i] = '\0';
 	free (ptr);
 	return (newptr);
 }
