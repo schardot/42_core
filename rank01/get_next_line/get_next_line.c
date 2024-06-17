@@ -2,139 +2,160 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <string.h> //pra usar strcmp, dps apagar
+#include <stdlib.h>
+#include <string.h>
 
-char	*get_next_line(int fd)
+
+char *ft_realloc(char *ptr, size_t size)
 {
-	static char	*extra;
-	char	*buffer;
-	char	*line;
-	int	b;
-	int	i;
-	int	linelen;
-	int	x;
-	int	flag;
+	char *newptr;
+	size_t i = 0;
 
-	flag = 0;
-	if (fd < 0)
+	newptr = (char *)malloc(size);
+	if (!newptr)
+	{
+		free(ptr);
 		return (NULL);
-	x = 0;
-	line = NULL;
-	linelen = 0;
+	}
+
+	if (ptr)
+	{
+		while (i < size - 1 && ptr[i] != '\0')
+		{
+			newptr[i] = ptr[i];
+			i++;
+		}
+		free(ptr);
+	}
+
+	return (newptr);
+}
+
+char *put_extra(char *line, char **extra, int *linelen)
+{
+	int i = 0;
+
+	while ((*extra)[i] != '\0')
+	{
+		line = ft_realloc(line, (*linelen) + 2); // +2 for new char and null-terminator
+		line[(*linelen)++] = (*extra)[i];
+		if ((*extra)[i] == '\n')
+		{
+			line[*linelen] = '\0';
+			char *new_extra = strdup(&(*extra)[i + 1]);
+			free(*extra);
+			*extra = new_extra;
+			return (line);
+		}
+		i++;
+	}
+	free(*extra);
+	*extra = NULL;
+	return (line);
+}
+
+char *put_line(char *buffer, char *line, int bytes_read, int *linelen, char **extra)
+{
+	int i = 0;
+
+	while (i < bytes_read)
+	{
+		line = ft_realloc(line, (*linelen) + 2); // +2 for new char and null-terminator
+		line[*linelen] = buffer[i];
+		if (buffer[i] == '\n')
+		{
+			line[++(*linelen)] = '\0';
+			if (i + 1 < bytes_read)
+			{
+				*extra = strdup(&buffer[i + 1]);
+			}
+			return (line);
+		}
+		(*linelen)++;
+		i++;
+	}
+	return (line);
+}
+
+char *get_next_line(int fd)
+{
+	static char *extra = NULL;
+	char *buffer;
+	char *line = NULL;
+	int bytes_read;
+	int linelen = 0;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+	{
+		return (NULL);
+	}
+
 	if (extra)
 	{
-		line = ft_realloc(line, 1 + linelen);
-		while (*extra != '\0')
+		line = put_extra(line, &extra, &linelen);
+		if (line && line[linelen - 1] == '\n')
 		{
-			line[linelen] = *extra;
-			if (line[linelen] == '\n' || line[linelen] == EOF)
-			{
-				extra++;
-				linelen++;
-				line[linelen] = '\0';
-				return (line);
-			}
-			linelen++;
-			extra++;
+			return (line);
 		}
-		// free(extra);
 	}
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE);
+
+	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 	{
 		if (line)
 			free(line);
 		return (NULL);
 	}
-	while (1)
+
+	while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		b = read(fd, buffer, BUFFER_SIZE);
-		if (b <= 0)
+		buffer[bytes_read] = '\0';
+		line = put_line(buffer, line, bytes_read, &linelen, &extra);
+		if (line && line[linelen - 1] == '\n')
 		{
 			free(buffer);
-			if (flag > 0)
-			{
-				// linelen++;
-				line[linelen] = '\0';
-				return (line);
-			}
-			free (line);
-			return (NULL);
-		}
-		i = 0;
-		while (i < b)
-		{
-			line = ft_realloc(line, 1 + linelen);
-			line[linelen] = buffer[i];
-			flag ++;
-			if (line[linelen] == '\n')
-			{
-				while (b > i + 1)
-				{
-					extra = ft_realloc(extra, x);
-					extra[x] = buffer[i + 1];
-					x ++;
-					i ++;
-				}
-				free(buffer);
-				linelen++;
-				line[linelen] = '\0';
-				return (line);
-			}
-			i++;
-			linelen ++;
-		}
-		if (i == b && b < BUFFER_SIZE)
-		{
-			free (buffer);
-			//linelen++;
-			line[linelen] = '\0';
 			return (line);
 		}
 	}
+
+	free(buffer);
+	if (bytes_read < 0 || (bytes_read == 0 && linelen == 0))
+	{
+		free(line);
+		return (NULL);
+	}
+
+	if (line)
+	{
+		line[linelen] = '\0';
+	}
+	return (line);
 }
 
-// int	main(void)
+// int main(void)
 // {
-//     char	*r;
-//     int	fd;
+// 	char *r;
+// 	int fd;
 // 	int i;
 // 	int round = 0;
-
 // 	r = "";
-// 	fd = open("41_no_nl.txt", O_RDWR);
+// 	fd = open("41_with_nl.txt", O_RDWR);
 // 	while (r)
 // 	{
+// 		i = 42;
 // 		round ++;
 // 		r = get_next_line(fd);
 // 		printf("Round %d, gnl result: %s\n", round, r);
-// 		i = strcmp(r, "01234567890123456789012345678901234567890");
+// 		if (round == 1)
+// 			i = strcmp(r, "0123456789012345678901234567890123456789\n");
+// 		else if (round == 2)
+// 			i = strcmp(r, "0");
+// 		else if (round == 3)
+// 		{
+// 			if (r == NULL)
+// 			i = 0;
+// 		}
 // 		printf("Round %d, strcmp: %d\n", round, i);
 // 	}
-//     close(fd);
+// 	close(fd);
 // }
-
-char	*ft_realloc(char *ptr, size_t size)
-{
-	char	*newptr;
-	size_t	i;
-
-	if (!ptr)
-		return ((char *)malloc(size));
-	newptr = (char *)malloc(size + 1);
-	if (!newptr)
-	{
-		free (ptr);
-		return (NULL);
-	}
-	i = 0;
-	while (i < size - 1 && ptr[i] != '\0')
-	{
-		newptr[i] = ptr[i];
-		i++;
-	}
-	//newptr[i] = '\0';
-	free (ptr);
-	return (newptr);
-}
-
