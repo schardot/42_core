@@ -7,13 +7,20 @@
 # include <fcntl.h>
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 1
+#define BUFFER_SIZE 10000000
 #endif
 
-char *ft_realloc(char *ptr, size_t size);
-char *process_extra(char **extra, int *linelen);
-char *append_buffer(char *buffer, char *line, int bytes_read, int *linelen, char **extra);
 char *get_next_line(int fd);
-char *read_and_construct_line(int fd, char **extra, char *line, int *linelen);
+char *ft_realloc(char *ptr, size_t size);
+
+// char *process_extra(char **extra, int *linelen);
+// char *append_buffer(char *buffer, char *line, int bytes_read, int *linelen, char **extra);
+// char *get_next_line(int fd);
+// char *read_and_construct_line(int fd, char **extra, char *line, int *linelen);
+
+char *getmyline(char *line, char *extra, int fd, int *linelen);
+char *append_buffer(char *buffer, char *line, int *linelen, char *extra);
+void writeextra(char *extra, char *buffer);
+char *extrainline(char *xtra, int *linelen);
 
 #endif
