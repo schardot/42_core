@@ -3,7 +3,7 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*extra;
+	static char extra[BUFFER_SIZE + 1];
 	char		*line;
 	int			linelen;
 
@@ -11,19 +11,25 @@ char	*get_next_line(int fd)
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (extra)
-		line = extrainline(&extra, &linelen);
+	if (extra[0] != '\0')
+		line = extrainline(extra, &linelen);
+	//extra[0] = '\0';
 	if (line && line[linelen - 1] == '\n') // nao sei se ta certo esse --
 		return (line);
-	line = getmyline(line, &extra, fd, &linelen);
+	extra[0] = '\0';
+	line = getmyline(line, extra, fd, &linelen);
 	return (line); // tenho que passar o endereco de line?
 }
 
-char	*getmyline(char *line, char **extra, int fd, int *linelen)
+char	*getmyline(char *line, char *extra, int fd, int *linelen)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	int		b;
 
+	buffer = (char*)malloc(BUFFER_SIZE + 1);
+	if (buffer == NULL) {
+		return NULL;
+	}
 	while ((b = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[b] = '\0';
@@ -34,10 +40,11 @@ char	*getmyline(char *line, char **extra, int fd, int *linelen)
 	if (b == 0 && *linelen > 0)
 		return (line);
 	free (line);
+	free (buffer);
 	return (NULL);
 }
 
-char	*append_buffer(char	*buffer, char *line, int *linelen, char **extra)
+char	*append_buffer(char	*buffer, char *line, int *linelen, char *extra)
 {
 	int	i;
 
@@ -60,7 +67,7 @@ char	*append_buffer(char	*buffer, char *line, int *linelen, char **extra)
 	return (line);
 }
 
-void	writeextra(char **extra, char *buffer) //do i address buffer right?
+void	writeextra(char *extra, char *buffer) //do i address buffer right?
 {
 	int	len;
 	int	i;
@@ -68,53 +75,52 @@ void	writeextra(char **extra, char *buffer) //do i address buffer right?
 	len = 0;
 	while (buffer[len] != '\0')
 		len ++;
-	*extra = (char *)malloc(len + 1); //so precisa somar um pq ele pega o \0 de buffer.
-	if (!extra)
-		return;
 	i = 0;
 	while (i <= len)
 	{
-		(*extra)[i] = buffer[i];
+		extra[i] = buffer[i];
 		i ++;
 	}
 	//(*extra)[i] = '\0'; nao precisa pq ele copia o \0 de buffer!
 }
 
-char	*extrainline(char **xtra, int *ll)
+char	*extrainline(char *xtra, int *ll)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
 	line = NULL;
-	while (**xtra != '\0')
+	while (xtra[i] != '\0')
 	{
 		line = ft_realloc(line, i + 2);
-		line[i] = (**xtra);
+		line[i] = (xtra)[i];
 		i ++;
 		//(*xtra)++;
 		if (line[i - 1] == '\n')
 		{
-			if ((*xtra)[1] == '\0')
+			if ((xtra)[i] == '\0')
 			{
 				*ll = i;
+				(xtra)[0] = '\0';
 				line[i] = '\0';
-				*xtra = NULL;
-				//free(xtra);
 				return (line);
 			}
-			else if ((*xtra)[1] != '\0')
+			else if ((xtra)[i] != '\0')
 			{
 				*ll = i;
-				(*xtra)++;
+				int j = 0;
+				while ((xtra)[j] != '\0')
+				{
+					(xtra)[j] = (xtra)[j + 1];
+					j ++;
+				}
 				line[i] = '\0';
 				return (line);
 			}
 		}
-		(*xtra)++;
 	}
 
-	*xtra = NULL;
 	*ll = i;
 	if (line)
 		line[i] = '\0';
@@ -150,7 +156,7 @@ char *ft_realloc(char *ptr, size_t size)
 // 	int	fd;
 
 // 	//line = NULL;
-// 	fd = open("alternate_line_nl_no_nl.txt", O_RDONLY);
+// 	fd = open("multiple_nlx5.txt", O_RDONLY);
 // 	while (line)
 // 	{
 // 		line = get_next_line(fd);
