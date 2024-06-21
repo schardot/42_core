@@ -1,22 +1,139 @@
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h> // apagar
 
-char	*ft_realloc(char *ptr, size_t size)
+char	*get_next_line(int fd)
 {
-	char	*newptr = (char *)malloc(size);
+	static char	*extra;
+	char		*line;
+	int			linelen;
+
+	linelen = 0;
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (extra)
+		line = extrainline(&extra, &linelen);
+	if (line && line[linelen - 1] == '\n') // nao sei se ta certo esse --
+		return (line);
+	line = getmyline(line, &extra, fd, &linelen);
+	return (line); // tenho que passar o endereco de line?
+}
+
+char	*getmyline(char *line, char **extra, int fd, int *linelen)
+{
+	char	buffer[BUFFER_SIZE + 1];
+	int		b;
+
+	while ((b = read(fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		buffer[b] = '\0';
+		line = append_buffer(buffer, line, linelen, extra);
+		if (line && line[*linelen - 1] == '\n') // nao sei se ta certo esse --
+			return (line);
+	}
+	if (b == 0 && *linelen > 0)
+		return (line);
+	free (line);
+	return (NULL);
+}
+
+char	*append_buffer(char	*buffer, char *line, int *linelen, char **extra)
+{
+	int	i;
+
+	i = 0;
+	while (buffer[i] != '\0')
+	{
+		line = ft_realloc(line, (*linelen) + 2);
+		line[*linelen] = buffer[i];
+		(*linelen)++;
+		if (line[*linelen - 1] == '\n')
+		{
+			if (buffer[i + 1] != '\0')
+				writeextra(extra, buffer + i + 1);
+			line[*linelen] = '\0';
+			return (line);
+		}
+		i ++;
+	}
+	line[*linelen] = '\0'; //nao preciso aumentar a len
+	return (line);
+}
+
+void	writeextra(char **extra, char *buffer) //do i address buffer right?
+{
+	int	len;
+	int	i;
+
+	len = 0;
+	while (buffer[len] != '\0')
+		len ++;
+	*extra = (char *)malloc(len + 1); //so precisa somar um pq ele pega o \0 de buffer.
+	if (!extra)
+		return;
+	i = 0;
+	while (i <= len)
+	{
+		(*extra)[i] = buffer[i];
+		i ++;
+	}
+	//(*extra)[i] = '\0'; nao precisa pq ele copia o \0 de buffer!
+}
+
+char	*extrainline(char **xtra, int *ll)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	line = NULL;
+	while (**xtra != '\0')
+	{
+		line = ft_realloc(line, i + 2);
+		line[i] = (**xtra);
+		i ++;
+		//(*xtra)++;
+		if (line[i - 1] == '\n')
+		{
+			if ((*xtra)[1] == '\0')
+			{
+				*ll = i;
+				line[i] = '\0';
+				*xtra = NULL;
+				//free(xtra);
+				return (line);
+			}
+			else if ((*xtra)[1] != '\0')
+			{
+				*ll = i;
+				(*xtra)++;
+				line[i] = '\0';
+				return (line);
+			}
+		}
+		(*xtra)++;
+	}
+
+	*xtra = NULL;
+	*ll = i;
+	if (line)
+		line[i] = '\0';
+	return (line);
+}
+char *ft_realloc(char *ptr, size_t size)
+{
+	char	*newptr;
+	size_t	i;
+
+		newptr = (char *)malloc(size);
 	if (!newptr)
 	{
 		free(ptr);
-		return NULL;
+		return (NULL);
 	}
-
 	if (ptr)
 	{
-		size_t i = 0;
+		i = 0;
 		while (i < size - 1 && ptr[i] != '\0')
 		{
 			newptr[i] = ptr[i];
@@ -24,126 +141,19 @@ char	*ft_realloc(char *ptr, size_t size)
 		}
 		free(ptr);
 	}
-
-	return newptr;
+	return (newptr);
 }
 
-char	*get_next_line(int fd)
-{
-	static char	*extra;
-	char	*line;
-	int	linelen;
-
-	extra = NULL;
-	line = NULL;
-	linelen = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return NULL;
-	if (extra)
-	{
-		line = process_extra(&extra, &linelen);
-		if (line && line[linelen - 1] == '\n')
-			return (line);
-	}
-
-	return (read_and_construct_line(fd, &extra, line, &linelen));
-}
-
-char *read_and_construct_line(int fd, char **extra, char *line, int *linelen)
-{
-	char buffer[BUFFER_SIZE + 1];
-	int bytes_read;
-
-	while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
-	{
-		buffer[bytes_read] = '\0';
-		line = append_buffer(buffer, line, bytes_read, linelen, extra);
-		if (line && line[*linelen - 1] == '\n')
-			return line;
-	}
-
-	if (bytes_read < 0 || (bytes_read == 0 && *linelen == 0))
-	{
-		free(line);
-		return NULL;
-	}
-
-	if (line)
-		line[*linelen] = '\0';
-	return line;
-}
-
-char *process_extra(char **extra, int *linelen)
-{
-	char *line = NULL;
-	int i = 0;
-
-	while ((*extra)[i] != '\0')
-	{
-		line = ft_realloc(line, (*linelen) + 2); // +2 for new char and null-terminator
-		line[*linelen] = (*extra)[i];
-		if ((*extra)[i] == '\n')
-		{
-			line[++(*linelen)] = '\0';
-			char *new_extra = strdup(&(*extra)[i + 1]);
-			free(*extra);
-			*extra = new_extra;
-			return line;
-		}
-		(*linelen)++;
-		i++;
-	}
-	free(*extra);
-	*extra = NULL;
-	return line;
-}
-char *append_buffer(char *buffer, char *line, int bytes_read, int *linelen, char **extra)
-{
-	int i = 0;
-
-	while (i < bytes_read)
-	{
-		line = ft_realloc(line, (*linelen) + 2); // +2 for new char and null-terminator
-		line[*linelen] = buffer[i];
-		if (buffer[i] == '\n')
-		{
-			if (i + 1 < bytes_read)
-			{
-				*extra = strdup(&buffer[i + 1]);
-			}
-			line[++(*linelen)] = '\0';
-			return line;
-		}
-		(*linelen)++;
-		i++;
-	}
-	return line;
-}
-
-// int main(void)
+// int	main(void)
 // {
-// 	char *r;
-// 	int fd;
-// 	int i;
-// 	int round = 0;
-// 	r = "";
-// 	fd = open("41_with_nl.txt", O_RDWR);
-// 	while (r)
+// 	char	*line;
+// 	int	fd;
+
+// 	//line = NULL;
+// 	fd = open("alternate_line_nl_no_nl.txt", O_RDONLY);
+// 	while (line)
 // 	{
-// 		i = 42;
-// 		round ++;
-// 		r = get_next_line(fd);
-// 		printf("Round %d, gnl result: %s\n", round, r);
-// 		if (round == 1)
-// 			i = strcmp(r, "0123456789012345678901234567890123456789\n");
-// 		else if (round == 2)
-// 			i = strcmp(r, "0");
-// 		else if (round == 3)
-// 		{
-// 			if (r == NULL)
-// 			i = 0;
-// 		}
-// 		printf("Round %d, strcmp: %d\n", round, i);
+// 		line = get_next_line(fd);
+// 		printf("%s", line);
 // 	}
-// 	close(fd);
 // }
