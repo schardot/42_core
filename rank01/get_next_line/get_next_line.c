@@ -23,7 +23,10 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (buffer[0] != '\0')
+	{
+		line = ft_realloc(line, (linelen) + BUFFER_SIZE + 1);
 		line = append_buffer(buffer, line, &linelen);
+	}
 	if (line && line[linelen - 1] == '\n')
 		return (line);
 	line = getmyline(line, buffer, fd, &linelen);

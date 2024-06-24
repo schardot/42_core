@@ -20,6 +20,7 @@ char	*getmyline(char *line, char *buffer, int fd, int *linelen)
 	while (b > 0)
 	{
 		(buffer)[b] = '\0';
+		line = ft_realloc(line, (*linelen) + BUFFER_SIZE + 1);
 		line = append_buffer(buffer, line, linelen);
 		if (line && line[*linelen - 1] == '\n')
 			return (line);
@@ -42,8 +43,8 @@ char	*append_buffer(char *buffer, char *line, int *linelen)
 	j = 0;
 	while ((buffer)[i] != '\0')
 	{
-		line = ft_realloc(line, (*linelen) + 2);
-		line[*linelen] = (buffer)[i++];
+		line[*linelen] = (buffer)[i];
+		i++;
 		(*linelen)++;
 		if (line[*linelen - 1] == '\n')
 		{
