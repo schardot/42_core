@@ -38,9 +38,12 @@ char	*getmyline(char *line, char *extra, int fd, int *linelen)
 			return (line);
 	}
 	if (b == 0 && *linelen > 0)
+	{
+		free(buffer);
 		return (line);
+	}
 	free (line);
-	free (buffer);
+	free(buffer);
 	return (NULL);
 }
 
@@ -81,6 +84,7 @@ void	writeextra(char *extra, char *buffer) //do i address buffer right?
 		extra[i] = buffer[i];
 		i ++;
 	}
+	free (buffer);
 	//(*extra)[i] = '\0'; nao precisa pq ele copia o \0 de buffer!
 }
 
@@ -150,16 +154,16 @@ char *ft_realloc(char *ptr, size_t size)
 	return (newptr);
 }
 
-// int	main(void)
-// {
-// 	char	*line;
-// 	int	fd;
+int	main(void)
+{
+	char	*line;
+	int	fd;
 
-// 	//line = NULL;
-// 	fd = open("multiple_nlx5.txt", O_RDONLY);
-// 	while (line)
-// 	{
-// 		line = get_next_line(fd);
-// 		printf("%s", line);
-// 	}
-// }
+	//line = NULL;
+	fd = open("nl.txt", O_RDONLY);
+	while (line)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+	}
+}
