@@ -1,35 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 11:58:36 by nataliaschard     #+#    #+#             */
+/*   Updated: 2024/06/24 11:58:38 by nataliaschard    ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-// void *ft_realloc(void *ptr, size_t size)
-// {
-//     if (!ptr)
-//         return (malloc(size));
-//     void *newptr;
-//     newptr = malloc(size);
-//     if (!newptr)
-//         return (NULL);
-//     newptr = ft_memcpy(newptr, ptr, size);
-//     return (newptr);
-// }
+char	*getmyline(char *line, char *buffer, int fd, int *linelen)
+{
+	int	b;
 
-// void *ft_memcpy(void *dest, const void *src, size_t n)
-// {
-//     char *d;
-//     const char *s;
-//     int i;
+	b = read(fd, buffer, BUFFER_SIZE);
+	while (b > 0)
+	{
+		(buffer)[b] = '\0';
+		line = append_buffer(buffer, line, linelen);
+		if (line && line[*linelen - 1] == '\n')
+			return (line);
+		b = read(fd, buffer, BUFFER_SIZE);
+	}
+	if (b == 0 && *linelen > 0)
+	{
+		return (line);
+	}
+	free(line);
+	return (NULL);
+}
 
-//     d = dest;
-//     s = src;
-//     if (d == NULL && s == NULL)
-//     {
-//         return (NULL);
-//     }
-//     i = 0;
-//     while (n > 0)
-//     {
-//         d[i] = s[i];
-//         n--;
-//         i++;
-//     }
-//     return (dest);
-// }
+char	*append_buffer(char *buffer, char *line, int *linelen)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while ((buffer)[i] != '\0')
+	{
+		line = ft_realloc(line, (*linelen) + 2);
+		line[*linelen] = (buffer)[i++];
+		(*linelen)++;
+		if (line[*linelen - 1] == '\n')
+		{
+			while ((buffer)[j + i] != '\0')
+			{
+				(buffer)[j] = (buffer)[j + i];
+				j++;
+			}
+			buffer[j] = '\0';
+			line[*linelen] = '\0';
+			return (line);
+		}
+	}
+	buffer[0] = '\0';
+	line[*linelen] = '\0';
+	return (line);
+}
+
+char	*ft_realloc(char *ptr, size_t size)
+{
+	char	*newptr;
+	size_t	i;
+
+	newptr = (char *)malloc(size);
+	if (!newptr)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	if (ptr)
+	{
+		i = 0;
+		while (i < size - 1 && ptr[i] != '\0')
+		{
+			newptr[i] = ptr[i];
+			i++;
+		}
+		free(ptr);
+	}
+	return (newptr);
+}

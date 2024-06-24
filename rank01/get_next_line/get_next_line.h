@@ -1,26 +1,30 @@
-#ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 11:56:31 by nataliaschard     #+#    #+#             */
+/*   Updated: 2024/06/24 11:56:36 by nataliaschard    ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 10000000
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000000
+# endif
 
-char *get_next_line(int fd);
-char *ft_realloc(char *ptr, size_t size);
-
-// char *process_extra(char **extra, int *linelen);
-// char *append_buffer(char *buffer, char *line, int bytes_read, int *linelen, char **extra);
-// char *get_next_line(int fd);
-// char *read_and_construct_line(int fd, char **extra, char *line, int *linelen);
-
-char *getmyline(char *line, char *extra, int fd, int *linelen);
-char *append_buffer(char *buffer, char *line, int *linelen, char *extra);
-void writeextra(char *extra, char *buffer);
-char *extrainline(char *xtra, int *linelen);
+char	*get_next_line(int fd);
+char	*ft_realloc(char *ptr, size_t size);
+char	*getmyline(char *line, char *buffer, int fd, int *linelen);
+char	*append_buffer(char *buffer, char *line, int *linelen);
 
 #endif
