@@ -1,10 +1,10 @@
 # MANDATORY PART
 
- ## Function name: 🟡 get_next_line
+ ## Function name: :green_circle: get_next_line
 
- Passed moulinette? 🔴 - haven't tried yet
+ Passed moulinette? :green_circle:
 
- Turn in files: 🟡 get_next_line.c, 🟡 get_next_line_utils.c, 🟡 get_next_line.h
+ Turn in files: :green_circle: get_next_line.c, :green_circle: get_next_line_utils.c, :green_circle: get_next_line.h
 
  External functs. read, malloc, free
 
