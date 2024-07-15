@@ -39,38 +39,6 @@ int main(void)
     ft_printf("printf: ");
     printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%%"));
 
-    // ft_printf("Less simple Tests\nCheck that you can put multiple conversions (and so multiple arguments) of the same type in a same printf.\n");
-    // ft_printf("%%s test\n");
-    // ft = ft_printf("%s and %s and %s %s", s, s, s, s);
-    // ft_printf("\nBytes written: %d\n", ft);
-    // ft_printf("printf:\n");
-    // og = printf("%s and %s and %s %s", s, s, s, s);
-    // printf("\nBytes written: %d\n", og);
-
-    // ft_printf("%%d test\n");
-    // ft = ft_printf("%d and %d and %d %d", d, d, d, d);
-    // ft_printf("\nBytes written: %d\n", ft);
-    // ft_printf("printf:\n");
-    // og = printf("%d and %d and %d %d", d, d, d, d);
-    // printf("\nBytes written: %d\n", og);
-
-    // ft_printf("%%p test\n");
-    // ft = ft_printf("%p and %p and %p %p", &d, &d, &c, &d);
-    // ft_printf("\nBytes written: %d\n", ft);
-    // ft_printf("printf:\n");
-    // og = printf("%p and %p and %p %p", &d, &d, &c, &d);
-    // printf("\nBytes written: %d\n", og);
-
-    // ft_printf("%%c test\n");
-    // ft = ft_printf("%c and %c and %c %c", c, c, 'b', c);
-    // ft_printf("\nBytes written: %d\n", ft);
-    // ft_printf("printf:\n");
-    // og = printf("%c and %c and %c %c", c, c, 'b', c);
-    // printf("\nBytes written: %d\n", og);
-
-    //SLIGHTLY COMPLICATED TESTS
-
-    ft_printf("\033[44mSlightly complicated tests\033[0m\nCheck that the less usual conversions %i, %u, %x, %X and %c work fine while doing multiple calls\n");
     //%i test
     ft_printf("\n\033[45m%%i test - \"42\"\033[0m\n");
     ft_printf("ft_printf: ");
@@ -86,14 +54,14 @@ int main(void)
     printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%u and %u and %u %u", u, u, u, u));
 
     //%x test
-    ft_printf("\n\033[45m%%x test - \"2147483646 turns into 7ffffffe\"\033[0m\n");
+    ft_printf("\n\033[45m%%x test - \"2147483646 turns into ffffffff\"\033[0m\n");
     ft_printf("ft_printf: ");
     ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", ft_printf("%x and %x and %x %x", u, u, u, u));
     ft_printf("printf: ");
     printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%x and %x and %x %x", u, u, u, u));
 
     //%X test
-    ft_printf("\n\033[45m%%x test - \"2147483646 turns into 7FFFFFFE\"\033[0m\n");
+    ft_printf("\n\033[45m%%x test - \"2147483646 turns into FFFFFFFF\"\033[0m\n");
     ft_printf("ft_printf: ");
     ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", ft_printf("%X and %X and %X %X", u, u, u, u));
     ft_printf("printf: ");
@@ -104,6 +72,33 @@ int main(void)
     ft_printf("ft_printf: ");
     ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", ft_printf("%c and %c and %c %c", c, c, c, c));
     ft_printf("printf: ");
-    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%c and %c and %c %c", c, c, c, c));
+    printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%c and %c and %c %c", c, c, c, c));
 
+    //0 test
+    ft_printf("\n\033[45m0 test - should return -1\033[0m\n");
+    ft_printf("ft_printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", ft_printf(0));
+    ft_printf("printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", printf(0));
+
+    //empty string test
+    ft_printf("\n\033[45m""/empty string test - should do nothing\033[0m\n");
+    ft_printf("ft_printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", ft_printf("%s",""));
+    ft_printf("printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%s",""));
+
+    //INT_MIN test
+    ft_printf("\n\033[45m""smallest int test - \033[0m\n");
+    ft_printf("ft_printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", ft_printf("%d",INT_MIN));
+    ft_printf("printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%d",INT_MIN));
+    
+    //NULL test
+    ft_printf("\n\033[45m""NULL pointer test - ""-2147483648"" \033[0m\n");
+    ft_printf("ft_printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", ft_printf("%p", NULL));
+    ft_printf("printf: ");
+    ft_printf("\nBytes written: \033[0;36m%d\033[0m\n", printf("%p", NULL));
 }
