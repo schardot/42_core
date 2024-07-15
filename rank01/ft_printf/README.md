@@ -2,7 +2,7 @@
 
  ## Program name: :green_circle: libftprintf.a
 
- Passed moulinette? 🔴 - haven't tried yet
+ Passed moulinette? :green_circle: - 100%
 
  Turn in files: :green_circle: Makefile, :green_circle: *.h, :green_circle: */*.h, :green_circle: *.c, , :green_circle: */*.c
 
