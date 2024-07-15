@@ -45,7 +45,12 @@ int	ft_printaddr(void *ptr, char *base, bool first)
 	len = 0;
 	baselen = (unsigned long)ft_strlen(base);
 	addr = (unsigned long)ptr;
-	if (first)
+	if (addr == 0)
+	{
+		len += ft_printf("%s", "(nil)");
+		return (len);
+	}
+	else if (first)
 		len += ft_printstr("0x");
 	if (addr == 0)
 		len += ft_printchar(base[0]);
