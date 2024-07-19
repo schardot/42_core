@@ -29,8 +29,6 @@ Here is a list of some of the projects included in this repository:
 2. **Rank 01 - Born2beroot** :yellow_circle:
    - **Description:** You will create your first machine in VirtualBox under specific instructions
    - **Technologies Used:** Shell, Debian, UFW (Uncomplicated Firewall), VirtualBox, SSH, cron, rsync, sudo, systemd, User and Permission Management, Network Configuration, Monitoring Tools
-   - **Folder:** [rank01/born2beroot](./rank01/born2beroot)
-
-
+   - **Folder:** [rank01/born2beroot](./rank01/Born2beroot)
 
 
