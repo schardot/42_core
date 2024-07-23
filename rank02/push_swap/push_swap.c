@@ -4,26 +4,33 @@
 int push_swap(int argc, char **argv)
 {
     t_list  *a;
+    t_list  *b;
 
     a = NULL;
-    //implementar error handling pra argc e argv
-    if (is_stack_sorted(argc, argv))
-        its already sorted, check later what to return;
+    b = NULL;
+    if (argc < 2)
+        return (NULL);
+        //If no parameters are specified, the program must not display anything and give the prompt back.
+    if (!check_argv(argc, argv))
+        return (false);
     else
     {
         array_to_list(argc, argv, &a);
     }
 }
 
-int is_stack_sorted(int argc, char *argv)
+int check_argv(int argc, char *argv)
 {
     int i;
 
     i = 0;
     while (i < argc)
     {
-        if (argv[i + 1] < argv[i])
+        if (ft_isdigit(argv[i]) == 1 || ft_strchr(argv, argv[i]))
+        {
+            ft_printf("Error\n");
             return (false);
+        }
         i ++;
     }
     return (true);
@@ -46,3 +53,24 @@ int array_to_list(int argc, char **argv, t_list **a)
     }
     return (i); //que vai ser quandos nodes tem na lista. nao sei se preciso
 }
+int swap(t_list *stack)
+{
+    int swap_helper;
+
+    swap_helper = stack->content;
+    stack->content = stack->next->content;
+    stack->next->content = swap_helper;
+}
+
+int push(t_list **from, t_list **to)
+{
+    if (!to)
+    {
+        to = ft_lstnew(from->content);
+        ft_lstdelone(from->next, free)
+    }
+}
+
+int rotate()
+
+int reverse()
