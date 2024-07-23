@@ -20,15 +20,20 @@ Here is a list of some of the projects included in this repository:
    - **Description:** Write a library that contains ft_printf(), a function that will mimic the original printf()
    - **Technologies Used:** C, Shell, Makefile.
    - **Folder:** [rank01/ft_printf](./rank01/ft_printf)
-  
+
 2. **Rank 01 - get_next_line** :green_circle:
    - **Description:** Write a function that returns a line read from a file descriptor
    - **Technologies Used:** C, Shell.
    - **Folder:** [rank01/get_next_line](./rank01/get_next_line)
-  
+
 2. **Rank 01 - Born2beroot** :yellow_circle:
    - **Description:** You will create your first machine in VirtualBox under specific instructions
    - **Technologies Used:** Shell, Debian, UFW (Uncomplicated Firewall), VirtualBox, SSH, cron, rsync, sudo, systemd, User and Permission Management, Network Configuration, Monitoring Tools
    - **Folder:** [rank01/born2beroot](./rank01/Born2beroot)
+
+3. **Rank 02 - push_swap** :yellow_circle:
+   - **Description:** Write a program in C called push_swap which calculates and displays on the standard output the smallest program, made of Push swap language instructions, that sorts the integers received as arguments.
+   - **Technologies Used:**  C, Shell, Makefile, Stacks (Linked Lists), Sorting Algorithms, CLI.
+   - **Folder:** [rank02/push_swap](./rank02/push_swap)
 
 
