@@ -30,7 +30,7 @@ int prep_check_argv(int argc, char *argv)
     while (i < argc)
     {
         num = ft_atoi(argv[i]);
-        if (num > INT_MAX || num < INT_MIN || ft_strchr(argv, argv[i])) // ft_digit is not going to work, come back here later
+        if (num > INT_MAX || num < INT_MIN || ft_strchr(argv, argv[i]))
         {
             ft_printf("Error\n");
             return (false);
