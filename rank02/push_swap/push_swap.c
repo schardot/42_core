@@ -57,6 +57,5 @@ int array_to_list(int argc, char **argv, node **a)
         ft_lstadd_back(a, node_aux);
         i ++;
     }
-    //tenho que free node_aux?
     return (true);
 }
