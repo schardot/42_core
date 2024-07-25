@@ -27,7 +27,7 @@ int check_argv(int argc, char *argv)
     i = 0;
     while (i < argc)
     {
-        if (ft_isdigit(argv[i]) == 1 || ft_strchr(argv, argv[i]))
+        if (ft_isdigit(argv[i]) == 1 || ft_strchr(argv, argv[i])) // ft_digit is not going to work, come back here later
         {
             ft_printf("Error\n");
             return (false);
