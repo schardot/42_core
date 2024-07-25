@@ -17,17 +17,20 @@ int push_swap(int argc, char **argv)
     {
         if (!array_to_list(argc, argv, &a))
             return (false);
+        sort_list()
     }
 }
 
-int check_argv(int argc, char *argv)
+int prep_check_argv(int argc, char *argv)
 {
     int i;
+    int num;
 
     i = 0;
     while (i < argc)
     {
-        if (ft_isdigit(argv[i]) == 1 || ft_strchr(argv, argv[i])) // ft_digit is not going to work, come back here later
+        num = ft_atoi(argv[i]);
+        if (num > INT_MAX || num < INT_MIN || ft_strchr(argv, argv[i])) // ft_digit is not going to work, come back here later
         {
             ft_printf("Error\n");
             return (false);
@@ -37,7 +40,7 @@ int check_argv(int argc, char *argv)
     return (true);
 }
 
-int array_to_list(int argc, char **argv, node **a)
+int prep_array_to_list(int argc, char **argv, node **a)
 {
     int i;
     node *node_aux;
@@ -58,4 +61,17 @@ int array_to_list(int argc, char **argv, node **a)
         i ++;
     }
     return (true);
+}
+
+int sort_list()
+{
+    //at this point:
+    // 1. checked for errors
+    // 2. transformed from array to linked list
+    // 3. stack a is full
+    // 4. stack b is empty
+    // NOW ===
+    // already wrote functions for the operations push swap rotate and reverse
+    // its time to figure out how i want to do the sorting in the most efficient way
+    // each time i do a move, print which move was it!
 }
