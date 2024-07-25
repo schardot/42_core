@@ -4,4 +4,8 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
+typedef struct node{
+    int content;
+    struct node *next;
+} node;
 

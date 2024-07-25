@@ -3,19 +3,20 @@
 
 int push_swap(int argc, char **argv)
 {
-    t_list  *a;
-    t_list  *b;
+    node  *a;
+    node  *b;
 
     a = NULL;
     b = NULL;
     if (argc < 2)
-        return (NULL);
+        return (push_swap(?));
         //If no parameters are specified, the program must not display anything and give the prompt back.
     if (!check_argv(argc, argv))
         return (false);
     else
     {
-        array_to_list(argc, argv, &a);
+        if (!array_to_list(argc, argv, &a))
+            return (false);
     }
 }
 
@@ -36,41 +37,26 @@ int check_argv(int argc, char *argv)
     return (true);
 }
 
-int array_to_list(int argc, char **argv, t_list **a)
+int array_to_list(int argc, char **argv, node **a)
 {
     int i;
-    t_list *node_aux;
+    node *node_aux;
 
     i = 1;
-    a = ft_lstnew(argv[0]);
+    *a = ft_lstnew(ft_atoi(argv[0]));
+    if (!*a)
+        return (false);
     while (i < argc - 1)
     {
-        node_aux = ft_lstnew(argv[i]);
+        node_aux = ft_lstnew(ft_atoi(argv[i]));
             if(!node_aux)
-                return (NULL);
+            {
+                ft_lstclear(a, free);
+                return (false);
+            }
         ft_lstadd_back(a, node_aux);
         i ++;
     }
-    return (i); //que vai ser quandos nodes tem na lista. nao sei se preciso
+    //tenho que free node_aux?
+    return (true);
 }
-int swap(t_list *stack)
-{
-    int swap_helper;
-
-    swap_helper = stack->content;
-    stack->content = stack->next->content;
-    stack->next->content = swap_helper;
-}
-
-int push(t_list **from, t_list **to)
-{
-    if (!to)
-    {
-        to = ft_lstnew(from->content);
-        ft_lstdelone(from->next, free)
-    }
-}
-
-int rotate()
-
-int reverse()
