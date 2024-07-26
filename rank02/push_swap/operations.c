@@ -1,17 +1,19 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-int swap(node *stack)
+int swap(node *stack, char c)
 {
     int swap_helper;
 
     swap_helper = stack->content;
     stack->content = stack->next->content;
     stack->next->content = swap_helper;
+    write(1, 's', 1);
+    write(1, &c, 1);
     return (true);
 }
 
-int push(node **from, node **to)
+int push(node **from, node **to, char c)
 {
     node    *aux;
     if (!*from)
@@ -29,30 +31,34 @@ int push(node **from, node **to)
         (*from) = (*from)->next;
         (*to)->next = aux;
     }
+    write(1, 'p', 1);
+    write(1, &c, 1);
     return (true);
 }
 
-bool rotate(node **stack) //shift up by one
+bool rotate(node **stack, char c)
 {
     node    *last;
     node    *first;
 
-    if (!stack || !*stack || !(*stack)->next) // no rotation needed if the stack is empty or has only one element
+    if (!stack || !*stack || !(*stack)->next)
         return (false);
     first = *stack;
     last = ft_lstlast(*stack);
     *stack = (*stack)->next,
     last->next = first;
     first->next = NULL;
+    write(1, 'r', 1);
+    write(1, &c, 1);
     return (true);
 }
 
-bool reverse(node **stack) // shift down by one
+bool reverse(node **stack, char c)
 {
     node    *last;
     node    *seclast;
 
-    if (!stack || !*stack || !(*stack)->next) // no rotation needed if the stack is empty or has only one element
+    if (!stack || !*stack || !(*stack)->next)
         return (false);
     last = ft_lstlast(*stack);
     seclast = *stack;
@@ -61,5 +67,7 @@ bool reverse(node **stack) // shift down by one
     seclast->next = NULL;
     last->next = *stack;
     *stack = last;
+    write(1, 'rr', 2);
+    write(1, &c, 1);
     return (true);
 }

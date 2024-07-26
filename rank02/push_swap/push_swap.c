@@ -17,7 +17,7 @@ int push_swap(int argc, char **argv)
     {
         if (!array_to_list(argc, argv, &a))
             return (false);
-        sort_list()
+        sort_list(a, b);
     }
 }
 
@@ -75,13 +75,13 @@ int sort_list(node **a, node **b)
     while (sorted == false)
     {
         if (*b && (*b)->content < (*a)->content)
-            push(b, a);
+            push(b, a, 'b');
         if ((*a)->content < (*a)->next->content)
-            rotate(a);
+            rotate(a, 'a');
         else if ((*a)->content > (*a)->next->content)
-            push(a, b);
+            push(a, b, 'a');
         if ((*a)->content == first && (*b)->content == last)
-            push(a, b);
+            push(a, b, 'a');
         if (!*b)
             sorted = check_sort(a);
     }

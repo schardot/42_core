@@ -13,9 +13,9 @@ typedef struct node{
 int push_swap(int argc, char **argv);
 int prep_check_argv(int argc, char *argv);
 int prep_array_to_list(int argc, char **argv, node **a);
-int swap(node *stack);
-int push(node **from, node **to);
-bool rotate(node **stack);
-bool reverse(node **stack);
+int swap(node *stack, char c);
+int push(node **from, node **to, char c);
+bool rotate(node **stack, char c);
+bool reverse(node **stack, char c);
 int sort_list(node **a, node **b);
 bool check_sort(node **a);
