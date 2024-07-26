@@ -20,8 +20,6 @@ int main(int argc, char **argv)
     if (!prep_array_to_list(argc, argv, &a))
         return (1);
     sort_list(&a, &b, first, last);
-    ft_lstclear((t_list **)&a, free);
-    ft_lstclear((t_list **)&b, free);
     return (0);
 }
 
@@ -93,7 +91,7 @@ void sort_list(t_list **a, t_list **b, long first, long last)
         else if ((long)(*a)->content < (long)(*a)->next->content)
             rotate(a, 'a');
         else if ((long)(*a)->content == last && (long)(*a)->next->content == first)
-            reverse(a, 'a');
+            rotate(a, 'a');
         else if ((long)(*a)->content > (long)(*a)->next->content)
         {
             push(a, b, 'a');
@@ -112,7 +110,7 @@ bool    check_sort(t_list *a)
     aux = a;
     while (aux->next)
     {
-        if ((int *)aux->content > (int *)aux->next->content)
+        if ((long)aux->content > (long)aux->next->content)
             return (false);
         aux = aux->next;
     }
