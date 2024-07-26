@@ -17,3 +17,5 @@ int swap(node *stack);
 int push(node **from, node **to);
 bool rotate(node **stack);
 bool reverse(node **stack);
+int sort_list(node **a, node **b);
+bool check_sort(node **a);

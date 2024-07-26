@@ -63,15 +63,35 @@ int prep_array_to_list(int argc, char **argv, node **a)
     return (true);
 }
 
-int sort_list()
+int sort_list(node **a, node **b)
 {
-    //at this point:
-    // 1. checked for errors
-    // 2. transformed from array to linked list
-    // 3. stack a is full
-    // 4. stack b is empty
-    // NOW ===
-    // already wrote functions for the operations push swap rotate and reverse
-    // its time to figure out how i want to do the sorting in the most efficient way
-    // each time i do a move, print which move was it!
+    int first;
+    int last;
+    bool sorted;
+
+    first = (*a)->content;
+    last = (*a)->content;
+    sorted = false;
+    while (sorted == false)
+    {
+        if (*b && (*b)->content < (*a)->content)
+            push(b, a);
+        if ((*a)->content < (*a)->next->content)
+            rotate(a);
+        else if ((*a)->content > (*a)->next->content)
+            push(a, b);
+        if ((*a)->content == first && (*b)->content == last)
+            push(a, b);
+        if (!*b)
+            sorted = check_sort(a);
+    }
+}
+bool    check_sort(node **a)
+{
+    while ((*a)->next)
+    {
+        if ((*a)->content > (*a)->next->content)
+            return (false);
+    }
+    return (true);
 }
