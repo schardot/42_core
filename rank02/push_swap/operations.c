@@ -1,23 +1,27 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-int swap(node *stack, char c)
+void swap(t_list *stack, char c)
 {
-    int swap_helper;
+    long swap_helper;
 
-    swap_helper = stack->content;
-    stack->content = stack->next->content;
-    stack->next->content = swap_helper;
-    write(1, 's', 1);
-    write(1, &c, 1);
-    return (true);
+    if (stack && stack->next)
+    {
+        swap_helper = *(int *)stack->content;
+        *(int *)stack->content = *(int *)stack->next->content;
+        *(int *)stack->next->content = swap_helper;
+        write(1, "s", 1);
+        write(1, &c, 1);
+        write(1, "\n", 1);
+    }
 }
 
-int push(node **from, node **to, char c)
+void push(t_list **from, t_list **to, char c)
 {
-    node    *aux;
-    if (!*from)
-        return ; //nothing to move, stack is empty
+    t_list    *aux;
+
+    if (!from || !*from)
+        return ;
     if (!*to)
     {
         *to = *from;
@@ -28,18 +32,18 @@ int push(node **from, node **to, char c)
     {
         aux = *to;
         *to = *from;
-        (*from) = (*from)->next;
+        *from = (*from)->next;
         (*to)->next = aux;
     }
-    write(1, 'p', 1);
+    write(1, "p", 1);
     write(1, &c, 1);
-    return (true);
+    write(1, "\n", 1);
 }
 
-bool rotate(node **stack, char c)
+bool rotate(t_list **stack, char c)
 {
-    node    *last;
-    node    *first;
+    t_list    *last;
+    t_list    *first;
 
     if (!stack || !*stack || !(*stack)->next)
         return (false);
@@ -48,15 +52,16 @@ bool rotate(node **stack, char c)
     *stack = (*stack)->next,
     last->next = first;
     first->next = NULL;
-    write(1, 'r', 1);
+    write(1, "r", 1);
     write(1, &c, 1);
+    write(1, "\n", 1);
     return (true);
 }
 
-bool reverse(node **stack, char c)
+bool reverse(t_list **stack, char c)
 {
-    node    *last;
-    node    *seclast;
+    t_list    *last;
+    t_list    *seclast;
 
     if (!stack || !*stack || !(*stack)->next)
         return (false);
@@ -67,7 +72,8 @@ bool reverse(node **stack, char c)
     seclast->next = NULL;
     last->next = *stack;
     *stack = last;
-    write(1, 'rr', 2);
+    write(1, "rr", 2);
     write(1, &c, 1);
+    write(1, "\n", 1);
     return (true);
 }

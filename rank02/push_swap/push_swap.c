@@ -1,38 +1,51 @@
 #include "push_swap.h"
 #include "libft/libft.h"
+#include <stdio.h>
 
-int push_swap(int argc, char **argv)
+int main(int argc, char **argv)
 {
-    node  *a;
-    node  *b;
+    t_list  *a;
+    t_list  *b;
+    long first;
+    long last;
 
     a = NULL;
     b = NULL;
+    first = LONG_MAX;
+    last = LONG_MIN;
     if (argc < 2)
-        return (push_swap(?));
-        //If no parameters are specified, the program must not display anything and give the prompt back.
-    if (!check_argv(argc, argv))
-        return (false);
-    else
-    {
-        if (!array_to_list(argc, argv, &a))
-            return (false);
-        sort_list(a, b);
-    }
+        return (0);
+    if (!prep_check_argv(argc, argv, &first, &last))
+        return (1);
+    if (!prep_array_to_list(argc, argv, &a))
+        return (1);
+    sort_list(&a, &b, first, last);
+    ft_lstclear((t_list **)&a, free);
+    ft_lstclear((t_list **)&b, free);
+    return (0);
 }
 
-int prep_check_argv(int argc, char *argv)
+bool prep_check_argv(int argc, char **argv, long *first, long *last)
 {
     int i;
-    int num;
+    long num;
 
-    i = 0;
+    i = 1;
     while (i < argc)
     {
         num = ft_atoi(argv[i]);
-        if (num > INT_MAX || num < INT_MIN || ft_strchr(argv, argv[i]))
+        if (!*first && !*last)
         {
-            ft_printf("Error\n");
+            *first = num;
+            *last = num;
+        }
+        if (num < *first)
+            *first = num;
+        if (num > *last)
+            *last = num;
+        if (num > INT_MAX || num < INT_MIN || !ft_isdigit(argv[i][0]))
+        {
+            printf("Error\n"); //put my own implementation later
             return (false);
         }
         i ++;
@@ -40,58 +53,68 @@ int prep_check_argv(int argc, char *argv)
     return (true);
 }
 
-int prep_array_to_list(int argc, char **argv, node **a)
+bool prep_array_to_list(int argc, char **argv, t_list **a)
 {
     int i;
-    node *node_aux;
+    t_list *node_aux;
 
-    i = 1;
-    *a = ft_lstnew(ft_atoi(argv[0]));
+    i = 2;
+    *a = ft_lstnew((void *)(long)ft_atoi(argv[1]));
     if (!*a)
         return (false);
-    while (i < argc - 1)
+    while (i < argc)
     {
-        node_aux = ft_lstnew(ft_atoi(argv[i]));
-            if(!node_aux)
-            {
-                ft_lstclear(a, free);
-                return (false);
-            }
+        node_aux = ft_lstnew((void *)(long)ft_atoi(argv[i]));
+        if (!node_aux)
+        {
+            ft_lstclear(a, free);
+            return (false);
+        }
         ft_lstadd_back(a, node_aux);
         i ++;
     }
     return (true);
 }
 
-int sort_list(node **a, node **b)
+void sort_list(t_list **a, t_list **b, long first, long last)
 {
-    int first;
-    int last;
     bool sorted;
 
-    first = (*a)->content;
-    last = (*a)->content;
     sorted = false;
     while (sorted == false)
     {
-        if (*b && (*b)->content < (*a)->content)
+        if (*a && *b && (long)(*a)->content == first && (long)(*b)->content == last)
+        {
             push(b, a, 'b');
-        if ((*a)->content < (*a)->next->content)
+            reverse(a, 'a');
+        }
+        else if (*b && (long)(*b)->content < (long)(*a)->content)
+            push(b, a, 'b');
+        else if ((long)(*a)->content < (long)(*a)->next->content)
             rotate(a, 'a');
-        else if ((*a)->content > (*a)->next->content)
+        else if ((long)(*a)->content == last && (long)(*a)->next->content == first)
+            reverse(a, 'a');
+        else if ((long)(*a)->content > (long)(*a)->next->content)
+        {
             push(a, b, 'a');
-        if ((*a)->content == first && (*b)->content == last)
-            push(a, b, 'a');
+            rotate(a, 'a');
+        }
         if (!*b)
             sorted = check_sort(a);
     }
 }
-bool    check_sort(node **a)
+bool    check_sort(t_list **a)
 {
-    while ((*a)->next)
+    t_list *aux;
+
+    if (!a || !*a)
+        return (true);
+    aux = *a;
+    while (aux->next)
     {
-        if ((*a)->content > (*a)->next->content)
+        if (*(int *)aux->content > *(int *)aux->next->content)
             return (false);
+        aux = aux->next;
     }
     return (true);
 }
