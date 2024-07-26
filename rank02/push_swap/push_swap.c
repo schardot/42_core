@@ -100,19 +100,19 @@ void sort_list(t_list **a, t_list **b, long first, long last)
             rotate(a, 'a');
         }
         if (!*b)
-            sorted = check_sort(a);
+            sorted = check_sort(*a);
     }
 }
-bool    check_sort(t_list **a)
+bool    check_sort(t_list *a)
 {
     t_list *aux;
 
-    if (!a || !*a)
+    if (!a)
         return (true);
-    aux = *a;
+    aux = a;
     while (aux->next)
     {
-        if (*(int *)aux->content > *(int *)aux->next->content)
+        if ((int *)aux->content > (int *)aux->next->content)
             return (false);
         aux = aux->next;
     }
