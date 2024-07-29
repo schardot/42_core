@@ -1,21 +1,32 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void swap(t_list *stack, char c)
+void swap(t_list **stack, char c)
 {
     long swap_helper;
 
-    if (stack && stack->next)
+    if (ft_lstsize(*stack) < 2)
+        return ;
+    if (stack && (*stack)->next)
     {
-        swap_helper = *(int *)stack->content;
-        *(int *)stack->content = *(int *)stack->next->content;
-        *(int *)stack->next->content = swap_helper;
+        swap_helper = (long)(*stack)->content;
+        (*stack)->content = (*stack)->next->content;
+        (*stack)->next->content = (void *)swap_helper;
         write(1, "s", 1);
-        write(1, &c, 1);
-        write(1, "\n", 1);
+        if (c == 'a' || c == 'b')
+        {
+            write(1, &c, 1);
+            write(1, "\n", 1);
+        }
     }
 }
 
+void swap_swap(t_list **a, t_list **b)
+{
+    swap(a, 's');
+    swap(b, 's');
+    write(1, "\n", 1);
+}
 void push(t_list **from, t_list **to, char c)
 {
     t_list    *aux;

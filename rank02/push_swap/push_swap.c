@@ -19,7 +19,10 @@ int main(int argc, char **argv)
         return (1);
     if (!prep_array_to_list(argc, argv, &a))
         return (1);
+    if (check_sort(a) == true)
+        return (0);
     sort_list(&a, &b, first, last);
+    //ft_lstclear(a, free);
     return (0);
 }
 
@@ -78,29 +81,40 @@ void sort_list(t_list **a, t_list **b, long first, long last)
 {
     bool sorted;
 
+    if (ft_lstsize(*a) < 6)
+    {
+        small_list(a, b, first, last);
+        return ;
+    }
     sorted = false;
     while (sorted == false)
     {
-        if (*a && *b && (long)(*a)->content == first && (long)(*b)->content == last)
+        while (ft_lstsize(*a) > 2)
         {
-            push(b, a, 'b');
-            reverse(a, 'a');
+            if ((long)(*a)->content == first || (long)(*a)->content == last)
+                rotate(a, 'a');
+            else
+                push(a, b, 'b');
         }
-        else if (*b && (long)(*b)->content < (long)(*a)->content)
-            push(b, a, 'b');
-        else if ((long)(*a)->content < (long)(*a)->next->content)
+        if ((long)(*a)->content == first)
             rotate(a, 'a');
-        else if ((long)(*a)->content == last && (long)(*a)->next->content == first)
-            rotate(a, 'a');
-        else if ((long)(*a)->content > (long)(*a)->next->content)
+        while(*b)
         {
-            push(a, b, 'a');
-            rotate(a, 'a');
+            if (!(*b)->next)
+                push(b, a, 'a');
+            else if (*b && (long)(*b)->content < (long)(*b)->next->content)
+                swap(b, 'b');
+            else if (*b && (long)(*b)->content < (long)(*a)->content && (*b)->content > ft_lstlast(*a)->content)
+                push(b, a, 'a');
+            else
+                rotate(a, 'a');
         }
-        if (!*b)
-            sorted = check_sort(*a);
+        reverse(a, 'a');
+        sorted = check_sort(*a);
     }
+    return ;
 }
+
 bool    check_sort(t_list *a)
 {
     t_list *aux;
