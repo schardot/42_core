@@ -29,7 +29,7 @@ void swap_swap(t_list **a, t_list **b)
 }
 void push(t_list **from, t_list **to, char c)
 {
-    t_list    *aux;
+    t_list *aux;
 
     if (!from || !*from)
         return ;

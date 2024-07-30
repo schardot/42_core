@@ -13,11 +13,12 @@ void swap(t_list **stack, char c);
 void push(t_list **from, t_list **to, char c);
 bool rotate(t_list **stack, char c);
 bool reverse(t_list **stack, char c);
-void sort_list(t_list **a, t_list **b, long first, long last);
+void sort_list(t_list **a, t_list **b, long last);
 bool check_sort(t_list *a);
 void small_list(t_list **a, t_list **b, int first, int last);
 void size_three_list(t_list **a);
 void size_four_list(t_list **a, t_list **b, int first, int last);
 void size_five_list(t_list **a, t_list **b);
+int digits_amount(int num);
 
 #endif
