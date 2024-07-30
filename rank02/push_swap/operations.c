@@ -17,12 +17,6 @@ void swap(t_list **stack, char c)
     }
 }
 
-void swap_swap(t_list **a, t_list **b)
-{
-    swap(a, 's');
-    swap(b, 's');
-    ft_printf("\n");
-}
 void push(t_list **from, t_list **to, char c)
 {
     t_list *aux;

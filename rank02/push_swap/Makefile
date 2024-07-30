@@ -14,7 +14,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -g $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) bonus
@@ -30,4 +30,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
