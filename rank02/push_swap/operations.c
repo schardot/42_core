@@ -12,12 +12,8 @@ void swap(t_list **stack, char c)
         swap_helper = (long)(*stack)->content;
         (*stack)->content = (*stack)->next->content;
         (*stack)->next->content = (void *)swap_helper;
-        write(1, "s", 1);
         if (c == 'a' || c == 'b')
-        {
-            write(1, &c, 1);
-            write(1, "\n", 1);
-        }
+            ft_printf("s%c\n", c);
     }
 }
 
@@ -25,7 +21,7 @@ void swap_swap(t_list **a, t_list **b)
 {
     swap(a, 's');
     swap(b, 's');
-    write(1, "\n", 1);
+    ft_printf("\n");
 }
 void push(t_list **from, t_list **to, char c)
 {
@@ -46,9 +42,7 @@ void push(t_list **from, t_list **to, char c)
         *from = (*from)->next;
         (*to)->next = aux;
     }
-    write(1, "p", 1);
-    write(1, &c, 1);
-    write(1, "\n", 1);
+    ft_printf("P%c\n", c);
 }
 
 bool rotate(t_list **stack, char c)
@@ -63,9 +57,7 @@ bool rotate(t_list **stack, char c)
     *stack = (*stack)->next,
     last->next = first;
     first->next = NULL;
-    write(1, "r", 1);
-    write(1, &c, 1);
-    write(1, "\n", 1);
+    ft_printf("r%c\n", c);
     return (true);
 }
 
@@ -83,8 +75,6 @@ bool reverse(t_list **stack, char c)
     seclast->next = NULL;
     last->next = *stack;
     *stack = last;
-    write(1, "rr", 2);
-    write(1, &c, 1);
-    write(1, "\n", 1);
+    ft_printf("rr%c\n", c);
     return (true);
 }
