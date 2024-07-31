@@ -12,6 +12,9 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
+PRINTF_DIR = ./ft_printf
+PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a
+
 NAME = libft.a
 
 all: $(NAME)
@@ -19,18 +22,24 @@ all: $(NAME)
 bonus: $(OBJS_B) $(OBJS_S)
 	ar r $(NAME) $(OBJS_B) $(OBJS_S)
 
-$(NAME): $(OBJS_S)
+$(NAME): $(OBJS_S) $(PRINTF_LIB)
 	ar r $(NAME) $(OBJS_S)
+
+$(PRINTF_LIB):
+	$(MAKE) -C $(PRINTF_DIR)
 
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS_S) $(OBJS_B)
+	$(MAKE) -C $(PRINTF_DIR) fclean
 
 fclean: clean
 	$(RM) $(NAME)
+	$(MAKE) -C $(PRINTF_DIR) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
+

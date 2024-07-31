@@ -1,4 +1,3 @@
-# Variables
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iinclude
 LIBFT_DIR = libft
@@ -7,7 +6,6 @@ SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
 NAME = push_swap
 
-# Targets
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
@@ -17,6 +15,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
+	make -C $(LIBFT_DIR)
 	make -C $(LIBFT_DIR) bonus
 
 clean:
