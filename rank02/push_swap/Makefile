@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+CFLAGS = -g -Wall -Wextra -Werror -Iinclude
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 SRCS = $(wildcard *.c)

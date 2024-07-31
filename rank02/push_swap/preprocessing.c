@@ -22,7 +22,7 @@ bool is_valid_number(char *arg)
     return (true);
 }
 
-bool prep_check_argv(int argc, char **argv, long *biggest_number)
+bool prep_check_argv(int argc, char **argv, long *biggest_number, long *smallest_number)
 {
     int i;
     long num;
@@ -36,7 +36,7 @@ bool prep_check_argv(int argc, char **argv, long *biggest_number)
         copy = argv;
         while (*copy)
         {
-            if (!duplicates_check(argv + i + 1, argv[i]) || num > INT_MAX || num < INT_MIN)
+            if (!duplicates_check(&argv[i - 1], argc - 1 - i, argv[i]) || num > INT_MAX || num < INT_MIN)
             {
                 printf("Error\n");
                 exit (false);
@@ -45,6 +45,8 @@ bool prep_check_argv(int argc, char **argv, long *biggest_number)
         }
         if (num > *biggest_number)
             *biggest_number = num;
+        if (num < *smallest_number)
+            *smallest_number = num;
         i++;
     }
     return (true);
@@ -74,22 +76,27 @@ bool prep_array_to_list(int argc, char **argv, t_list **a)
     return (true);
 }
 
-bool duplicates_check(char **argv, char *current)
+bool duplicates_check(char **args, int argc, char *current)
 {
-    char **copy_argv;
+    int i;
+    int len_current;
+    int len_i;
 
-    copy_argv = argv;
-    while (*copy_argv)
+    len_current = ft_strlen(current);
+    i = 2;
+    while (i < argc)
     {
-        if (*copy_argv != current && ft_strncmp(*copy_argv, current, ft_strlen(*copy_argv)) == 0)
+        len_i = ft_strlen(args[i]);
+        if (len_current == len_i && ft_strncmp(args[i], current, len_current) == 0)
         {
-            printf("Error\n");
-            exit (false);
+            printf("Error, duplicate\n");
+            exit(false);
         }
-        copy_argv ++;
+        i ++;
     }
     return (true);
 }
+
 int digits_amount(int num)
 {
     int i;
