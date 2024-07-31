@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     prep_array_to_list(argc, argv, &a);
     if (check_sort(a) == true)
     {
-        ft_lstclear(&a, free);
+        //ft_lstclear(&a, free);
         return (0);
     }
     ft_radix_sort(&a, &b, ft_lstsize(a), digits_amount(biggest_number));
@@ -31,6 +31,11 @@ void ft_radix_sort(t_list **a, t_list **b, int size, int amountdigits)
     int mask;
     int counter;
 
+    if (size < 6)
+    {
+        small_list(a, b, size);
+        return;
+    }
     mask = 0;
     counter = 0;
     while (mask <= amountdigits)
