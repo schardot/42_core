@@ -26,23 +26,30 @@ bool prep_check_argv(int argc, char **argv, long *biggest_number, long *smallest
 {
     int i;
     long num;
-    char **copy;
+    char *itoa_r;
+    //char **copy;
 
     i = 1;
     while (i < argc)
     {
         is_valid_number(argv[i]);
         num = ft_atoi(argv[i]);
-        copy = argv;
-        while (*copy)
+        itoa_r = ft_itoa(num);
+        if (ft_strncmp(itoa_r, argv[i], ft_strlen(argv[i]) != 0))
         {
-            if (!duplicates_check(&argv[i - 1], argc - 1 - i, argv[i]) || num > INT_MAX || num < INT_MIN)
+            printf("Out of bounds for int\n");
+            exit(false);
+        }
+        //copy = argv;
+        // while (*copy)
+        // {
+            if (!duplicates_check(argv, argc, argv[i]))
             {
                 printf("Error\n");
                 exit (false);
             }
-            copy ++;
-        }
+            //copy ++;
+       // }
         if (num > *biggest_number)
             *biggest_number = num;
         if (num < *smallest_number)
@@ -81,16 +88,22 @@ bool duplicates_check(char **args, int argc, char *current)
     int i;
     int len_current;
     int len_i;
+    bool found_itself;
 
     len_current = ft_strlen(current);
     i = 2;
+    found_itself = false;
     while (i < argc)
     {
         len_i = ft_strlen(args[i]);
         if (len_current == len_i && ft_strncmp(args[i], current, len_current) == 0)
         {
-            printf("Error, duplicate\n");
-            exit(false);
+            if (found_itself == true)
+            {
+                printf("Error duplicate\n");
+                exit(false);
+            }
+            found_itself = true;
         }
         i ++;
     }
