@@ -23,7 +23,7 @@ int main(int argc, char **argv)
     }
     if (ft_lstsize(a) < 6)
     {
-        small_list(&a, &b, ft_lstsize(a));
+        small_list(&a, &b, ft_lstsize(a), smallest_number, biggest_number);
         return (0);
     }
     ft_radix_sort_signed(&a, &b, digits_amount(biggest_number), smallest_number);
