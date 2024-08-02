@@ -31,7 +31,6 @@ int main(int argc, char **argv)
     return (0);
 }
 
-
 void ft_radix_sort(t_list **a, t_list **b, int size, int max_bits)
 {
     int mask;
@@ -43,7 +42,7 @@ void ft_radix_sort(t_list **a, t_list **b, int size, int max_bits)
     {
         counter = 0;
         pushed = 0;
-        while (counter < size)
+        while (counter < size) // ta errado, conta demais
         {
             if (((long)(*a)->content & mask) == 0) // If the current bit is 0
             {
@@ -56,6 +55,7 @@ void ft_radix_sort(t_list **a, t_list **b, int size, int max_bits)
         }
         while (pushed > 0)
         {
+            //reverse(b, 'b');
             push(b, a, 'a');
             pushed --;
         }
