@@ -22,24 +22,3 @@ void size_three_list(node **a)
     }
 }
 
-void size_five_list(node **a, node **b, int first, int last)
-{
-    while (list_size(*a) > 2)
-    {
-        if (*b && (*b)->next && (long)(*b)->content < (long)(*b)->next->content)
-            swap(b, 'b');
-        if ((long)(*a)->content == first || (long)(*a)->content == last)
-            rotate(a, 'a');
-        else if ((long)(*a)->content > (long)(*a)->next->content)
-            swap(a, 'a');
-        else
-            push(a, b, 'b');
-    }
-    if ((long)(*b)->content < (long)(*b)->next->content)
-        swap(b, 'b');
-    push(b, a, 'a');
-    push(b, a, 'a');
-    push(b, a, 'a');
-    reverse(a, 'a');
-}
-
