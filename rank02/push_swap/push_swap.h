@@ -1,27 +1,48 @@
 #ifndef PUSH_SWAP_H
 #define PUSH_SWAP_H
 
-# include <stdlib.h>
-# include <stdbool.h>
-# include <limits.h>
-# include "libft/libft.h"
+#include <stdbool.h>
+#include <limits.h>
+#include "libft/libft.h"
+#include "libft/ft_printf/ft_printf.h"
 
-bool prep_check_argv(int argc, char **argv, long *biggest_number, long *smallest_number);
-bool prep_array_to_list(int argc, char **argv, t_list **a);
-void swap(t_list **stack, char c);
-void push(t_list **from, t_list **to, char c);
-bool rotate(t_list **stack, char c);
-bool reverse(t_list **stack, char c);
-bool check_sort(t_list *a);
-void small_list(t_list **a, t_list **b, int size, int first, int last);
-void size_three_list(t_list **a);
-void size_four_list(t_list **a, t_list **b);
-void size_five_list(t_list **a, t_list **b, int first, int last);
-int digits_amount(int num);
-void ft_radix_sort(t_list **a, t_list **b, int size, int amountdigits);
+typedef struct node
+{
+    long content;
+    int index;
+    int cost;
+    bool first_half;
+    bool cheapest; //entender melhor como usar
+    struct node *target;
+    struct node *next;
+    struct node *prev;
+} node;
+
 bool is_valid_number(char *arg);
-bool duplicates_check(char **argv, int argc, char *current);
-void ft_radix_sort_signed(t_list **a, t_list **b, int max_bits, long smallest_number);
-void ft_reverse_list(t_list **list);
+bool prep_check_argv(int argc, char **argv, long *biggest_number, long *smallest_number);
+bool prep_array_to_list(int argc, char **argv, node **a);
+bool duplicates_check(char **args, int argc, char *current);
+bool check_sort(node *a);
+void sort(node **a, node **b);
+void update_stack(node **a, node **b);
+void update_target(node *a, node **b);
+void update_index(node **stack, int size);
+void update_cost(node **stack, int target_stack_size, int stack_size);
+void update_cheapest(node **stack);
+void swap(node **stack, char c);
+void push(node **from, node **to, char c);
+bool rotate(node **stack, char c);
+void move_until_first(node **a, node **b, node *cur);
+bool move_both_stacks(node **a, node **b, char operation);
+bool reverse(node **stack, char c);
+int list_size(node *stack);
+node    *lst_new(long content);
+void    lst_clear(node **lst, void (*del)(void *));
+void lst_add_back(node **lst, node *new);
+node    *lst_last(node *lst);
+void small_list(node **a, node **b, int size, int smallest, int biggest);
+void size_three_list(node **a);
+void size_five_list(node **a, node **b, int first, int last);
+long biggest_node(node *stack);
 
 #endif

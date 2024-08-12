@@ -1,25 +1,25 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void swap(t_list **stack, char c)
+void swap(node **stack, char c)
 {
     long swap_helper;
 
-    if (ft_lstsize(*stack) < 2)
+    if (list_size(*stack) < 2)
         return ;
     if (stack && (*stack)->next)
     {
-        swap_helper = (long)(*stack)->content;
+        swap_helper = (*stack)->content;
         (*stack)->content = (*stack)->next->content;
-        (*stack)->next->content = (void *)swap_helper;
+        (*stack)->next->content = swap_helper;
         if (c == 'a' || c == 'b')
             printf("s%c\n", c);
     }
 }
 
-void push(t_list **from, t_list **to, char c)
+void push(node **from, node **to, char c)
 {
-    t_list *aux;
+    node *aux;
 
     if (!from || !*from)
         return ;
@@ -28,47 +28,82 @@ void push(t_list **from, t_list **to, char c)
         *to = *from;
         (*from) = (*from)->next;
         (*to)->next = NULL;
+        (*from)->prev = NULL;
     }
     else
     {
         aux = *to;
         *to = *from;
-        *from = (*from)->next;
+        if ((*from)->next)
+        {
+            *from = (*from)->next;
+            (*to)->next->prev = NULL;
+        }
+        else
+            *from = NULL;
         (*to)->next = aux;
+        (*to)->next->prev = (*to);
     }
     printf("p%c\n", c);
 }
 
-bool rotate(t_list **stack, char c)
+bool rotate(node **stack, char c)
 {
-    t_list    *last;
-    t_list    *first;
+    node    *last;
+    node    *first;
 
     if (!stack || !*stack || !(*stack)->next)
         return (false);
     first = *stack;
-    last = ft_lstlast(*stack);
-    *stack = (*stack)->next,
+    last = lst_last(*stack);
+    *stack = (*stack)->next;
     last->next = first;
     first->next = NULL;
-    printf("r%c\n", c);
+    first->prev = last;
+    (*stack)->prev = NULL;
+    printf("r");
+    if (c == 'a' || c == 'b')
+        printf("%c\n", c);
     return (true);
 }
 
-bool reverse(t_list **stack, char c)
+bool move_both_stacks(node **a, node **b, char  operation)
 {
-    t_list    *last;
-    t_list    *seclast;
+    if (operation == 'o')
+    {
+        if (rotate(a, 'x') && rotate(b, 'x'))
+        {
+            printf("\n");
+            return (true);
+        }
+    }
+    else if (operation == 'e')
+    {
+        if (reverse(a, 'x') && reverse(b, 'x'))
+        {
+            printf("rrr\n");
+            return (true);
+        }
+    }
+    return (false);
+}
+bool reverse(node **stack, char c)
+{
+    node    *last;
+    node    *seclast;
 
     if (!stack || !*stack || !(*stack)->next)
         return (false);
-    last = ft_lstlast(*stack);
+    last = lst_last(*stack);
     seclast = *stack;
     while (seclast->next != last)
         seclast = seclast->next;
     seclast->next = NULL;
     last->next = *stack;
     *stack = last;
-    printf("rr%c\n", c);
+    (*stack)->next->prev = (*stack);
+    (*stack)->prev = NULL;
+    if (c == 'a' || c == 'b')
+        printf("rr%c\n", c);
     return (true);
 }

@@ -27,7 +27,6 @@ bool prep_check_argv(int argc, char **argv, long *biggest_number, long *smallest
     int i;
     long num;
     char *itoa_r;
-    //char **copy;
 
     i = 1;
     while (i < argc)
@@ -35,21 +34,12 @@ bool prep_check_argv(int argc, char **argv, long *biggest_number, long *smallest
         is_valid_number(argv[i]);
         num = ft_atoi(argv[i]);
         itoa_r = ft_itoa(num);
+        duplicates_check(argv, argc, argv[i]);
         if (ft_strncmp(itoa_r, argv[i], ft_strlen(argv[i]) != 0))
         {
-            printf("Out of bounds for int\n");
-            exit(false);
+            printf("Error\n");
+            exit (false);
         }
-        //copy = argv;
-        // while (*copy)
-        // {
-            if (!duplicates_check(argv, argc, argv[i]))
-            {
-                printf("Error\n");
-                exit (false);
-            }
-            //copy ++;
-       // }
         if (num > *biggest_number)
             *biggest_number = num;
         if (num < *smallest_number)
@@ -59,25 +49,25 @@ bool prep_check_argv(int argc, char **argv, long *biggest_number, long *smallest
     return (true);
 }
 
-bool prep_array_to_list(int argc, char **argv, t_list **a)
+bool prep_array_to_list(int argc, char **argv, node **a)
 {
     int i;
-    t_list *node_aux;
+    node *node_aux;
 
     i = 1;
-    *a = ft_lstnew((void *)(long)ft_atoi(argv[i]));
+    *a = lst_new((long)ft_atoi(argv[i]));
     if (!*a)
         exit(false);
     i++;
     while (i < argc)
     {
-        node_aux = ft_lstnew((void *)(long)ft_atoi(argv[i]));
+        node_aux = lst_new((long)ft_atoi(argv[i]));
         if (!node_aux)
         {
-            ft_lstclear(a, free);
-            exit(false);
+            lst_clear(a, free);
+            return (false);
         }
-        ft_lstadd_back(a, node_aux);
+        lst_add_back(a, node_aux);
         i++;
     }
     return (true);
@@ -88,7 +78,7 @@ bool duplicates_check(char **args, int argc, char *current)
     int i;
     int len_current;
     int len_i;
-    bool found_itself;
+   bool found_itself;
 
     len_current = ft_strlen(current);
     i = 2;
@@ -109,13 +99,18 @@ bool duplicates_check(char **args, int argc, char *current)
     }
     return (true);
 }
-
-int digits_amount(int num)
+bool check_sort(node *a)
 {
-    int i;
+    node *aux;
 
-    i = 0;
-    while (num >> i)
-        i++;
-    return (i);
+    if (!a)
+        return (true);
+    aux = a;
+    while (aux->next)
+    {
+        if ((long)aux->content > (long)aux->next->content)
+            return (false);
+        aux = aux->next;
+    }
+    return (true);
 }

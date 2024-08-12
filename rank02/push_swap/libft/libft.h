@@ -18,6 +18,7 @@
 # include <stddef.h>
 # include <limits.h>
 # include <stdint.h>
+# include <stdio.h>
 # include "ft_printf/ft_printf.h"
 
 typedef struct s_list
