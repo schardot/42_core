@@ -1,74 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   linked_list_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/12 18:58:36 by nataliaschard     #+#    #+#             */
+/*   Updated: 2024/08/12 18:58:37 by nataliaschard    ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int list_size(node *stack)
+int	list_size(t_node *stack)
 {
-    int i;
+	int	i;
 
-    i = 1;
-    while (stack->next)
-    {
-        stack = stack->next;
-        i++;
-    }
-    return (i);
+	i = 1;
+	while (stack->next)
+	{
+		stack = stack->next;
+		i++;
+	}
+	return (i);
 }
 
-node    *lst_new(long content)
+t_node	*lst_new(long value)
 {
-    node    *head;
-    head = (node *)malloc(sizeof(node));
-    if (!head)
-        return (NULL);
-    head->content = content;
-    head->index = INT_MIN;
-    head->cost = INT_MIN;
-    head->first_half = NULL;
-    head->cheapest = NULL;
-    head->target = NULL;
-    head->next = NULL;
-    head->prev = NULL;
-    return (head);
+	t_node	*head;
+
+	head = (t_node *)malloc(sizeof(t_node));
+	if (!head)
+		return (NULL);
+	head->value = value;
+	head->index = INT_MIN;
+	head->cost = INT_MIN;
+	head->first_half = NULL;
+	head->cheapest = NULL;
+	head->target = NULL;
+	head->next = NULL;
+	head->prev = NULL;
+	return (head);
 }
 
-void    lst_clear(node **lst, void (*del)(void *))
+void	lst_clear(t_node **lst, void (*del)(void *))
 {
-    node *aux;
+	t_node	*aux;
 
-    if (!del || !lst || !*lst)
-        return;
-    while (lst && *lst)
-    {
-        aux = (*lst)->next;
-        del((void *)(*lst)->content);
-        free (*lst);
-        *lst = aux;
-    }
+	if (!del || !lst || !*lst)
+		return ;
+	while (lst && *lst)
+	{
+		aux = (*lst)->next;
+		del((void *)(*lst)->value);
+		free (*lst);
+		*lst = aux;
+	}
 }
 
-void    lst_add_back(node **lst, node *new)
+void	lst_add_back(t_node **lst, t_node *new)
 {
-    node *last;
+	t_node	*last;
 
-    if (!new)
-        return;
-    if (!*lst)
-    {
-        *lst = new;
-        return;
-    }
-    last = lst_last(*lst);
-    last->next = new;
-    new->prev = last;
+	if (!new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	last = lst_last(*lst);
+	last->next = new;
+	new->prev = last;
 }
 
-node    *lst_last(node *lst)
+t_node	*lst_last(t_node *lst)
 {
-    node *aux;
+	t_node	*aux;
 
-    if (!lst)
-        return (NULL);
-    aux = lst;
-    while (aux->next)
-        aux = aux->next;
-    return (aux);
+	if (!lst)
+		return (NULL);
+	aux = lst;
+	while (aux->next)
+		aux = aux->next;
+	return (aux);
 }

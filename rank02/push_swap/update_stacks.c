@@ -1,126 +1,122 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_stacks.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/12 19:22:37 by nataliaschard     #+#    #+#             */
+/*   Updated: 2024/08/12 19:22:39 by nataliaschard    ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void update_stack(node **a, node **b)
+void	update_stack(t_node **a, t_node **b)
 {
-    int size_a;
-    int size_b;
+	int	size_a;
+	int	size_b;
 
-    size_a = list_size(*a);
-    size_b = list_size(*b);
-    update_index(a, size_a);
-    update_target(*a, b);
-    update_index(b, size_b);
-    update_cost(b, size_a, size_b);
-    if (b && *b)
-        update_cheapest(b);
+	size_a = list_size(*a);
+	size_b = list_size(*b);
+	update_index(a, size_a);
+	update_target(*a, b, biggest_node(*a));
+	update_index(b, size_b);
+	update_cost(b, size_a, size_b);
+	if (b && *b)
+		update_cheapest(b);
 }
 
-void update_target(node *stack_a, node **stack_b)
+void	update_target(t_node *stack_a, t_node **stack_b, long biggest)
 {
-    node *b;
-    node *a;
-    long biggest;
+	t_node	*b;
+	t_node	*a;
 
-    biggest = biggest_node(stack_a);
-    b = *stack_b;
-    while (b)
-    {
-        a = stack_a;
-        while (a)
-        {
-            if (!(b)->target)
-                (b)->target = a;
-            if (((b)->content > biggest))
-            {
-                if (a->content < b->target->content)
-                    (b)->target = (a);
-            }
-            else if ((a)->content > (b)->content)
-            {
-                if ((a)->content < (b)->target->content || (b)->target->content < (b)->content)
-                    (b)->target = (a);
-            }
-            a = (a)->next;
-        }
-       b = (b)->next;
-    }
+	b = *stack_b;
+	while (b)
+	{
+		a = stack_a;
+		while (a)
+		{
+			if (!(b)->target)
+				(b)->target = a;
+			if (((b)->value > biggest))
+			{
+				if (a->value < b->target->value)
+					(b)->target = (a);
+			}
+			else if ((a)->value > (b)->value)
+			{
+				if (a->value < b->target->value || b->target->value < b->value)
+					(b)->target = (a);
+			}
+			a = (a)->next;
+		}
+		b = (b)->next;
+	}
 }
 
-void update_index(node **list, int size)
+void	update_index(t_node **list, int size)
 {
-    int i;
-    node *stack;
-    stack = *list;
+	int		i;
+	t_node	*stack;
 
-    i = 0;
-    while (stack)
-    {
-        (stack)->index = i;
-        if (i <= size/2)
-            (stack)->first_half = true;
-        else if (i <= size / 2 && size % 2 != 0)
-            (stack)->first_half = true;
-        else
-            (stack)->first_half = false;
-        stack = (stack)->next;
-        i++;
-    }
+	stack = *list;
+	i = 0;
+	while (stack)
+	{
+		(stack)->index = i;
+		if (i <= size / 2)
+			(stack)->first_half = true;
+		else if (i <= size / 2 && size % 2 != 0)
+			(stack)->first_half = true;
+		else
+			(stack)->first_half = false;
+		stack = (stack)->next;
+		i++;
+	}
 }
 
-void update_cost(node **stack, int target_stack_size, int stack_size)
+void	update_cost(t_node **stack, int target_stack_size, int stack_size)
 {
-    int cost;
-    node *b;
+	int		cost;
+	t_node	*b;
 
-    b = *stack;
-    while (b)
-    {
-        cost = 0;
-        if (b->first_half)
-            cost = b->index;
-        else
-            cost = stack_size - b->index;
-        if (b->target->first_half)
-            cost += b->target->index;
-        else
-            cost += target_stack_size - b->target->index;
-        b->cost = cost;
-        b = b->next;
-    }
+	b = *stack;
+	while (b)
+	{
+		cost = 0;
+		if (b->first_half)
+			cost = b->index;
+		else
+			cost = stack_size - b->index;
+		if (b->target->first_half)
+			cost += b->target->index;
+		else
+			cost += target_stack_size - b->target->index;
+		b->cost = cost;
+		b = b->next;
+	}
 }
 
-void update_cheapest(node **stack)
+void	update_cheapest(t_node **stack)
 {
-    long cheapest_cost;
-    node *cheapest_node;
-    node *b;
+	long	cheapest_cost;
+	t_node	*cheapest_node;
+	t_node	*b;
 
-    b = *stack;
-    if (!b)
-        return;
-    cheapest_cost = LONG_MAX;
-    while (b)
-    {
-        if (b->cost < cheapest_cost)
-        {
-            cheapest_node = b;
-            cheapest_cost = b->cost;
-        }
-        b = b->next;
-    }
-    cheapest_node->cheapest = true;
-}
-
-long biggest_node(node *stack)
-{
-    long i;
-
-    i = LONG_MIN;
-    while (stack)
-    {
-        if (stack->content > i)
-            i = stack->content;
-        stack = stack->next;
-    }
-    return (i);
+	b = *stack;
+	if (!b)
+		return ;
+	cheapest_cost = LONG_MAX;
+	while (b)
+	{
+		if (b->cost < cheapest_cost)
+		{
+			cheapest_node = b;
+			cheapest_cost = b->cost;
+		}
+		b = b->next;
+	}
+	cheapest_node->cheapest = true;
 }
