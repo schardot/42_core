@@ -3,36 +3,47 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strle
 BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 OBJS_S = $(SRCS:.c=.o)
-
 OBJS_B = $(BONUS:.c=.o)
 
+# New variables for get_next_line
+GNL_DIR = get_next_line
+GNL_SRCS = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
+GNL_OBJS = $(GNL_SRCS:$(GNL_DIR)/%.c=$(OBJDIR)/%.o)
+
 CC = cc
-
 RM = rm -f
-
 CFLAGS = -Wall -Wextra -Werror
 
 PRINTF_DIR = ./ft_printf
 PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a
 
 NAME = libft.a
+OBJDIR = obj
 
 all: $(NAME)
 
-bonus: $(OBJS_B) $(OBJS_S)
-	ar r $(NAME) $(OBJS_B) $(OBJS_S)
+bonus: $(OBJS_B) $(OBJS_S) $(GNL_OBJS)
+	ar r $(NAME) $(OBJS_B) $(OBJS_S) $(GNL_OBJS)
 
-$(NAME): $(OBJS_S) $(PRINTF_LIB)
-	ar r $(NAME) $(OBJS_S)
+$(NAME): $(OBJS_S) $(GNL_OBJS) $(PRINTF_LIB)
+	ar r $(NAME) $(OBJS_S) $(GNL_OBJS)
 
 $(PRINTF_LIB):
 	$(MAKE) -C $(PRINTF_DIR)
 
-%.o: %.c libft.h
+# Create object directories if they do not exist
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+# Compile source files to object files
+$(OBJDIR)/%.o: %.c libft.h | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o: $(GNL_DIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS_S) $(OBJS_B)
+	$(RM) $(OBJS_S) $(OBJS_B) $(GNL_OBJS)
 	$(MAKE) -C $(PRINTF_DIR) fclean
 
 fclean: clean
@@ -42,4 +53,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all bonus clean fclean re
-

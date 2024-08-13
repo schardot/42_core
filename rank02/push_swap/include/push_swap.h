@@ -24,7 +24,7 @@ typedef struct node
 	int			index;
 	int			cost;
 	bool		first_half;
-	bool		cheapest; //entender melhor como usar
+	bool		cheapest;
 	struct node	*target;
 	struct node	*next;
 	struct node	*prev;
@@ -45,7 +45,7 @@ void	swap(t_node **stack, char c);
 void	push(t_node **from, t_node **to, char c);
 bool	rotate(t_node **stack, char c);
 void	move_until_first(t_node **a, t_node **b, t_node *cur);
-bool	move_both_stacks(t_node **a, t_node **b, char operation);
+bool	move_both_stacks(t_node **a, t_node **b, char operation, bool checker);
 bool	reverse(t_node **stack, char c);
 int		list_size(t_node *stack);
 t_node	*lst_new(long value);

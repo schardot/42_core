@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
-#include <stdbool.h>
-#include <stdio.h>
+#include "../include/push_swap.h"
 
 bool	is_valid_number(char *arg)
 {
@@ -26,7 +23,7 @@ bool	is_valid_number(char *arg)
 	{
 		if (!ft_isdigit(*str))
 		{
-			printf("Error\n");
+			ft_printf("Error\n");
 			exit(false);
 		}
 		str++;
@@ -49,7 +46,7 @@ bool	prep_check_argv(int argc, char **argv, long *biggest, long *smallest)
 		duplicates_check(argv, argc, argv[i]);
 		if (ft_strncmp(itoa_r, argv[i], ft_strlen(argv[i]) != 0))
 		{
-			printf("Error\n");
+			ft_printf("Error\n");
 			exit (false);
 		}
 		if (num > *biggest)
@@ -102,7 +99,7 @@ bool	duplicates_check(char **args, int argc, char *cur)
 		{
 			if (found_itself == true)
 			{
-				printf("Error duplicate\n");
+				ft_printf("Error\n");
 				exit(false);
 			}
 			found_itself = true;

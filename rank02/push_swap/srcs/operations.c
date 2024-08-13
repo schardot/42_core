@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "../include/push_swap.h"
 
 void	swap(t_node **stack, char c)
 {
@@ -25,7 +24,7 @@ void	swap(t_node **stack, char c)
 		(*stack)->value = (*stack)->next->value;
 		(*stack)->next->value = swap_helper;
 		if (c == 'a' || c == 'b')
-			printf("s%c\n", c);
+			ft_printf("s%c\n", c);
 	}
 }
 
@@ -43,7 +42,8 @@ void	push(t_node **from, t_node **to, char c)
 	if (*to)
 		(*to)->prev = aux;
 	*to = aux;
-	printf("p%c\n", c);
+	if (c == 'a' || c == 'b')
+		ft_printf("p%c\n", c);
 }
 
 bool	rotate(t_node **stack, char c)
@@ -60,19 +60,20 @@ bool	rotate(t_node **stack, char c)
 	first->next = NULL;
 	first->prev = last;
 	(*stack)->prev = NULL;
-	printf("r");
+	//ft_printf("r");
 	if (c == 'a' || c == 'b')
-		printf("%c\n", c);
+		ft_printf("r%c\n", c);
 	return (true);
 }
 
-bool	move_both_stacks(t_node **a, t_node **b, char operation)
+bool	move_both_stacks(t_node **a, t_node **b, char operation, bool checker)
 {
 	if (operation == 'o')
 	{
 		if (rotate(a, 'x') && rotate(b, 'x'))
 		{
-			printf("\n");
+			if (!checker)
+				ft_printf("rr\n");
 			return (true);
 		}
 	}
@@ -80,7 +81,8 @@ bool	move_both_stacks(t_node **a, t_node **b, char operation)
 	{
 		if (reverse(a, 'x') && reverse(b, 'x'))
 		{
-			printf("rrr\n");
+			if (!checker)
+				ft_printf("rrr\n");
 			return (true);
 		}
 	}
@@ -107,6 +109,6 @@ bool	reverse(t_node **stack, char c)
 	*stack = last;
 	(*stack)->next->prev = *stack;
 	if (c == 'a' || c == 'b')
-		printf("rr%c\n", c);
+		ft_printf("rr%c\n", c);
 	return (true);
 }
