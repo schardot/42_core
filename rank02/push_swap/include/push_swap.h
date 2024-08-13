@@ -31,7 +31,7 @@ typedef struct node
 }	t_node;
 
 bool	is_valid_number(char *arg);
-bool	prep_check_argv(int argc, char **argv, long *biggest, long *smallest);
+bool	prep_check_argv(int argc, char **argv);
 bool	prep_array_to_list(int argc, char **argv, t_node **a);
 bool	duplicates_check(char **args, int argc, char *current);
 bool	check_sort(t_node *a);

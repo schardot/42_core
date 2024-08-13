@@ -31,7 +31,7 @@ bool	is_valid_number(char *arg)
 	return (true);
 }
 
-bool	prep_check_argv(int argc, char **argv, long *biggest, long *smallest)
+bool	prep_check_argv(int argc, char **argv)
 {
 	int		i;
 	long	num;
@@ -49,10 +49,6 @@ bool	prep_check_argv(int argc, char **argv, long *biggest, long *smallest)
 			ft_printf("Error\n");
 			exit (false);
 		}
-		if (num > *biggest)
-			*biggest = num;
-		if (num < *smallest)
-			*smallest = num;
 		i++;
 	}
 	return (true);

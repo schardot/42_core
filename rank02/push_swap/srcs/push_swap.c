@@ -16,16 +16,12 @@ int	main(int argc, char **argv)
 {
 	t_node	*a;
 	t_node	*b;
-	long	biggest_number;
-	long	smallest_number;
 
 	a = NULL;
 	b = NULL;
-	biggest_number = LONG_MIN;
-	smallest_number = LONG_MAX;
 	if (argc < 2)
 		return (0);
-	prep_check_argv(argc, argv, &biggest_number, &smallest_number);
+	prep_check_argv(argc, argv);
 	prep_array_to_list(argc, argv, &a);
 	if (list_size(a) == 3)
 		size_three_list(&a);
