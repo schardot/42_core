@@ -5,7 +5,6 @@ BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c
 OBJS_S = $(SRCS:.c=.o)
 OBJS_B = $(BONUS:.c=.o)
 
-# New variables for get_next_line
 GNL_DIR = get_next_line
 GNL_SRCS = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
 GNL_OBJS = $(GNL_SRCS:$(GNL_DIR)/%.c=$(OBJDIR)/%.o)
