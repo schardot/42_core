@@ -37,7 +37,7 @@ bool	duplicates_check(char **args, int argc, char *current);
 bool	check_sort(t_node *a);
 void	sort(t_node **a, t_node **b);
 void	update_stack(t_node **a, t_node **b);
-void	update_target(t_node *a, t_node **b, long biggest);
+void	update_target(t_node *a, t_node **b, t_node *biggest);
 void	update_index(t_node **stack, int size);
 void	update_cost(t_node **stack, int target_stack_size, int stack_size);
 void	update_cheapest(t_node **stack);
@@ -53,6 +53,7 @@ void	lst_clear(t_node **lst, void (*del)(void *));
 void	lst_add_back(t_node **lst, t_node *new);
 t_node	*lst_last(t_node *lst);
 void	size_three_list(t_node **a);
-long	biggest_node(t_node *stack);
+t_node	*biggest_node(t_node *stack);
+void	finish_sorting(t_node **a, bool *sorted);
 
 #endif

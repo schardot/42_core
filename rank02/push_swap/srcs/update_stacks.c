@@ -27,7 +27,7 @@ void	update_stack(t_node **a, t_node **b)
 		update_cheapest(b);
 }
 
-void	update_target(t_node *stack_a, t_node **stack_b, long biggest)
+void	update_target(t_node *stack_a, t_node **stack_b, t_node *biggest)
 {
 	t_node	*b;
 	t_node	*a;
@@ -40,7 +40,7 @@ void	update_target(t_node *stack_a, t_node **stack_b, long biggest)
 		{
 			if (!(b)->target)
 				(b)->target = a;
-			if (((b)->value > biggest))
+			if (((b)->value > biggest->value))
 			{
 				if (a->value < b->target->value)
 					(b)->target = (a);
