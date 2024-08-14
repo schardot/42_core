@@ -12,6 +12,8 @@
 
 Description: Sort stacks
 
+*Note:* I've found that radix sort does not work for this project. It was one of my first attempts, but it doesn't handle negative numbers well and although it's possible to pass push_swap with it, it's not the most optimal algorithm due to our limitation of movements.
+
 # BONUS PART
 
  ## Program name: :green_circle: checker
@@ -25,6 +27,7 @@ Description: Sort stacks
  Libft authorized: yes
 
 Description: Execute the sorting instructions
+
 
 
 
