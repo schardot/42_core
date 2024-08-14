@@ -86,7 +86,7 @@ bool	duplicates_check(char **args, int argc, char *cur)
 	bool	found_itself;
 
 	len_cur = ft_strlen(cur);
-	i = 2;
+	i = 1;
 	found_itself = false;
 	while (i < argc)
 	{
