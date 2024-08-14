@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/14 11:29:30 by nataliaschard     #+#    #+#             */
+/*   Updated: 2024/08/14 11:29:32 by nataliaschard    ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 int	main(int argc, char **argv)
@@ -10,12 +22,14 @@ int	main(int argc, char **argv)
 	b = NULL;
 	if (argc < 2)
 		return (0);
-
+	prep_check_argv(argc, argv);
 	prep_array_to_list(argc, argv, &a);
-	while (((instructions = get_next_line(0)) != NULL))
+	instructions = get_next_line(0);
+	while (instructions != NULL)
 	{
 		try_instructions(&a, &b, instructions);
 		free(instructions);
+		instructions = get_next_line(0);
 	}
 	if (check_sort(a) && b == NULL)
 	{
@@ -26,7 +40,7 @@ int	main(int argc, char **argv)
 	return (1);
 }
 
-void try_instructions(t_node **a, t_node **b, char *instructions)
+void	try_instructions(t_node **a, t_node **b, char *instructions)
 {
 	if (ft_strncmp(instructions, "sa\n", 3) == 0)
 		swap(a, '-');
