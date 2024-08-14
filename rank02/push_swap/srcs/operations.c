@@ -60,7 +60,6 @@ bool	rotate(t_node **stack, char c)
 	first->next = NULL;
 	first->prev = last;
 	(*stack)->prev = NULL;
-	//ft_printf("r");
 	if (c == 'a' || c == 'b')
 		ft_printf("r%c\n", c);
 	return (true);
