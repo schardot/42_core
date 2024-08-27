@@ -3,18 +3,19 @@
 
 int main(int argc, char *argv[])
 {
+    int pid;
+    int i;
+
     if (argc != 3)
     {
         ft_printf("Error, wrong arguments.");
         return (1);
     }
-    //argv[2] == string a imprimir
-    int pid;
-    int i = 0;
     int b;
     int letter;
 
     pid = atoi(argv[1]);
+    i = 0;
     while (argv[2][i] != '\0')
     {
         b = 7;

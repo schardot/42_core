@@ -1,18 +1,13 @@
 #include <signal.h>
 #include <unistd.h>
 
-//SIGUSR1 = quando bit for 0
-void handle_sigusr1(int sig);
-void handle_sigusr2(int sig);
+void handle_sigusr(int sig);
 
-int letter;
-
-letter = 0;
 int main(void)
 {
     ft_printf("%d", (int)getpid());
-    signal(SIGUSR1, handle_sigusr1);
-    signal(SIGUSR2, handle_sigusr2);
+    signal(SIGUSR1, handle_sigusr);
+    signal(SIGUSR2, handle_sigusr);
     while (1)
     {
         sleep(1);
@@ -20,17 +15,22 @@ int main(void)
 
 }
 
-void handle_sigusr1(int sig)
+void handle_sigusr(int sig)
 {
+    int num;
+    static int bit;
 
-}
-
-void handle_sigusr2(int sig)
-{
-    int y;
-
-    y = 1;
-    y << 8 - bit - 1;
-    x = x | y;
-    bit++;
+    bit = 0;
+    num = 0;
+    num = num << 1;
+    if (sig = SIGUSR2)
+        num = num | 1;
+    bit ++;
+    if (bit == 8)
+    {
+        a letra ja ta completa;
+        adicionar letra na string;
+    }
+    se letra for NULL
+        imprimir oq tem da string
 }
