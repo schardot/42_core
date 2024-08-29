@@ -1,5 +1,6 @@
-#include <signal.h>
-#include <unistd.h>
+#include "include/minitalk.h"
+#include "libft/libft.h"
+#include "libft/ft_printf/ft_printf.h"
 
 int main(int argc, char *argv[])
 {
