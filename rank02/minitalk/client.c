@@ -9,17 +9,23 @@ void parsestring(char *str, int serverpid);
 int main(int argc, char **argv)
 {
     int pid;
+    char ch;
     struct sigaction action;
 
     action.sa_sigaction = signalhandler;
     action.sa_flags = SA_SIGINFO;
     sigemptyset(&action.sa_mask);
     pid = atoi(argv[1]);
+    ch = argv[2][0];
+    if ((ch >> 7) & 1)
+        kill(pid, SIGUSR2);
+    else
+        kill(pid, SIGUSR1);
     sigaction(SIGUSR1, &action, NULL);
     parsestring(argv[2], pid);
     while (1)
         pause();
-}
+    }
 
 void signalhandler(int sig, siginfo_t *info, void *ucontext)
 {

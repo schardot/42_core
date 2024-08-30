@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
+#include <string.h>
+#include <stdlib.h>
 
 void signalhandler(int sig, siginfo_t *info, void *ucontext);
 
@@ -20,27 +22,30 @@ int main(int argc, char *argv[])
 
 void signalhandler(int sig, siginfo_t *info, void *ucontext)
 {
-    static int n = 0;
+    static char n = 0;
     static int b = 0;
+    static char *string = NULL;
+    char *dest;
 
     n <<= 1;
-    printf("i got a signal");
     if (sig == SIGUSR2)
     {
-        n |= 1;
-        printf("it's sig2");
+        n &= 1;
     }
     else
-        printf("it's sig1");
     b ++;
     if (b == 8)
     {
-        write (1, &n, 1);
+        // printf("%c\n", n);
+        dest = (char *)malloc(strlen(dest) + 2);
+        strcat(dest, &n);
         b = 0;
         n = 0;
     }
+    printf("%s", string);
     kill(info->si_pid, SIGUSR1);
 }
+
 
 
 
