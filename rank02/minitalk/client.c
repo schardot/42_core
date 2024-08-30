@@ -6,7 +6,7 @@
 void signalhandler(int sig, siginfo_t *info, void *ucontext);
 void parsestring(char *str, int serverpid);
 
-    int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     int pid;
     struct sigaction action;
@@ -28,9 +28,9 @@ void signalhandler(int sig, siginfo_t *info, void *ucontext)
 
 void    parsestring(char *str, int serverpid)
 {
-    char ch;
-    int i;
-    int b;
+    static char ch;
+    static int i;
+    static int b;
 
     i = 0;
     while (str[i] != '\0')
