@@ -13,15 +13,43 @@ int main(int argc, char *argv[])
     sigemptyset(&action.sa_mask);
     printf("SERVER PID: %d\n", (int)getpid());
     sigaction(SIGUSR1, &action, NULL);
+    sigaction(SIGUSR2, &action, NULL);
     while (1)
         pause();
 }
 
 void signalhandler(int sig, siginfo_t *info, void *ucontext)
 {
-    printf("SERVER: recebi o sinal %d do processo %d.\n", sig, info->si_pid);
-    kill(info->si_pid, sig);
+    static int n = 0;
+    static int b = 0;
+
+    n <<= 1;
+    printf("i got a signal");
+    if (sig == SIGUSR2)
+    {
+        n |= 1;
+        printf("it's sig2");
+    }
+    else
+        printf("it's sig1");
+    b ++;
+    if (b == 8)
+    {
+        write (1, &n, 1);
+        b = 0;
+        n = 0;
+    }
+    kill(info->si_pid, SIGUSR1);
 }
+
+
+
+
+
+
+
+
+
 
 // #include <signal.h>
 // #include <unistd.h>
