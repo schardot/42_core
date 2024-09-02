@@ -6,8 +6,6 @@
 void signalhandler(int sig, siginfo_t *info, void *ucontext);
 void parsestring(char *str, int serverpid);
 
-volatile sig_atomic_t flag = 0;
-
 int main(int argc, char **argv)
 {
     int pid;
@@ -25,7 +23,7 @@ int main(int argc, char **argv)
 
 void signalhandler(int sig, siginfo_t *info, void *ucontext)
 {
-    flag = 1;
+    printf("CLIENT: recebi o sinal %d do processo %d.\n", sig, info->si_pid);
 }
 
 void    parsestring(char *str, int serverpid)
@@ -39,14 +37,13 @@ void    parsestring(char *str, int serverpid)
     {
         b = 7;
         ch = str[i];
-        while (b >= 0 && flag == 1)
+        while (b >= 0)
         {
             if ((ch >> b) & 1)
                 kill(serverpid, SIGUSR2);
             else
                 kill(serverpid, SIGUSR1);
             b --;
-            flag == 0;
             pause();
         }
         i ++;

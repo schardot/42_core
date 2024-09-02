@@ -1,46 +1,46 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
-#include <stdlib.h>
 
-volatile sig_atomic_t flag = -1;
-
-void signalhandler(int signum, siginfo_t *info, void *context)
-{
-    if (signum == SIGUSR1)
-        flag = 0;
-    if (signum == SIGUSR2)
-        flag = 1;
-    kill(info->si_pid, SIGUSR1);
-}
+void signalhandler(int sig, siginfo_t *info, void *ucontext);
 
 int main(int argc, char *argv[])
 {
-    char c;
-    int b;
     struct sigaction action;
 
     action.sa_sigaction = signalhandler;
     action.sa_flags = SA_SIGINFO;
     sigemptyset(&action.sa_mask);
-    b = 0;
-    c = 0;
     printf("SERVER PID: %d\n", (int)getpid());
     sigaction(SIGUSR1, &action, NULL);
     sigaction(SIGUSR2, &action, NULL);
     while (1)
-    {
-        if (flag == 0 || flag == 1)
-        {
-            c <<= 1;
-            if (flag == 1)
-                c |= 1;
-            flag = -1;
-            b ++;
-        }
-    }
+        pause();
 }
 
+void signalhandler(int sig, siginfo_t *info, void *ucontext)
+{
+    static int n = 0;
+    static int b = 0;
+
+    n <<= 1;
+    printf("i got a signal");
+    if (sig == SIGUSR2)
+    {
+        n |= 1;
+        printf("it's sig2");
+    }
+    else
+        printf("it's sig1");
+    b ++;
+    if (b == 8)
+    {
+        write (1, &n, 1);
+        b = 0;
+        n = 0;
+    }
+    kill(info->si_pid, SIGUSR1);
+}
 
 
 
