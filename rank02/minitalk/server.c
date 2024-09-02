@@ -38,6 +38,12 @@ int main(int argc, char *argv[])
             flag = -1;
             b ++;
         }
+        if (b == 8)
+        {
+            write(1, &c, 1);
+            c = 0;
+            b = 0;
+        }
     }
 }
 

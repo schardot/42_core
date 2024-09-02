@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void signalhandler(int sig, siginfo_t *info, void *ucontext);
+void signalhandler(int sig);
 void parsestring(char *str, int serverpid);
 
 volatile sig_atomic_t flag = 0;
@@ -11,19 +11,27 @@ volatile sig_atomic_t flag = 0;
 int main(int argc, char **argv)
 {
     int pid;
-    struct sigaction action;
 
-    action.sa_sigaction = signalhandler;
-    action.sa_flags = SA_SIGINFO;
-    sigemptyset(&action.sa_mask);
+    if (argc != 3)
+        return(1);
+
     pid = atoi(argv[1]);
-    sigaction(SIGUSR1, &action, NULL);
+    signal(SIGUSR1, signalhandler);
+    if (flag == -1)
+    {
+        while (flag != 7)
+        {
+            kill(pid, SIGUSR2);
+            flag ++;
+        }
+    }
     parsestring(argv[2], pid);
     while (1)
         pause();
+
 }
 
-void signalhandler(int sig, siginfo_t *info, void *ucontext)
+void signalhandler(int sig)
 {
     flag = 1;
 }
@@ -46,16 +54,12 @@ void    parsestring(char *str, int serverpid)
             else
                 kill(serverpid, SIGUSR1);
             b --;
-            flag == 0;
+            flag = 0;
             pause();
         }
         i ++;
     }
-    for (b = 7; b >= 0; b--)
-    {
-        kill(serverpid, SIGUSR1); // Sending all bits as 0 (SIGUSR1) for a NULL character
-        pause();
-    }
+    flag = -1; // Sending all bits as 0 (SIGUSR1) for a NULL character
 }
 
 
