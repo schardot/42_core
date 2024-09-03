@@ -3,55 +3,27 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void signalhandler(int sig);
+void signalhandler(int sig, siginfo_t *info, void *ucontext);
 void parsestring(char *str, int serverpid);
-
-volatile sig_atomic_t flag = 0;
 
 int main(int argc, char **argv)
 {
     int pid;
-<<<<<<< HEAD
-    char ch;
     struct sigaction action;
-=======
->>>>>>> 4ef74fdbce5d4a99e612b486aa81b393151a2b3f
 
-    if (argc != 3)
-        return(1);
-
+    action.sa_sigaction = signalhandler;
+    action.sa_flags = SA_SIGINFO;
+    sigemptyset(&action.sa_mask);
     pid = atoi(argv[1]);
-<<<<<<< HEAD
-    ch = argv[2][0];
-    if ((ch >> 7) & 1)
-        kill(pid, SIGUSR2);
-    else
-        kill(pid, SIGUSR1);
     sigaction(SIGUSR1, &action, NULL);
     parsestring(argv[2], pid);
     while (1)
         pause();
-    }
-=======
-    signal(SIGUSR1, signalhandler);
-    if (flag == -1)
-    {
-        while (flag != 7)
-        {
-            kill(pid, SIGUSR2);
-            flag ++;
-        }
-    }
-    parsestring(argv[2], pid);
-    while (1)
-        pause();
-
 }
->>>>>>> 4ef74fdbce5d4a99e612b486aa81b393151a2b3f
 
-void signalhandler(int sig)
+void signalhandler(int sig, siginfo_t *info, void *ucontext)
 {
-    flag = 1;
+    printf("CLIENT: recebi o sinal %d do processo %d.\n", sig, info->si_pid);
 }
 
 void    parsestring(char *str, int serverpid)
@@ -65,19 +37,22 @@ void    parsestring(char *str, int serverpid)
     {
         b = 7;
         ch = str[i];
-        while (b >= 0 && flag == 1)
+        while (b >= 0)
         {
             if ((ch >> b) & 1)
                 kill(serverpid, SIGUSR2);
             else
                 kill(serverpid, SIGUSR1);
             b --;
-            flag = 0;
             pause();
         }
         i ++;
     }
-    flag = -1; // Sending all bits as 0 (SIGUSR1) for a NULL character
+    for (b = 7; b >= 0; b--)
+    {
+        kill(serverpid, SIGUSR1); // Sending all bits as 0 (SIGUSR1) for a NULL character
+        pause();
+    }
 }
 
 

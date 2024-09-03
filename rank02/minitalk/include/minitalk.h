@@ -7,5 +7,7 @@
 #include "libft/ft_printf/ft_printf.h"
 
 void handle_sigusr(int sig);
+void signalhandler(int sig, siginfo_t *info, void *ucontext);
+void parsestring(char *str, int serverpid);
 
 #endif

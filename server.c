@@ -1,85 +1,46 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <signal.h>
-<<<<<<< HEAD
-#include <string.h>
-=======
->>>>>>> 4ef74fdbce5d4a99e612b486aa81b393151a2b3f
-#include <stdlib.h>
 
-volatile sig_atomic_t flag = -1;
-
-void signalhandler(int signum, siginfo_t *info, void *context)
-{
-    if (signum == SIGUSR1)
-        flag = 0;
-    if (signum == SIGUSR2)
-        flag = 1;
-    kill(info->si_pid, SIGUSR1);
-}
+void signalhandler(int sig, siginfo_t *info, void *ucontext);
 
 int main(int argc, char *argv[])
 {
-    char c;
-    int b;
     struct sigaction action;
 
     action.sa_sigaction = signalhandler;
     action.sa_flags = SA_SIGINFO;
     sigemptyset(&action.sa_mask);
-    b = 0;
-    c = 0;
     printf("SERVER PID: %d\n", (int)getpid());
     sigaction(SIGUSR1, &action, NULL);
     sigaction(SIGUSR2, &action, NULL);
     while (1)
-    {
-        if (flag == 0 || flag == 1)
-        {
-            c <<= 1;
-            if (flag == 1)
-                c |= 1;
-            flag = -1;
-            b ++;
-        }
-        if (b == 8)
-        {
-            write(1, &c, 1);
-            c = 0;
-            b = 0;
-        }
-    }
+        pause();
 }
 
-<<<<<<< HEAD
 void signalhandler(int sig, siginfo_t *info, void *ucontext)
 {
-    static char n = 0;
+    static int n = 0;
     static int b = 0;
-    static char *string = NULL;
-    char *dest;
 
     n <<= 1;
+    printf("i got a signal");
     if (sig == SIGUSR2)
     {
-        n &= 1;
+        n |= 1;
+        printf("it's sig2");
     }
     else
+        printf("it's sig1");
     b ++;
     if (b == 8)
     {
-        // printf("%c\n", n);
-        dest = (char *)malloc(strlen(dest) + 2);
-        strcat(dest, &n);
+        write (1, &n, 1);
         b = 0;
         n = 0;
     }
-    printf("%s", string);
     kill(info->si_pid, SIGUSR1);
 }
-=======
->>>>>>> 4ef74fdbce5d4a99e612b486aa81b393151a2b3f
-
 
 
 
