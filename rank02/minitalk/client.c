@@ -9,13 +9,11 @@ void parsestring(char *str, int serverpid);
 int main(int argc, char **argv)
 {
     int pid;
-    char ch;
 
     if (argc != 3)
         return(1);
 
     pid = atoi(argv[1]);
-    ch = argv[2][0];
 
     parsestring(argv[2], pid);
     while (1)

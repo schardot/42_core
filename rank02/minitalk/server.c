@@ -9,6 +9,8 @@ void signalhandler(int signum, siginfo_t *info, void *context)
 {
     static int c;
     static int b;
+    (void)info;
+    (void)context;
     if (signum == SIGUSR1 || signum == SIGUSR2)
     {
         c <<= 1;
@@ -24,7 +26,7 @@ void signalhandler(int signum, siginfo_t *info, void *context)
     }
 }
 
-int main(int argc, char *argv[])
+int main(void)
 {
     struct sigaction action;
 
