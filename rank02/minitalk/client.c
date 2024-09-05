@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 void parsestring(char *str, int serverpid);
+void sendnull(int serverpid);
 
 int main(int argc, char **argv)
 {
@@ -12,7 +13,7 @@ int main(int argc, char **argv)
     if (argc != 3)
         return(1);
 
-    pid = atoi(argv[1]);
+    pid = ft_atoi(argv[1]);
 
     parsestring(argv[2], pid);
     while (1)
@@ -41,11 +42,20 @@ void    parsestring(char *str, int serverpid)
         }
         i ++;
     }
-    for (int j = 0; j < 8; j++)
+    sendnull(serverpid);
+    exit(1);
+}
+
+void    sendnull(int serverpid)
+{
+    int i;
+
+    i = 0;
+    while (i < 8)
     {
         kill(serverpid, SIGUSR1);
+        i ++;
         usleep(100);
     }
-    exit(1);
 }
 
