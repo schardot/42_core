@@ -3,11 +3,11 @@
 #include <signal.h>
 #include <stdlib.h>
 
-
-void signalhandler(int signum, siginfo_t *info, void *context)
+void    signalhandler(int signum, siginfo_t *info, void *context)
 {
     static int c = 0;
     static int b = 0;
+
     (void)context;
     (void)info;
     if (signum == SIGUSR1 || signum == SIGUSR2)
@@ -44,7 +44,5 @@ int main(void)
     }
     printf("SERVER PID: %d\n", (int)getpid());
     while (1)
-    {
         pause();
-    }
 }
