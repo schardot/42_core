@@ -5,7 +5,6 @@
 
 void parsestring(char *str, int serverpid);
 
-
 int main(int argc, char **argv)
 {
     int pid;
@@ -49,3 +48,4 @@ void    parsestring(char *str, int serverpid)
     }
     exit(1);
 }
+
