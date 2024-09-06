@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 10:10:58 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/05 10:11:00 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/06 11:09:23 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 void	parsestring(char *str, int serverpid);
 void	sendnull(int serverpid);
+void	ackreceived(int sig);
 
 int	main(int argc, char **argv)
 {
@@ -27,7 +28,10 @@ int	main(int argc, char **argv)
 	pid = ft_atoi(argv[1]);
 	parsestring(argv[2], pid);
 	while (1)
+	{
+		signal(SIGUSR1, ackreceived);
 		usleep(100);
+	}
 }
 
 void	parsestring(char *str, int serverpid)
@@ -67,4 +71,12 @@ void	sendnull(int serverpid)
 		i ++;
 		usleep(100);
 	}
+}
+
+void ackreceived(int sig)
+{
+	if (sig == SIGUSR1)
+		ft_printf("Acknowledgement received from server.");
+	else
+		ft_printf("Received signal number %d", sig);
 }

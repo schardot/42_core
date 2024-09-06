@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 10:11:01 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 10:56:42 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/06 11:03:25 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	signalhandler(int signum, siginfo_t *info, void *context)
 			write(1, &c, 1);
 			c = 0;
 			b = 0;
+			kill(info->si_pid, SIGUSR1);
 		}
 	}
 }
@@ -42,19 +43,21 @@ int	main(void)
 	struct sigaction	action;
 
 	action.sa_sigaction = signalhandler;
-	action.sa_flags = SA_SIGINFO;
+	action.sa_flags = 0;
 	sigemptyset(&action.sa_mask);
-	if (sigaction(SIGUSR1, &action, NULL) == -1)
-	{
-		perror("sigaction");
-		exit(EXIT_FAILURE);
-	}
-	if (sigaction(SIGUSR2, &action, NULL) == -1)
-	{
-		perror("sigaction");
-		exit(EXIT_FAILURE);
-	}
 	printf("SERVER PID: %d\n", (int)getpid());
 	while (1)
+	{
+		if (sigaction(SIGUSR1, &action, NULL) == -1)
+		{
+			perror("sigaction");
+			exit(EXIT_FAILURE);
+		}
+		if (sigaction(SIGUSR2, &action, NULL) == -1)
+		{
+			perror("sigaction");
+			exit(EXIT_FAILURE);
+		}
 		pause();
+	}
 }
