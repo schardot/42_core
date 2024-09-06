@@ -6,14 +6,11 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 10:11:01 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 11:03:25 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/06 14:33:32 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <signal.h>
-#include <stdlib.h>
+#include "include/minitalk.h"
 
 void	signalhandler(int signum, siginfo_t *info, void *context)
 {
@@ -31,9 +28,13 @@ void	signalhandler(int signum, siginfo_t *info, void *context)
 		if (b == 8)
 		{
 			write(1, &c, 1);
+			if (c == 0)
+			{
+				write(1, "\n", 1);
+				kill(info->si_pid, SIGUSR1);
+			}
 			c = 0;
 			b = 0;
-			kill(info->si_pid, SIGUSR1);
 		}
 	}
 }
@@ -45,17 +46,17 @@ int	main(void)
 	action.sa_sigaction = signalhandler;
 	action.sa_flags = 0;
 	sigemptyset(&action.sa_mask);
-	printf("SERVER PID: %d\n", (int)getpid());
+	ft_printf("SERVER PID: %d\n", (int)getpid());
 	while (1)
 	{
 		if (sigaction(SIGUSR1, &action, NULL) == -1)
 		{
-			perror("sigaction");
+			ft_printf("Error setting up SIGUSR1 handler");
 			exit(EXIT_FAILURE);
 		}
 		if (sigaction(SIGUSR2, &action, NULL) == -1)
 		{
-			perror("sigaction");
+			ft_printf("Error setting up SIGUSR2 handler");
 			exit(EXIT_FAILURE);
 		}
 		pause();

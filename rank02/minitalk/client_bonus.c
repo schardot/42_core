@@ -6,18 +6,11 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 10:10:58 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 11:09:23 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/06 14:17:16 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
-
-void	parsestring(char *str, int serverpid);
-void	sendnull(int serverpid);
-void	ackreceived(int sig);
+#include "include/minitalk.h"
 
 int	main(int argc, char **argv)
 {
@@ -29,7 +22,6 @@ int	main(int argc, char **argv)
 	parsestring(argv[2], pid);
 	while (1)
 	{
-		signal(SIGUSR1, ackreceived);
 		usleep(100);
 	}
 }
@@ -70,13 +62,12 @@ void	sendnull(int serverpid)
 		kill(serverpid, SIGUSR1);
 		i ++;
 		usleep(100);
+		signal(SIGUSR1, ackreceived);
 	}
 }
 
-void ackreceived(int sig)
+void	ackreceived(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("Acknowledgement received from server.");
-	else
-		ft_printf("Received signal number %d", sig);
+		write(1, "Received acknowledgement from server\n", 39);
 }

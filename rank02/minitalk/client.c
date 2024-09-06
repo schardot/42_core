@@ -6,17 +6,11 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 10:10:58 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/05 10:11:00 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/06 14:16:41 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <signal.h>
-#include <stdio.h>
-#include <unistd.h>
-
-void	parsestring(char *str, int serverpid);
-void	sendnull(int serverpid);
+#include "include/minitalk.h"
 
 int	main(int argc, char **argv)
 {
