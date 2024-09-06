@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 10:11:01 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 14:31:52 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/06 14:36:56 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	main(void)
 		pause();
 }
 
-void signalhandler(int signum, siginfo_t *info, void *context)
+void	signalhandler(int signum, siginfo_t *info, void *context)
 {
-	static int c = 0;
-	static int b = 0;
+	static int	c = 0;
+	static int	b = 0;
 
 	(void)context;
 	(void)info;
@@ -59,4 +59,3 @@ void signalhandler(int signum, siginfo_t *info, void *context)
 		}
 	}
 }
-
