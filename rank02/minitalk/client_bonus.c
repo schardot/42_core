@@ -1,18 +1,23 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 10:10:58 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/18 16:49:19 by nleite-s         ###   ########.fr       */
+/*   Created: 2024/09/18 17:11:02 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/18 17:11:05 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "include/minitalk.h"
 
-volatile sig_atomic_t	flag = 0;
+volatile sig_atomic_t	g_flag = 0;
+
+void	sendsig(int serverpid, int sig);
+void	parsestring(char *str, int serverpid);
+void	sendnull(int serverpid);
+void	ackreceived(int sig);
 
 int	main(int argc, char **argv)
 {
@@ -27,8 +32,8 @@ int	main(int argc, char **argv)
 void	parsestring(char *str, int serverpid)
 {
 	char	ch;
-	int	i;
-	int	b;
+	int		i;
+	int		b;
 
 	signal(SIGUSR1, ackreceived);
 	i = 0;
@@ -39,13 +44,13 @@ void	parsestring(char *str, int serverpid)
 		while (b >= 0)
 		{
 			if ((ch >> b) & 1)
-                kill(serverpid, SIGUSR2);
+				sendsig(serverpid, SIGUSR2);
 			else
-                kill(serverpid, SIGUSR1);
+				sendsig(serverpid, SIGUSR1);
 			b --;
-			while(!flag)
+			while (!g_flag)
 				pause();
-			flag = 0;
+			g_flag = 0;
 		}
 		i ++;
 	}
@@ -60,16 +65,25 @@ void	sendnull(int serverpid)
 	i = 0;
 	while (i < 8)
 	{
-		kill(serverpid, SIGUSR1);
+		sendsig(serverpid, SIGUSR1);
 		i ++;
-		while (!flag)
+		while (!g_flag)
 			pause();
-		flag = 0;
+		g_flag = 0;
 	}
 }
 
 void	ackreceived(int sig)
 {
 	if (sig == SIGUSR1)
-		flag = 1;
+		g_flag = 1;
+}
+
+void	sendsig(int serverpid, int sig)
+{
+	if (sig == SIGUSR1)
+		ft_printf("Sending SIGUSR1 (0) to server\n");
+	else if (sig == SIGUSR2)
+		ft_printf("Sending SIGUSR2 (1) to server\n");
+	kill(serverpid, sig);
 }

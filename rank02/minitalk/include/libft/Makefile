@@ -2,27 +2,17 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strle
 
 OBJS_S = $(SRCS:.c=.o)
 
-GNL_DIR = get_next_line
-GNL_SRCS = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
-GNL_OBJS = $(GNL_SRCS:$(GNL_DIR)/%.c=$(OBJDIR)/%.o)
-
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
-
-PRINTF_DIR = ./ft_printf
-PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a
 
 NAME = libft.a
 OBJDIR = obj
 
 all: $(PRINTF_LIB) $(NAME)
 
-$(NAME): $(OBJS_S) $(GNL_OBJS) $(PRINTF_LIB)
-	ar r $(NAME) $(OBJS_S) $(GNL_OBJS)
-
-$(PRINTF_LIB):
-	$(MAKE) -C $(PRINTF_DIR)
+$(NAME): $(OBJS_S)
+	ar -rf $(NAME) $(OBJS_S)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -30,16 +20,14 @@ $(OBJDIR):
 $(OBJDIR)/%.o: %.c libft.h | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o: $(GNL_DIR)/%.c | $(OBJDIR)
+$(OBJDIR)/%.o: $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS_S) $(OBJS_B) $(GNL_OBJS)
-	$(MAKE) -C $(PRINTF_DIR) fclean
+	$(RM) $(OBJS_S) $(OBJS_B)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(MAKE) -C $(PRINTF_DIR) fclean
 
 re: fclean all
 
