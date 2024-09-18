@@ -1,16 +1,18 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 10:10:58 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 14:17:16 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/18 16:49:19 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "include/minitalk.h"
+
+volatile sig_atomic_t	flag = 0;
 
 int	main(int argc, char **argv)
 {
@@ -20,36 +22,35 @@ int	main(int argc, char **argv)
 		return (1);
 	pid = ft_atoi(argv[1]);
 	parsestring(argv[2], pid);
-	while (1)
-	{
-		usleep(100);
-	}
 }
 
 void	parsestring(char *str, int serverpid)
 {
-	static char	ch;
-	static int	i;
-	static int	b;
+	char	ch;
+	int	i;
+	int	b;
 
+	signal(SIGUSR1, ackreceived);
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		b = 7;
 		ch = str[i];
 		while (b >= 0)
 		{
 			if ((ch >> b) & 1)
-				kill(serverpid, SIGUSR2);
+                kill(serverpid, SIGUSR2);
 			else
-				kill(serverpid, SIGUSR1);
+                kill(serverpid, SIGUSR1);
 			b --;
-			usleep(100);
+			while(!flag)
+				pause();
+			flag = 0;
 		}
 		i ++;
 	}
 	sendnull(serverpid);
-	exit(1);
+	exit(0);
 }
 
 void	sendnull(int serverpid)
@@ -61,13 +62,14 @@ void	sendnull(int serverpid)
 	{
 		kill(serverpid, SIGUSR1);
 		i ++;
-		usleep(100);
-		signal(SIGUSR1, ackreceived);
+		while (!flag)
+			pause();
+		flag = 0;
 	}
 }
 
 void	ackreceived(int sig)
 {
 	if (sig == SIGUSR1)
-		write(1, "Received acknowledgement from server\n", 39);
+		flag = 1;
 }
