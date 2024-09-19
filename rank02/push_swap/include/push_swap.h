@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 18:57:49 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/08/12 18:57:52 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/08/12 18:57:49 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/09/19 16:10:12 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -55,5 +55,6 @@ t_node	*lst_last(t_node *lst);
 void	size_three_list(t_node **a);
 t_node	*biggest_node(t_node *stack);
 void	finish_sorting(t_node **a, bool *sorted);
+int		argumentcount(char **argv);
 
 #endif

@@ -1,12 +1,13 @@
-SRCS = ft_printf.c format_csp.c format_diuxX.c
-OBJS = $(SRCS:.c=.o)
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 AR = ar
-ARFLAGS = rcs
+ARFLAGS = -rcs
 RM = rm -f
+
+SRCS = ft_printf.c format_csp.c format_diuxX.c
+OBJS = $(SRCS:.c=.o)
+
 
 NAME = libftprintf.a
 

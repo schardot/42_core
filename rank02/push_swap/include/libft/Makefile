@@ -1,53 +1,33 @@
-SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strrchr.c ft_strchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-
-BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strrchr.c ft_strchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 OBJS_S = $(SRCS:.c=.o)
-OBJS_B = $(BONUS:.c=.o)
-
-GNL_DIR = get_next_line
-GNL_SRCS = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
-GNL_OBJS = $(GNL_SRCS:$(GNL_DIR)/%.c=$(OBJDIR)/%.o)
 
 CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-PRINTF_DIR = ./ft_printf
-PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a
-
 NAME = libft.a
 OBJDIR = obj
 
-all: $(NAME)
+all: $(PRINTF_LIB) $(NAME)
 
-bonus: $(OBJS_B) $(OBJS_S) $(GNL_OBJS)
-	ar r $(NAME) $(OBJS_B) $(OBJS_S) $(GNL_OBJS)
+$(NAME): $(OBJS_S)
+	ar -rf $(NAME) $(OBJS_S)
 
-$(NAME): $(OBJS_S) $(GNL_OBJS) $(PRINTF_LIB)
-	ar r $(NAME) $(OBJS_S) $(GNL_OBJS)
-
-$(PRINTF_LIB):
-	$(MAKE) -C $(PRINTF_DIR)
-
-# Create object directories if they do not exist
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-# Compile source files to object files
 $(OBJDIR)/%.o: %.c libft.h | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o: $(GNL_DIR)/%.c | $(OBJDIR)
+$(OBJDIR)/%.o: $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS_S) $(OBJS_B) $(GNL_OBJS)
-	$(MAKE) -C $(PRINTF_DIR) fclean
+	$(RM) $(OBJS_S) $(OBJS_B)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(MAKE) -C $(PRINTF_DIR) fclean
 
 re: fclean all
 

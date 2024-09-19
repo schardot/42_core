@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   format_diuxX.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 22:23:14 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/05/29 22:23:17 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/05/29 22:23:14 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/09/19 14:41:36 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "ft_printf.h"
 
@@ -58,7 +58,7 @@ int	ft_putnbr_base(unsigned int nbr, const char *base)
 	unsigned int	base_len;
 
 	len = 0;
-	base_len = ft_strlen(base);
+	base_len = printfft_strlen(base);
 	if (nbr < base_len)
 		len += ft_printchar(base[nbr]);
 	else

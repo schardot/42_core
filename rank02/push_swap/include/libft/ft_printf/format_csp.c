@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   format_csp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 22:23:04 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/05/29 22:23:06 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/05/29 22:23:04 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/09/19 14:41:09 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "ft_printf.h"
 
@@ -43,7 +43,7 @@ int	ft_printaddr(void *ptr, char *base, bool first)
 	int				len;
 
 	len = 0;
-	baselen = (unsigned long)ft_strlen(base);
+	baselen = (unsigned long)printfft_strlen(base);
 	addr = (unsigned long)ptr;
 	if (addr == 0)
 	{
