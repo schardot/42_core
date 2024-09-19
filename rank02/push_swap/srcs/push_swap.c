@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:20:22 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/19 16:07:52 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:51:43 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 	if (check_sort(a) == true)
 		return (0);
 	sort(&a, &b);
+	lst_clear(&a, &ft_lstdelone);
+	lst_clear(&b, &ft_lstdelone);
 	return (0);
 }
 
