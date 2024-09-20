@@ -63,7 +63,7 @@ int ft_update(estrutura *g)
 
 // }
 
-void    map_to_grid(int fd) //vai transformar o map em grid e vai tbm captar as dimensoes do mapa.
+char    **ber_to_grid(int fd) //vai transformar o map em grid e vai tbm captar as dimensoes do mapa.
 {
     int height = 0;
     int width;
@@ -85,4 +85,5 @@ void    map_to_grid(int fd) //vai transformar o map em grid e vai tbm captar as 
         height++;
     }
     // ok, transformei em grid mas sem checar NADA
+    return (map)
 }
