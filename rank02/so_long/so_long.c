@@ -1,5 +1,7 @@
 #include "include/minilibx_opengl_20191021/mlx.h"
 #include "include/so_long.h"
+#include "include/libft/libft.h"
+#include "include/libft/get_next_line/get_next_line.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -21,7 +23,7 @@ int main(int argc, char **argv)
     connection = mlx_init();
     if (!connection)
         exit(1);
-    window = mlx_new_window(connection, 800, 500, "window");
+    window = mlx_new_window(connection, 800, 500, "window"); //tem q vincular esse tamanho com o tamanho do mapa
 
     int size;
     size = 200;
@@ -61,12 +63,26 @@ int ft_update(estrutura *g)
 
 // }
 
-// int check_map(char *file)
-// {
-//     int fd;
+void    map_to_grid(int fd) //vai transformar o map em grid e vai tbm captar as dimensoes do mapa.
+{
+    int height = 0;
+    int width;
+    char *line;
+    char **map;
+    int m = 0;
 
-//     fd = open(file, O_RDONLY);
-//     if (fd == -1)
-//         perror("Error opening file");
-//     //use get_next_line to check map
-// }
+    line = get_next_line(fd); //got first line;
+    map = (char **)malloc(sizeof(char *) * (height + 2)); //eu crio assim minhas duas primeiras linhas do grid. tenho ainda que alocar espaco nas linhas.
+    map[m] = ft_strdup(line);
+    m ++;
+    height ++;
+    while (line)
+    {
+        line = get_next_line(fd);
+        map = ft_realloc(map, height + 2);
+        map[m] = ft_strdup(line);
+        m++;
+        height++;
+    }
+    // ok, transformei em grid mas sem checar NADA
+}
