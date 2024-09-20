@@ -4,6 +4,8 @@
 #include "include/libft/get_next_line/get_next_line.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <errno.h>
+#include <string.h>
 
 typedef struct s_list
 {
@@ -51,19 +53,7 @@ int ft_update(estrutura *g)
     mlx_put_image_to_window(g->connection, g->window, g->img, 200, 200);
 }
 
-// int arguments_check(int argc, char **argv)
-// {
-//     if (argc != 2)
-//     {
-//         ft_printf("Argc must be 2");
-//         return (1);
-//     }
-//     if (argc == 2)
-//         check_map(*argv);
-
-// }
-
-char    **ber_to_grid(int fd) //vai transformar o map em grid e vai tbm captar as dimensoes do mapa.
+char    **ber_to_grid(int fd) //it will create and populate a grid with information of the map. it will then check is all the characters a valid. it doesnt check if theres a valid path.
 {
     int height = 0;
     int width;
@@ -72,7 +62,7 @@ char    **ber_to_grid(int fd) //vai transformar o map em grid e vai tbm captar a
     int m = 0;
 
     line = get_next_line(fd); //got first line;
-    map = (char **)malloc(sizeof(char *) * (height + 2)); //eu crio assim minhas duas primeiras linhas do grid. tenho ainda que alocar espaco nas linhas.
+    map = (char **)malloc(sizeof(char *) * (height + 2)); //if i dont initialize line here, it'll never go inside the loop
     map[m] = ft_strdup(line);
     m ++;
     height ++;
@@ -84,6 +74,59 @@ char    **ber_to_grid(int fd) //vai transformar o map em grid e vai tbm captar a
         m++;
         height++;
     }
-    // ok, transformei em grid mas sem checar NADA
-    return (map)
+    check_map(map);
+    return (map);
+}
+
+void check_map(char **map)
+{
+    1. check if all the borders are 1 (walls)
+
+    int w;
+    int h;
+
+    //for now i declared variables so i can count E, P and C but im sure theres a more efficient way to do it.
+    int E;
+    int P;
+    int C;
+    E = 0;
+    P = 0;
+    C = 0;
+
+    w = 0;
+    h = 0;
+    while(map[h])
+    {
+        while (map[h][w])
+        {
+            if ((h == 0 || h == ultima linha) && map[h][w] != 1)
+            {
+                ft_printf("Map borders are invalid, check the extremities up or down");
+                exit (1);
+            }
+            else if (first or last letter of the line are not 1)
+            {
+                ft_printf("Map borders are invalid, check the extremities left or right");
+                exit (1);
+            }
+            if (map[h][w] == 'E')
+                E ++;
+            else if (map[h][w] == 'P')
+                P ++;
+            else if (map[h][w] == 'C')
+                C ++;
+            else if (map[h][w] != '1' && map[h][w] != '0')
+            {
+                ft_printf("Invalid character");
+                exit(1);
+            }
+            w++;
+        }
+        h ++;
+    }
+    if (E > 1 || P > 1 || C < 1)
+    {
+        ft_printf("Too many exits, players or to little coins.");
+        exit(1);
+    }
 }
