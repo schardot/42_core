@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 10:10:58 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 14:16:41 by nataliascha      ###   ########.fr       */
+/*   Created: 2024/09/17 12:05:25 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/17 12:05:29 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	parsestring(char *str, int serverpid)
 			else
 				kill(serverpid, SIGUSR1);
 			b --;
-			usleep(100);
+			usleep(300);
 		}
 		i ++;
 	}

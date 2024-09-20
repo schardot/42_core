@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:31:26 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/07/08 14:31:28 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:40:43 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "ft_printf.h"
 
@@ -25,7 +25,7 @@ int	ft_printf(const char *s, ...)
 		return (-1);
 	while (s[i] != '\0')
 	{
-		if (s[i] == '%' && ft_strchr("cspdiuxX%", s[i + 1]))
+		if (s[i] == '%' && printfft_strchr("cspdiuxX%", s[i + 1]))
 		{
 			len += ft_format(s[i + 1], &args);
 			i ++;
@@ -65,7 +65,7 @@ int	ft_format(int c, va_list *args)
 	return (len);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*printfft_strchr(const char *s, int c)
 {
 	size_t	i;
 	char	temp_c;
@@ -84,7 +84,7 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	printfft_strlen(const char *s)
 {
 	size_t	length;
 	int		i;

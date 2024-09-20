@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 10:11:01 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 14:33:32 by nataliascha      ###   ########.fr       */
+/*   Created: 2024/09/18 17:11:50 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/18 17:11:51 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	signalhandler(int signum, siginfo_t *info, void *context)
 	static int	b = 0;
 
 	(void)context;
-	(void)info;
 	if (signum == SIGUSR1 || signum == SIGUSR2)
 	{
 		c <<= 1;
@@ -29,12 +28,13 @@ void	signalhandler(int signum, siginfo_t *info, void *context)
 		{
 			write(1, &c, 1);
 			if (c == 0)
-			{
 				write(1, "\n", 1);
-				kill(info->si_pid, SIGUSR1);
-			}
 			c = 0;
 			b = 0;
+		}
+		if (kill(info->si_pid, SIGUSR1) == -1)
+		{
+			perror("Error sending acknowledgment signal to client");
 		}
 	}
 }
@@ -44,21 +44,19 @@ int	main(void)
 	struct sigaction	action;
 
 	action.sa_sigaction = signalhandler;
-	action.sa_flags = 0;
+	action.sa_flags = SA_SIGINFO;
 	sigemptyset(&action.sa_mask);
 	ft_printf("SERVER PID: %d\n", (int)getpid());
-	while (1)
+	if (sigaction(SIGUSR1, &action, NULL) == -1)
 	{
-		if (sigaction(SIGUSR1, &action, NULL) == -1)
-		{
-			ft_printf("Error setting up SIGUSR1 handler");
-			exit(EXIT_FAILURE);
-		}
-		if (sigaction(SIGUSR2, &action, NULL) == -1)
-		{
-			ft_printf("Error setting up SIGUSR2 handler");
-			exit(EXIT_FAILURE);
-		}
-		pause();
+		perror("Error setting up SIGUSR1 handler");
+		exit(EXIT_FAILURE);
 	}
+	if (sigaction(SIGUSR2, &action, NULL) == -1)
+	{
+		perror("Error setting up SIGUSR2 handler");
+		exit(EXIT_FAILURE);
+	}
+	while (1)
+		pause();
 }

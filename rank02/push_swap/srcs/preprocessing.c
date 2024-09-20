@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 18:58:10 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/08/12 18:58:12 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/08/12 18:58:10 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/09/19 17:37:00 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/push_swap.h"
 
@@ -57,16 +57,33 @@ bool	prep_check_argv(int argc, char **argv)
 bool	prep_array_to_list(int argc, char **argv, t_node **a)
 {
 	int		i;
+	char	**arguments;
 	t_node	*node_aux;
 
 	i = 1;
-	*a = lst_new((long)ft_atoi(argv[i]));
+	arguments = argv;
+	
+	//-----------------ALTERANDO AQUI
+	if (argc == 2)
+	{
+		arguments = ft_split(argv[1], ' ');
+		if (!arguments)
+		{
+			ft_printf("Error");
+			exit (1);
+		}
+		argc = argumentcount(arguments);
+		i = 0;
+	}
+	//-----------------------------------------
+	prep_check_argv(argc, arguments);
+	*a = lst_new((long)ft_atoi(arguments[i]));
 	if (!*a)
 		exit(false);
 	i++;
 	while (i < argc)
 	{
-		node_aux = lst_new((long)ft_atoi(argv[i]));
+		node_aux = lst_new((long)ft_atoi(arguments[i]));
 		if (!node_aux)
 		{
 			lst_clear(a, free);
@@ -90,7 +107,7 @@ bool	duplicates_check(char **args, int argc, char *cur)
 	found_itself = false;
 	while (i < argc)
 	{
-		len_i = ft_strlen(args[i]);
+		len_i = argumentcount(&args[i]);
 		if (len_cur == len_i && ft_strncmp(args[i], cur, len_cur) == 0)
 		{
 			if (found_itself == true)
@@ -105,18 +122,12 @@ bool	duplicates_check(char **args, int argc, char *cur)
 	return (true);
 }
 
-bool	check_sort(t_node *a)
+int	argumentcount(char **argv)
 {
-	t_node	*aux;
+	int	i;
 
-	if (!a)
-		return (true);
-	aux = a;
-	while (aux->next)
-	{
-		if ((long)aux->value > (long)aux->next->value)
-			return (false);
-		aux = aux->next;
-	}
-	return (true);
+	i = 0;
+	while(argv[i])
+		i++;
+	return (i);
 }

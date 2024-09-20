@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 10:10:58 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/06 14:17:16 by nataliascha      ###   ########.fr       */
+/*   Created: 2024/09/18 17:11:02 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/18 17:11:05 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minitalk.h"
+
+volatile sig_atomic_t	g_flag = 0;
+
+void	sendsig(int serverpid, int sig);
+void	parsestring(char *str, int serverpid);
+void	sendnull(int serverpid);
+void	ackreceived(int sig);
 
 int	main(int argc, char **argv)
 {
@@ -20,36 +27,35 @@ int	main(int argc, char **argv)
 		return (1);
 	pid = ft_atoi(argv[1]);
 	parsestring(argv[2], pid);
-	while (1)
-	{
-		usleep(100);
-	}
 }
 
 void	parsestring(char *str, int serverpid)
 {
-	static char	ch;
-	static int	i;
-	static int	b;
+	char	ch;
+	int		i;
+	int		b;
 
+	signal(SIGUSR1, ackreceived);
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		b = 7;
 		ch = str[i];
 		while (b >= 0)
 		{
 			if ((ch >> b) & 1)
-				kill(serverpid, SIGUSR2);
+				sendsig(serverpid, SIGUSR2);
 			else
-				kill(serverpid, SIGUSR1);
+				sendsig(serverpid, SIGUSR1);
 			b --;
-			usleep(100);
+			while (!g_flag)
+				pause();
+			g_flag = 0;
 		}
 		i ++;
 	}
 	sendnull(serverpid);
-	exit(1);
+	exit(0);
 }
 
 void	sendnull(int serverpid)
@@ -59,15 +65,25 @@ void	sendnull(int serverpid)
 	i = 0;
 	while (i < 8)
 	{
-		kill(serverpid, SIGUSR1);
+		sendsig(serverpid, SIGUSR1);
 		i ++;
-		usleep(100);
-		signal(SIGUSR1, ackreceived);
+		while (!g_flag)
+			pause();
+		g_flag = 0;
 	}
 }
 
 void	ackreceived(int sig)
 {
 	if (sig == SIGUSR1)
-		write(1, "Received acknowledgement from server\n", 39);
+		g_flag = 1;
+}
+
+void	sendsig(int serverpid, int sig)
+{
+	if (sig == SIGUSR1)
+		ft_printf("Sending SIGUSR1 (0) to server\n");
+	else if (sig == SIGUSR2)
+		ft_printf("Sending SIGUSR2 (1) to server\n");
+	kill(serverpid, sig);
 }
