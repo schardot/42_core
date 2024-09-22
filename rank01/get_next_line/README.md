@@ -1,4 +1,4 @@
-# Get Next Line
+# get_next_line ![Static Badge](https://img.shields.io/badge/moulinette-105%25-brightgreen?style=flat-square)
 
 `get_next_line` is a C function designed to read a line from a file descriptor, allowing for efficient reading from both files and standard input. The function handles multiple calls and returns one line at a time, including the terminating newline character when applicable.
 
