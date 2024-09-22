@@ -1,4 +1,6 @@
-# Libft
+[![Libft bonus badge](https://github.com/ayogun/42-project-badges/blob/main/badges/libftm.png?raw=true)](https://github.com/schardot/42_core/tree/main/rank00/libft)
+
+# Libft 
 
 Libft is a custom C library that reimplements essential functions from the standard C library, as well as additional utility functions to assist with string manipulation, memory management, and linked list operations. This project serves as the foundation for many future projects at 42.
 
