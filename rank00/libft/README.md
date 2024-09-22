@@ -14,8 +14,8 @@ The libft library is divided into three main sections:
 ## 🛠️ Functions Implemented
 
 ### 🧠 Memory Functions
-
-- ft_memset: Fills a block of memory with a specific byte value.
+[ft_memset](./src/ft_memset)
+- [ft_memset](./src/ft_memset): Fills a block of memory with a specific byte value.
 - ft_bzero: Sets a block of memory to zero.
 - ft_memcpy: Copies memory from one location to another.
 - ft_memmove: Safely copies overlapping memory blocks.
