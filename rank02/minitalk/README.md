@@ -8,4 +8,24 @@ Minitalk is a project that demonstrates inter-process communication (IPC) using 
 - **Server and Client**: The server listens for incoming messages, while the client sends messages using signals.
 - **Dynamic Message Handling**: Supports sending messages of variable length, including Unicode characters.
 
+## Usage
+### Starting the Server
 
+Run the server in one terminal:
+
+````bash
+./server
+````
+The server will print its process ID (PID), which is required for the client to send messages.
+
+### Sending Messages from the Client
+In another terminal, run the client and provide the server's PID along with the message:
+
+````bash
+./client <server_pid> "<message>"
+````
+Parameters:
+
+`<server_pid>`: The process ID of the running server.
+
+`"<message>"`: The message to be sent to the server (supports Unicode).
