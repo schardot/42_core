@@ -1,29 +1,33 @@
-# MANDATORY PART
+# Get Next Line
 
- ## Function name: :green_circle: get_next_line
+`get_next_line` is a C function designed to read a line from a file descriptor, allowing for efficient reading from both files and standard input. The function handles multiple calls and returns one line at a time, including the terminating newline character when applicable.
 
- Passed moulinette? :green_circle:
+## Features
 
- Turn in files: :green_circle: get_next_line.c, :green_circle: get_next_line_utils.c, :green_circle: get_next_line.h
-
- External functs. read, malloc, free
-
- Libft authorized: forbidden
-
-Description: Write a function that returns a line read from a file descriptor
-
-Instructions:
-
+- Repeated calls to `get_next_line()` read from the specified file descriptor one line at a time.
+- Returns the line read, or `NULL` if there's nothing left to read or an error occurs.
+- Supports reading from both files and standard input.
+- The returned line includes the terminating newline character, except when the end of the file is reached without a newline.
+  
+## Instructions
 
 | Status | Description |
 | --- | --- |
-| :green_circle: | Repeated calls (e.g., using a loop) to your get_next_line() function should let you read the text file pointed to by the file descriptor, one line at a time. |
-| :green_circle: | Your function should return the line that was read. If there is nothing else to read or if an error occurred, it should return NULL. |
-| :green_circle: | Make sure that your function works as expected both when reading a file and when reading from the standard input. |
-| :green_circle: | Please note that the returned line should include the terminating \n character, except if the end of file was reached and does not end with a \n character. |
-| :green_circle: | Your header file get_next_line.h must at least contain the prototype of the get_next_line() function. |
-| :green_circle: | Add all the helper functions you need in the get_next_line_utils.c file. |
-| :green_circle: | Because you will have to read files in get_next_line(), add this option to your compiler call: -D BUFFER_SIZE=n. It will define the buffer size for read(). The buffer size value will be modified by your peer-evaluators and the Moulinette in order to test your code. |
-| :green_circle: | You will compile your code as follows (a buffer size of 42 is used as an example): cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c |
-| :green_circle: | We consider that get_next_line() has an undefined behavior if the file pointed toby the file descriptor changed since the last call whereas read() didn’t reach the end of file. |
-| :green_circle: | We also consider that get_next_line() has an undefined behavior when readinga binary file. However, you can implement a logical way to handle this behavior if you want to. |
+| :green_circle: | Repeated calls should read the text file pointed to by the file descriptor, one line at a time. |
+| :green_circle: | Returns the line that was read, or `NULL` if no more data is available. |
+| :green_circle: | Functions correctly for both file and standard input. |
+| :green_circle: | Returned line includes a terminating newline character, unless at the end of the file. |
+| :green_circle: | The header file `get_next_line.h` must contain the prototype of the `get_next_line()` function. |
+| :green_circle: | Add all helper functions in `get_next_line_utils.c`. |
+| :green_circle: | Use the option `-D BUFFER_SIZE=n` in the compiler call to define the buffer size for `read()`. |
+| :green_circle: | Compile as follows (example with a buffer size of 42): `cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c` |
+| :green_circle: | Undefined behavior occurs if the file descriptor changes between calls without reaching EOF. |
+| :green_circle: | Undefined behavior may also occur when reading binary files. Logical handling is encouraged. |
+
+## Installation
+
+To use the `get_next_line` function, include the header file in your project:
+
+```c
+#include "get_next_line.h"
+
