@@ -1,4 +1,5 @@
-# ft_printf 🖨️
+# ft_printf 🖨️  ![Static Badge](https://img.shields.io/badge/moulinette-100%25-brightgreen?style=flat-square)
+
 
 `ft_printf` is a reimplementation of the standard C library function `printf`. This project demonstrates the ability to handle formatted output, managing different format specifiers, and producing customized output with variable arguments.
 
