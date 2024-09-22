@@ -7,33 +7,52 @@ This repository contains a collection of my assignments and coursework from my s
 Here is a list of some of the projects included in this repository:
 
 **Rank 00 - [Libft](./rank00/libft)**
-   - **Description:** Write your own library, a collection of functions that will be a useful tool for your cursus.
-   - **Technologies Used:** C, Shell, Makefile.
-   - ![Static Badge](https://img.shields.io/badge/moulinette-125%25-brightgreen?style=flat-square)
+   - Libft is a custom C library that reimplements essential standard C functions, focusing on string manipulation, memory management, and linked lists. It serves as a foundation for many future projects in the 42 curriculum.
+   - **Tech stack:** C, Memory management, Data structures
+
+![Static Badge](https://img.shields.io/badge/moulinette-125%25-brightgreen?style=flat-square)
   
    
 **Rank 01 - [ft_printf](./rank01/ft_printf)**
-   - **Description:** Write a library that contains ft_printf(), a function that will mimic the original printf()
-   - **Technologies Used:** C, Shell, Makefile.
-   - ![Static Badge](https://img.shields.io/badge/moulinette-100%25-brightgreen?style=flat-square)
+   - The ft_printf project involves re-creating the printf function in C, handling various format specifiers and providing formatted output while optimizing for performance.
+   - **Tech stack:** C, Formatting, I/O
+   
+ ![Static Badge](https://img.shields.io/badge/moulinette-100%25-brightgreen?style=flat-square)
 
 
 **Rank 01 - [get_next_line](./rank01/get_next_line)**
-   - **Description:** Write a function that returns a line read from a file descriptor
-   - **Technologies Used:** C, Shell.
-   - ![Static Badge](https://img.shields.io/badge/moulinette-105%25-brightgreen?style=flat-square)
+   - Implementation of a function that reads and returns a single line from a file descriptor, a key utility for handling file I/O in C.
+   - **Tech stack:** C, File I/O, Buffer management
+   
+   ![Static Badge](https://img.shields.io/badge/moulinette-105%25-brightgreen?style=flat-square)
 
 
 **Rank 01 - [Born2beroot](./rank01/Born2beroot)**
-   - **Description:** You will create your first machine in VirtualBox under specific instructions
-   - **Technologies Used:** Shell, Debian, UFW (Uncomplicated Firewall), VirtualBox, SSH, cron, rsync, sudo, systemd, User and Permission Management, Network Configuration, Monitoring Tools
-   - ![Static Badge](https://img.shields.io/badge/moulinette-120%25-brightgreen?style=flat-square)
+   - Born2beroot focuses on setting up a virtual machine with specific security measures, teaching the fundamentals of system administration and server management using Linux.
+
+   - **Tech stack:** Shell, Debian, UFW (Uncomplicated Firewall), VirtualBox, SSH, cron, rsync, sudo, systemd, User and Permission Management, Network Configuration, Monitoring Tools
+
+   ![Static Badge](https://img.shields.io/badge/moulinette-120%25-brightgreen?style=flat-square)
 
 
 **Rank 02 - [push_swap](./rank02/push_swap)**
-   - **Description:** Write a program in C called push_swap which calculates and displays on the standard output the smallest program, made of Push swap language instructions, that sorts the integers received as arguments.
-   - **Technologies Used:**  C, Shell, Makefile, Stacks (Linked Lists), Sorting Algorithms, CLI.
-   - ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+   - The push_swap project challenges you to sort a stack of integers using two stacks and a limited set of operations (push, swap, rotate, and reverse rotate). The goal is to minimize the number of operations, requiring efficient algorithm design and optimization.
+   -**Tech stack:**  C, Sorting algorithms, Stack manipulation
 
+   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+
+**Rank 02 - [so_long](./rank02/so_long)**
+   - So_long is a 2D maze game developed using the minilibX graphics library. The project involves creating a small game where the player collects items and navigates through a map.
+
+   -**Tech stack:**  C, Game development, minilibX
+
+   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+
+**Rank 02 - [minitalk](./rank02/minitalk)**
+   - The Minitalk project creates a communication system between processes using Unix signals, enabling string transfers in a secure and efficient way.
+
+   -**Tech stack:** C, Unix signals, IPC (Inter-Process Communication)
+
+   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
 
 
