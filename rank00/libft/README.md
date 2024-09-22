@@ -8,7 +8,9 @@ Libft is a custom C library that reimplements essential functions from the stand
 The libft library is divided into three main sections:
 
 **Libc functions:** Reimplementations of functions like memset, strlen, strdup, etc.
+
 **Additional functions:** Utility functions for string manipulation, memory allocation, and linked list handling.
+
 **Bonus part:** Functions to manipulate linked lists.
 
 ## 🛠️ Functions Implemented
