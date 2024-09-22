@@ -98,4 +98,43 @@ The `ft_putnbr_base` function converts an unsigned integer to a specified base a
     - If the number is less than the base length, it prints the corresponding character from the base string.
     - For larger numbers, it recursively divides the number by the base length to process each digit.
 
+# Overview of `format_csp.c`
+
+## Function: `ft_printchar`
+The `ft_printchar` function prints a single character to the standard output.
+
+- **Parameters**:
+  - `int c`: The character to be printed, passed as an integer.
+
+- **Functionality**:
+  - Converts the integer to a character and writes it to the standard output using `write`.
+  - Returns `1` to indicate that one character was printed.
+
+## Function: `ft_printstr`
+The `ft_printstr` function prints a string to the standard output.
+
+- **Parameters**:
+  - `char *s`: The string to be printed.
+
+- **Functionality**:
+  - If the string is `NULL`, it calls `ft_printstr` recursively to print "(null)".
+  - Otherwise, it iterates through each character of the string, calling `ft_printchar` for each character.
+  - Returns the total number of characters printed.
+
+## Function: `ft_printaddr`
+The `ft_printaddr` function prints the address of a pointer in hexadecimal format.
+
+- **Parameters**:
+  - `void *ptr`: The pointer whose address is to be printed.
+  - `char *base`: A string representing the characters used in the base (e.g., "0123456789abcdef").
+  - `bool first`: A flag indicating if this is the first call (used to print the "0x" prefix).
+
+- **Functionality**:
+  - Initializes the address and base length.
+  - If the address is `NULL`, it prints "(nil)".
+  - If it's the first call, it prints the "0x" prefix.
+  - Uses recursion to print the address in the specified base:
+    - Divides the address by the base length to process higher digits.
+    - Prints the last digit based on the modulo of the base length.
+  - Returns the total number of characters printed.
 
