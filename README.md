@@ -1,39 +1,58 @@
-# 42 Core Curriculum (School Projects Repository)
+# 42 Core Curriculum 🚀
 
-This repository contains a collection of my assignments and coursework from my studies at 42, starting in April 2024 and ongoing. Please note that some projects may still be incomplete and have not yet been checked by Moulinette. Make sure to read the README file in each directory for specific details and updates before using any of the code.
+This repository contains a collection of my assignments and coursework from my studies at 42, starting in April 2024 and ongoing. These projects emphasize low-level programming, algorithms, and problem-solving using C and shell scripting.
 
-## Projects
+## 🔗 Table of Contents
 
 Here is a list of some of the projects included in this repository:
 
-0. **Rank -01 - Piscine Reloaded** :red_circle:
-   - **Description:** The Piscine Reloaded is a best-of of the exercises you did during the C Piscine to remind you all the basics of the C programming language.
-   - **Technologies Used:** C, Shell.
-   - **Folder:** [piscine_reloaded](./piscine_reloaded)
+**Rank 00 - [Libft](./rank00/libft)**
+   - Libft is a custom C library that reimplements essential standard C functions, focusing on string manipulation, memory management, and linked lists. It serves as a foundation for many future projects in the 42 curriculum.
+   - **Tech stack:** C, Memory management, Data structures
 
-1. **Rank 00 - Libft** :green_circle:
-   - **Description:** Write your own library, a collection of functions that will be a useful tool for your cursus.
-   - **Technologies Used:** C, Shell, Makefile.
-   - **Folder:** [rank00/libft](./rank00/libft)
+![Static Badge](https://img.shields.io/badge/moulinette-125%25-brightgreen?style=flat-square)
+  
+   
+**Rank 01 - [ft_printf](./rank01/ft_printf)**
+   - The ft_printf project involves re-creating the printf function in C, handling various format specifiers and providing formatted output while optimizing for performance.
+   - **Tech stack:** C, Formatting, I/O
+   
+ ![Static Badge](https://img.shields.io/badge/moulinette-100%25-brightgreen?style=flat-square)
 
-2. **Rank 01 - ft_printf** :green_circle:
-   - **Description:** Write a library that contains ft_printf(), a function that will mimic the original printf()
-   - **Technologies Used:** C, Shell, Makefile.
-   - **Folder:** [rank01/ft_printf](./rank01/ft_printf)
 
-2. **Rank 01 - get_next_line** :green_circle:
-   - **Description:** Write a function that returns a line read from a file descriptor
-   - **Technologies Used:** C, Shell.
-   - **Folder:** [rank01/get_next_line](./rank01/get_next_line)
+**Rank 01 - [get_next_line](./rank01/get_next_line)**
+   - Implementation of a function that reads and returns a single line from a file descriptor, a key utility for handling file I/O in C.
+   - **Tech stack:** C, File I/O, Buffer management
+   
+   ![Static Badge](https://img.shields.io/badge/moulinette-105%25-brightgreen?style=flat-square)
 
-2. **Rank 01 - Born2beroot** :green_circle:
-   - **Description:** You will create your first machine in VirtualBox under specific instructions
-   - **Technologies Used:** Shell, Debian, UFW (Uncomplicated Firewall), VirtualBox, SSH, cron, rsync, sudo, systemd, User and Permission Management, Network Configuration, Monitoring Tools
-   - **Folder:** [rank01/born2beroot](./rank01/Born2beroot)
 
-3. **Rank 02 - push_swap** :yellow_circle:
-   - **Description:** Write a program in C called push_swap which calculates and displays on the standard output the smallest program, made of Push swap language instructions, that sorts the integers received as arguments.
-   - **Technologies Used:**  C, Shell, Makefile, Stacks (Linked Lists), Sorting Algorithms, CLI.
-   - **Folder:** [rank02/push_swap](./rank02/push_swap)
+**Rank 01 - [Born2beroot](./rank01/Born2beroot)**
+   - Born2beroot focuses on setting up a virtual machine with specific security measures, teaching the fundamentals of system administration and server management using Linux.
+
+   - **Tech stack:** Shell, Debian, UFW (Uncomplicated Firewall), VirtualBox, SSH, cron, rsync, sudo, systemd, User and Permission Management, Network Configuration, Monitoring Tools
+
+   ![Static Badge](https://img.shields.io/badge/moulinette-120%25-brightgreen?style=flat-square)
+
+
+**Rank 02 - [push_swap](./rank02/push_swap)**
+   - The push_swap project challenges you to sort a stack of integers using two stacks and a limited set of operations (push, swap, rotate, and reverse rotate). The goal is to minimize the number of operations, requiring efficient algorithm design and optimization.
+   -**Tech stack:**  C, Sorting algorithms, Stack manipulation
+
+   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+
+**Rank 02 - [so_long](./rank02/so_long)**
+   - So_long is a 2D maze game developed using the minilibX graphics library. The project involves creating a small game where the player collects items and navigates through a map.
+
+   -**Tech stack:**  C, Game development, minilibX
+
+   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+
+**Rank 02 - [minitalk](./rank02/minitalk)**
+   - The Minitalk project creates a communication system between processes using Unix signals, enabling string transfers in a secure and efficient way.
+
+   -**Tech stack:** C, Unix signals, IPC (Inter-Process Communication)
+
+   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
 
 

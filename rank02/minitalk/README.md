@@ -1,14 +1,31 @@
-# MANDATORY PART
+# Minitalk 📡💬
 
- ## Project name: :yellow_circle: minitalk
+Minitalk is a project that demonstrates inter-process communication (IPC) using Unix signals. It allows clients to send messages to a server, which receives and processes them in real-time. The project also supports Unicode characters, enabling the transmission of a broader range of messages.
 
- Passed moulinette? :yellow_circle:
+## Features
 
- Turn in files: Makefile
+- **Signal-based Communication**: Uses Unix signals to transmit messages between a client and a server.
+- **Server and Client**: The server listens for incoming messages, while the client sends messages using signals.
+- **Dynamic Message Handling**: Supports sending messages of variable length, including Unicode characters.
 
- External functs allowed: write, ft_printf, signal, sigemptyset, sigaddset, sigaction, kill, getpid, malloc, free, pause, sleep, usleep, exit
+## Usage
+### Starting the Server
 
- Libft authorized: yes
+Run the server in one terminal:
 
-Description: Code a small data exchange program using UNIX signals.
+````bash
+./server
+````
+The server will print its process ID (PID), which is required for the client to send messages.
 
+### Sending Messages from the Client
+In another terminal, run the client and provide the server's PID along with the message:
+
+````bash
+./client <server_pid> "<message>"
+````
+Parameters:
+
+`<server_pid>`: The process ID of the running server.
+
+`"<message>"`: The message to be sent to the server (supports Unicode).
