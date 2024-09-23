@@ -8,13 +8,22 @@
 
 typedef struct v_list
 {
-    void *connection;
-    void *window;
-    void *img;
-    void *wallimage;
-    void *playerimage;
-    void *coinimage;
-    void *exitimage;
+	void    *connection;
+	void    *window;
+	void    *img;
+	void    *wallimage;
+	void    *playerimage;
+	void    *coinimage;
+	void    *exitimage;
+	void    *tileimage;
 } gamedata;
+
+int ft_update(gamedata *g);
+gamedata *init_data(gamedata *data);
+void put_file_to_image(gamedata *data);
+char **start_map(char *filename);
+char **ber_to_grid(int fd);
+void check_map(char **map);
+void grid_to_img(char **map, gamedata *d);
 
 #endif
