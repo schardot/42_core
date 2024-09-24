@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   linked_list_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 18:58:36 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/08/12 18:58:37 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/08/12 18:58:36 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/09/24 14:50:52 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/push_swap.h"
 
@@ -49,13 +49,15 @@ void	lst_clear(t_node **lst, void (*del)(void *))
 
 	if (!del || !lst || !*lst)
 		return ;
-	while (lst && *lst)
+	while (*lst)
 	{
 		aux = (*lst)->next;
-		del((void *)(*lst)->value);
+		//del((void *)(*lst)->value);
 		free (*lst);
 		*lst = aux;
 	}
+	//free (lst);
+	*lst = NULL;
 }
 
 void	lst_add_back(t_node **lst, t_node *new)

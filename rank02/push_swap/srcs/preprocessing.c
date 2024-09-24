@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:58:10 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/19 17:37:00 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:26:52 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,68 +31,67 @@ bool	is_valid_number(char *arg)
 	return (true);
 }
 
-bool	prep_check_argv(int argc, char **argv)
+bool check_argv(int argc, char **argv)
 {
-	int		i;
-	long	num;
-	char	*itoa_r;
+    int i;
+    long num;
+    char *itoa_r;
 
-	i = 1;
-	while (i < argc)
-	{
-		is_valid_number(argv[i]);
-		num = ft_atoi(argv[i]);
-		itoa_r = ft_itoa(num);
-		duplicates_check(argv, argc, argv[i]);
-		if (ft_strncmp(itoa_r, argv[i], ft_strlen(argv[i]) != 0))
-		{
-			ft_printf("Error\n");
-			exit (false);
-		}
-		i++;
-	}
-	return (true);
+    i = 1;
+    while (i < argc)
+    {
+        is_valid_number(argv[i]);
+        num = ft_atoi(argv[i]);
+        itoa_r = ft_itoa(num);
+        duplicates_check(argv, argc, argv[i]);
+        if (ft_strncmp(itoa_r, argv[i], ft_strlen(argv[i])) != 0) // Correct comparison
+        {
+            ft_printf("Error\n");
+            exit(false);
+        }
+        i++;
+    }
+    return true;
 }
 
-bool	prep_array_to_list(int argc, char **argv, t_node **a)
+void preprocessing(int argc, char **argv, t_node **a)
 {
-	int		i;
-	char	**arguments;
-	t_node	*node_aux;
+    char **arguments;
+    int ac;
 
-	i = 1;
-	arguments = argv;
-	
-	//-----------------ALTERANDO AQUI
-	if (argc == 2)
-	{
-		arguments = ft_split(argv[1], ' ');
-		if (!arguments)
-		{
-			ft_printf("Error");
-			exit (1);
-		}
-		argc = argumentcount(arguments);
-		i = 0;
-	}
-	//-----------------------------------------
-	prep_check_argv(argc, arguments);
-	*a = lst_new((long)ft_atoi(arguments[i]));
-	if (!*a)
-		exit(false);
-	i++;
-	while (i < argc)
-	{
-		node_aux = lst_new((long)ft_atoi(arguments[i]));
-		if (!node_aux)
-		{
-			lst_clear(a, free);
-			return (false);
-		}
-		lst_add_back(a, node_aux);
-		i++;
-	}
-	return (true);
+    ac = argc;
+    arguments = argv;
+    if (argc == 2)
+        ac = argctwo(arguments[1]);
+    check_argv(argc, arguments);
+    create_populate_stack(a, ac, arguments);
+}
+
+void    create_populate_stack(t_node **a, int ac, char **arguments)
+{
+    int i;
+    t_node *node_aux;
+
+    *a = lst_new((long)ft_atoi(arguments[1]));
+    if (!*a)
+    {
+        free_arguments(arguments);
+        exit (1);
+    }
+    i = 2;
+    while (i < ac)
+    {
+        node_aux = lst_new((long)ft_atoi(arguments[i]));
+        if (!node_aux)
+        {
+            lst_clear(a, free);
+            free_arguments(arguments);
+            return ;
+        }
+        lst_add_back(a, node_aux);
+        i++;
+    }
+    free_arguments(arguments);
 }
 
 bool	duplicates_check(char **args, int argc, char *cur)
@@ -107,7 +106,7 @@ bool	duplicates_check(char **args, int argc, char *cur)
 	found_itself = false;
 	while (i < argc)
 	{
-		len_i = argumentcount(&args[i]);
+		len_i = ft_strlen(args[i]);
 		if (len_cur == len_i && ft_strncmp(args[i], cur, len_cur) == 0)
 		{
 			if (found_itself == true)
@@ -122,7 +121,7 @@ bool	duplicates_check(char **args, int argc, char *cur)
 	return (true);
 }
 
-int	argumentcount(char **argv)
+int argumentcount(char **argv)
 {
 	int	i;
 
@@ -130,4 +129,31 @@ int	argumentcount(char **argv)
 	while(argv[i])
 		i++;
 	return (i);
+}
+
+int    argctwo(char *arguments)
+{
+    int ac;
+
+    arguments = ft_split(arguments, ' ');
+    if (!arguments)
+    {
+        ft_printf("Error: Could not split arguments.\n");
+        exit (1);
+    }
+    ac = argumentcount(arguments);
+    return (ac);
+}
+
+void    free_arguments(char **arguments)
+{
+    int i;
+
+    i = 0;
+    while(arguments[i])
+    {
+        free (arguments[i]);
+        i ++;
+    }
+    free(arguments);
 }

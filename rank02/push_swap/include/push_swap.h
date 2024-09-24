@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:57:49 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/19 16:10:12 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:25:18 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -31,8 +31,9 @@ typedef struct node
 }	t_node;
 
 bool	is_valid_number(char *arg);
-bool	prep_check_argv(int argc, char **argv);
-bool	prep_array_to_list(int argc, char **argv, t_node **a);
+void	preprocessing(int argc, char **argv, t_node **a);
+void	create_populate_stack(t_node **a, int ac, char **arguments);
+bool	check_argv(int argc, char **argv);
 bool	duplicates_check(char **args, int argc, char *current);
 bool	check_sort(t_node *a);
 void	sort(t_node **a, t_node **b);
@@ -56,5 +57,8 @@ void	size_three_list(t_node **a);
 t_node	*biggest_node(t_node *stack);
 void	finish_sorting(t_node **a, bool *sorted);
 int		argumentcount(char **argv);
+void    free_arguments(char **arguments);
+int    argctwo(char **arguments);
+void    create_populate_stack(t_node **a, int ac, char **arguments);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:20:22 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/19 17:51:43 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:42:30 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -20,16 +20,18 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	if (argc < 2)
-		return (0);
-	// prep_check_argv(argc, argv);
-	prep_array_to_list(argc, argv, &a);
+		return (1);
+	preprocessing(argc, argv, &a);
 	if (list_size(a) == 3)
 		size_three_list(&a);
 	if (check_sort(a) == true)
+	{
+		lst_clear(&a, &free);
 		return (0);
+	}
 	sort(&a, &b);
-	lst_clear(&a, &ft_lstdelone);
-	lst_clear(&b, &ft_lstdelone);
+	lst_clear(&a, &free);
+	lst_clear(&b, &free);
 	return (0);
 }
 

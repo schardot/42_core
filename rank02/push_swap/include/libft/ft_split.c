@@ -6,43 +6,51 @@
 /*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:36:16 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/19 17:21:34 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:11:02 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "libft.h"
 
-static int	count_words(char const *s, char c)
+int	ft_count_words(const char *s, char c)
 {
-	int	count;
+	int	counter;
 	int	in_word;
 
-	count = 0;
+	counter = 0;
 	in_word = 0;
 	while (*s)
 	{
 		if (*s == c)
 		{
-			in_word = 0;
+			if (in_word)
+			{
+				counter++;
+				in_word = 0;
+			}
 		}
-		else if (in_word == 0)
+		else
 		{
-			in_word = 1;
-			count++;
+			if (!in_word)
+				in_word = 1;
 		}
-		s ++;
+		s++;
 	}
-	return (count);
+	if (in_word)
+		counter++;
+	return (counter);
 }
 
-char	**ft_split2(int words, char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	int		i;
 	int		len;
+	int		words;
 
+	words = ft_count_words(s, c);
 	i = 0;
-	result = (char **)malloc((words + 1) * sizeof(char *));
+	result = (char **)ft_calloc((words + 1), sizeof(char *));
 	if (!result)
 		return (NULL);
 	while (i < words)
@@ -59,14 +67,5 @@ char	**ft_split2(int words, char const *s, char c)
 		s += len;
 		i++;
 	}
-	result[i] = NULL;
 	return (result);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	int	words;
-
-	words = count_words(s, c);
-	return (ft_split2(words, s, c));
 }
