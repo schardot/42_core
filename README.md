@@ -37,22 +37,23 @@ Here is a list of some of the projects included in this repository:
 
 **Rank 02 - [push_swap](./rank02/push_swap)**
    - The push_swap project challenges you to sort a stack of integers using two stacks and a limited set of operations (push, swap, rotate, and reverse rotate). The goal is to minimize the number of operations, requiring efficient algorithm design and optimization.
-   -**Tech stack:**  C, Sorting algorithms, Stack manipulation
+     
+   - **Tech stack:**  C, Sorting algorithms, Stack manipulation
 
    ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
 
 **Rank 02 - [so_long](./rank02/so_long)**
    - So_long is a 2D maze game developed using the minilibX graphics library. The project involves creating a small game where the player collects items and navigates through a map.
 
-   -**Tech stack:**  C, Game development, minilibX
+   - **Tech stack:**  C, Game development, minilibX
 
    ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
 
 **Rank 02 - [minitalk](./rank02/minitalk)**
    - The Minitalk project creates a communication system between processes using Unix signals, enabling string transfers in a secure and efficient way.
 
-   -**Tech stack:** C, Unix signals, IPC (Inter-Process Communication)
+   - **Tech stack:** C, Unix signals, IPC (Inter-Process Communication)
 
-   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+  ![Static Badge](https://img.shields.io/badge/moulinette-125%25-brightgreen?style=flat-square)
 
 
