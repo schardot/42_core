@@ -1,4 +1,4 @@
-# Minitalk 📡💬
+# Minitalk 📡💬 ![Static Badge](https://img.shields.io/badge/moulinette-125%25-brightgreen?style=flat-square)
 
 Minitalk is a project that demonstrates inter-process communication (IPC) using Unix signals. It allows clients to send messages to a server, which receives and processes them in real-time. The project also supports Unicode characters, enabling the transmission of a broader range of messages.
 
