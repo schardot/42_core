@@ -12,7 +12,7 @@ OBJDIR = obj
 all: $(PRINTF_LIB) $(NAME)
 
 $(NAME): $(OBJS_S)
-	ar -rf $(NAME) $(OBJS_S)
+	ar -rcs $(NAME) $(OBJS_S)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
