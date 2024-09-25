@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -f
 
 SRC_DIR = srcs
@@ -15,6 +15,7 @@ PUSH_SRCS = $(SRC_DIR)/push_swap.c
 SRCS = $(SRC_DIR)/linked_list_utils.c \
        $(SRC_DIR)/operations.c \
        $(SRC_DIR)/preprocessing.c \
+	   $(SRC_DIR)/argc_two_helpers.c \
        $(SRC_DIR)/update_stacks.c \
        $(SRC_DIR)/sorting_utils.c
 
