@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 11:48:28 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/26 11:48:29 by nleite-s         ###   ########.fr       */
+/*   Created: 2024/09/26 18:44:21 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/26 18:44:23 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ int	main(int argc, char **argv)
 	a = NULL;
 	b = NULL;
 	if (argc < 2)
-		return (1);
+		exit (1);
 	preprocessing(argc, argv, &a);
-	if (list_size(a) == 3)
+	if (a && list_size(a) == 3)
 		size_three_list(&a);
-	if (check_sort(a) == true)
+	if (a && check_sort(a) == true)
 	{
 		lst_clear(&a, &free);
 		return (0);
 	}
-	sort(&a, &b);
+	else if (a)
+		sort(&a, &b);
 	lst_clear(&a, &free);
 	lst_clear(&b, &free);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 18:57:49 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/25 10:28:01 by nataliascha      ###   ########.fr       */
+/*   Created: 2024/09/26 18:45:47 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/26 18:45:49 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef struct node
 
 void	preprocessing(int argc, char **argv, t_node **a);
 int		create_populate_stack(t_node **a, int ac, char **arguments);
-bool	is_valid_number(char *arg);
+int		is_valid_number(char *arg);
 int		argumentcount(char **argv);
 void	free_arguments(char **arguments);
 int		argctwo(char ***arguments);
-void	check_argv(int argc, char **argv);
+int		check_argv(int argc, char **argv);
 void	duplicates_check(char **args, int argc, char *current);
 bool	check_sort(t_node *a);
 void	sort(t_node **a, t_node **b);

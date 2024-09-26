@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 19:20:32 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/08/12 19:20:34 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/09/26 18:45:55 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/26 18:45:56 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
