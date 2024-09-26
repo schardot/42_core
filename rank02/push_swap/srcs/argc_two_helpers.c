@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   argc_two_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 18:46:16 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/26 18:46:18 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:55:35 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/push_swap.h"
 
@@ -46,12 +46,13 @@ void	free_arguments(char **arguments)
 	int	i;
 
 	i = 0;
-	while (arguments[i])
+	while (arguments && arguments[i])
 	{
 		free(arguments[i]);
 		i++;
 	}
-	free(arguments);
+	if (arguments)
+		free(arguments);
 }
 
 bool	check_sort(t_node *a)

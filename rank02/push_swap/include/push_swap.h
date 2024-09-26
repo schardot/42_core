@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 18:45:47 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/26 18:45:49 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:10:11 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -37,7 +37,7 @@ int		argumentcount(char **argv);
 void	free_arguments(char **arguments);
 int		argctwo(char ***arguments);
 int		check_argv(int argc, char **argv);
-void	duplicates_check(char **args, int argc, char *current);
+int	duplicates_check(char **args, int argc, char *current);
 bool	check_sort(t_node *a);
 void	sort(t_node **a, t_node **b);
 void	finish_sorting(t_node **a, bool *sorted);

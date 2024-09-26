@@ -1,4 +1,4 @@
-#include "../include/minilibx_opengl_20191021/mlx.h"
+#include "../include/minilibx-linux/mlx.h"
 #include "../include/so_long.h"
 #include "../include/libft/libft.h"
 #include "../include/libft/get_next_line/get_next_line.h"
@@ -9,14 +9,14 @@
 
 char **ber_to_grid(int fd) // it will create and populate a grid with information of the map. it will then check is all the characters a valid. it doesnt check if theres a valid path.
 {
-    int height = 0;
-    int width;
-    char *line;
-    char **map;
-    int m = 0;
+    int     height = 0;
+    int     width;
+    char    *line;
+    char    **map;
+    int     m = 0;
 
-    line = get_next_line(fd);                             // got first line;
-    map = (char **)malloc(sizeof(char *) * (height + 2)); // if i dont initialize line here, it'll never go inside the loop
+    line = get_next_line(fd);
+    map = (char **)malloc(sizeof(char *) * (height + 2));
     map[m] = ft_strdup(line);
     m++;
     height++;

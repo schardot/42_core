@@ -1,4 +1,4 @@
-#include "../include/minilibx_opengl_20191021/mlx.h"
+#include "../include/minilibx-linux/mlx.h"
 #include "../include/so_long.h"
 #include "../include/libft/libft.h"
 #include "../include/libft/get_next_line/get_next_line.h"
@@ -8,7 +8,6 @@
 #include <string.h>
 
 int ft_update(gamedata *g);
-char **ber_to_grid(int fd);
 
 int main(int argc, char **argv)
 {
