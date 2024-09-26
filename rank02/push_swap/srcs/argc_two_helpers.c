@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   argc_two_helpers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:45:09 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/26 11:45:10 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:10:49 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/push_swap.h"
 
@@ -25,11 +25,16 @@ int	argumentcount(char **argv)
 int	argctwo(char ***arguments)
 {
 	int	ac;
-
+	
+	if (***arguments == ' ' || !***arguments)
+	{
+		ft_putstr_fd("Error\n", 2);
+		exit(1);
+	}
 	*arguments = ft_split(**arguments, ' ');
 	if (!*arguments)
 	{
-		ft_printf("Error: Could not split arguments.\n");
+		ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
 	ac = argumentcount(*arguments);

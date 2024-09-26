@@ -1,18 +1,18 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:47:44 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/26 11:47:45 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:10:38 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/push_swap.h"
 
-bool	is_valid_number(char *arg)
+int	is_valid_number(char *arg)
 {
 	char	*str;
 
@@ -23,15 +23,15 @@ bool	is_valid_number(char *arg)
 	{
 		if (!ft_isdigit(*str))
 		{
-			ft_printf("Error\n");
-			exit(false);
+			ft_putstr_fd("Error\n", 2);
+			return (1);
 		}
 		str++;
 	}
-	return (true);
+	return (0);
 }
 
-void	check_argv(int argc, char **argv)
+int	check_argv(int argc, char **argv)
 {
 	int		i;
 	long	num;
@@ -40,18 +40,20 @@ void	check_argv(int argc, char **argv)
 	i = 0;
 	while (i < argc)
 	{
-		is_valid_number(argv[i]);
+		if(is_valid_number(argv[i]) == 1)
+			return (1);
 		num = ft_atoi(argv[i]);
 		itoa_r = ft_itoa(num);
 		duplicates_check(argv, argc, argv[i]);
 		if (ft_strncmp(itoa_r, argv[i], ft_strlen(argv[i])) != 0)
 		{
-			ft_printf("Error\n");
-			exit(false);
+			ft_putstr_fd("Error\n", 2);
+			return (1);
 		}
 		free(itoa_r);
 		i++;
 	}
+	return (0);
 }
 
 void	preprocessing(int argc, char **argv, t_node **a)
@@ -71,7 +73,8 @@ void	preprocessing(int argc, char **argv, t_node **a)
 		ac = argctwo(&arguments);
 		should_free = true;
 	}
-	check_argv(ac, arguments);
+	if (check_argv(ac, arguments) == 1)
+		should_free = false;
 	stack_status = create_populate_stack(a, ac, arguments);
 	if (should_free)
 		free_arguments(arguments);
@@ -119,7 +122,7 @@ void	duplicates_check(char **args, int argc, char *cur)
 		{
 			if (found_itself == true)
 			{
-				ft_printf("Error\n");
+				ft_putstr_fd("Error\n", 2);
 				exit(false);
 			}
 			found_itself = true;
