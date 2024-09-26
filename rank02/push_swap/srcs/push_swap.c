@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 10:31:06 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/25 10:31:08 by nataliascha      ###   ########.fr       */
+/*   Created: 2024/09/26 11:48:28 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/26 11:48:29 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,4 @@ int	main(int argc, char **argv)
 	lst_clear(&a, &free);
 	lst_clear(&b, &free);
 	return (0);
-}
-
-bool	check_sort(t_node *a)
-{
-	t_node	*aux;
-
-	if (!a)
-		return (true);
-	aux = a;
-	while (aux->next)
-	{
-		if ((long)aux->value > (long)aux->next->value)
-			return (false);
-		aux = aux->next;
-	}
-	return (true);
 }

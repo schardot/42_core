@@ -1,11 +1,13 @@
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror
 RM = rm -f
 
 SRC_DIR = srcs
 BONUS_SRC_DIR = $(SRC_DIR)/bonus
 LIBFTDIR = include/libft
 PRINTF_DIR = include/libft/ft_printf
+GNL_DIR = $(LIBFTDIR)/get_next_line/
+
 INCLUDE_DIR = include
 
 NAME = push_swap
@@ -19,7 +21,9 @@ SRCS = $(SRC_DIR)/linked_list_utils.c \
        $(SRC_DIR)/update_stacks.c \
        $(SRC_DIR)/sorting_utils.c
 
-BONUS_SRCS = $(BONUS_SRC_DIR)/checker.c
+BONUS_SRCS = $(BONUS_SRC_DIR)/checker.c \
+				$(GNL_DIR)/get_next_line.c \
+				$(GNL_DIR)/get_next_line_utils.c
 
 OBJS_S = $(SRCS:.c=.o)
 OBJS_P = $(PUSH_SRCS:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 11:29:30 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/08/14 11:29:32 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/09/26 11:48:55 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/26 11:48:56 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	main(int argc, char **argv)
 	b = NULL;
 	if (argc < 2)
 		return (0);
-	prep_check_argv(argc, argv);
-	prep_array_to_list(argc, argv, &a);
+	preprocessing(argc, argv, &a);
 	instructions = get_next_line(0);
 	while (instructions != NULL)
 	{
@@ -32,12 +31,8 @@ int	main(int argc, char **argv)
 		instructions = get_next_line(0);
 	}
 	if (check_sort(a) && b == NULL)
-	{
-		ft_printf("OK\n");
-		return (0);
-	}
+		free_all(&a, &b, instructions, 0);
 	ft_printf("KO\n");
-	return (1);
 }
 
 void	try_instructions(t_node **a, t_node **b, char *instructions)
@@ -63,8 +58,25 @@ void	try_instructions(t_node **a, t_node **b, char *instructions)
 	else if (ft_strncmp(instructions, "rr\n", 3) == 0)
 		move_both_stacks(a, b, 'o', true);
 	else
+		free_all(a, b, instructions, 1);
+}
+
+void	free_all(t_node **a, t_node **b, char *instructions, int error)
+{
+	if (a)
+		lst_clear(a, &free);
+	if (b)
+		lst_clear(b, &free);
+	if (instructions)
+		free(instructions);
+	if (error == 1)
 	{
 		ft_putstr_fd("Error\n", 2);
-		exit(EXIT_FAILURE);
+		exit(1);
+	}
+	else if (error == 0)
+	{
+		ft_printf("OK\n");
+		exit(1);
 	}
 }

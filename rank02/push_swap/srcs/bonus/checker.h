@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 11:30:38 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/08/14 11:30:40 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/09/26 11:49:16 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/26 11:49:17 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 # include "../../include/push_swap.h"
 
 void	try_instructions(t_node **a, t_node **b, char *instructions);
+void	free_all(t_node **a, t_node **b, char *instructions, int error);
 
 #endif

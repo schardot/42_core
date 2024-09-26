@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/12 18:58:10 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/09/25 10:36:05 by nataliascha      ###   ########.fr       */
+/*   Created: 2024/09/26 11:47:44 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/09/26 11:47:45 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	check_argv(int argc, char **argv)
 			ft_printf("Error\n");
 			exit(false);
 		}
+		free(itoa_r);
 		i++;
 	}
 }
