@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:29:52 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/25 10:43:00 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/09/27 13:33:10 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ int	ft_atoi(const char *nptr)
 
 static int	ft_isspace(int c)
 {
-	int	space;
-
-	space = 0;
 	if (c == ' ' || c == '\t' || c == '\n')
 		return (1);
 	if (c == '\r' || c == '\f' || c == '\v')
