@@ -1,21 +1,21 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   preprocessing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 18:46:04 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/26 19:12:05 by nleite-s         ###   ########.fr       */
+/*   Updated: 2024/09/27 16:42:14 by nataliascha      ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
 int	is_valid_number(char *arg)
 {
 	char	*str;
-	
+
 	if (!arg)
 		return (1);
 	str = arg;
@@ -40,17 +40,14 @@ int	check_argv(int argc, char **argv)
 	char	*itoa_r;
 
 	i = 0;
-	while (i ++ < argc)
+	while (i < argc)
 	{
 		if (is_valid_number(argv[i]) == 1)
 			return (1);
+		if (duplicates_check(argv, argc, argv[i]) == 1)
+			return (1);
 		num = ft_atoi(argv[i]);
 		itoa_r = ft_itoa(num);
-		if (duplicates_check(argv, argc, argv[i]) == 1)
-		{
-			free(itoa_r);
-			return(1);
-		}
 		if (ft_strncmp(itoa_r, argv[i], ft_strlen(argv[i])) != 0)
 		{
 			ft_putstr_fd("Error\n", 2);
@@ -58,7 +55,7 @@ int	check_argv(int argc, char **argv)
 			return (1);
 		}
 		free(itoa_r);
-		//i++;
+		i++;
 	}
 	return (0);
 }
@@ -68,7 +65,9 @@ void	preprocessing(int argc, char **argv, t_node **a)
 	char	**arguments;
 	int		ac;
 	int		stack_status;
+	int		should_free;
 
+	should_free = 0;
 	stack_status = 0;
 	ac = argc - 1;
 	arguments = argv;
@@ -76,10 +75,12 @@ void	preprocessing(int argc, char **argv, t_node **a)
 	if (argc == 2)
 	{
 		ac = argctwo(&arguments);
+		should_free = 1;
 	}
-	check_argv(ac, arguments);
-	stack_status = create_populate_stack(a, ac, arguments);
-	free_arguments(arguments);
+	if (check_argv(ac, arguments) == 0)
+		stack_status = create_populate_stack(a, ac, arguments);
+	if (should_free == 1)
+		free_arguments(arguments);
 	if (stack_status == 1)
 		exit (1);
 }
