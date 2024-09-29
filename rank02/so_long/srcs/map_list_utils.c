@@ -7,26 +7,29 @@
 #include <errno.h>
 #include <string.h>
 
-map_node *m_list_new(char letter)
+t_map *t_map_new(char letter)
 {
-    map_node *m;
+    t_map *m;
 
-    m = (map_node *)malloc(size_of(map_node));
+    m = (t_amp *)malloc(size_of(t_map));
     if (!m)
     {
-        ft_printf("Couldn't make m_list_new");
+        ft_printf("Couldn't make t_map_new");
         return (NULL);
     }
-    m->letter = letter;
-    m->count = 0;
-    m->next = NULL;
-    m->prev = NULL;
+    m->hei = -1;
+    m->wid = -1;
+    m->n_e = -1;
+    m->n_0 = -1;
+    m->n_1 = -1;
+    m->n_p = -1;
+    m->n_c = -1;
     return (m);
 }
 
-void m_listadd_back(map_node **lst, map_node *new)
+void t_mapadd_back(t_map **lst, t_map *new)
 {
-    map_node *last;
+    t_map *last;
 
     if (!new)
         return;
@@ -40,9 +43,9 @@ void m_listadd_back(map_node **lst, map_node *new)
     new->prev = last;
 }
 
-map_node *m_listlast(map_node *lst)
+t_map *t_maplast(t_map *lst)
 {
-    map_node *aux;
+    t_map *aux;
 
     if (!lst)
         return (NULL);
@@ -52,9 +55,9 @@ map_node *m_listlast(map_node *lst)
     return (aux);
 }
 
-map_node **m_list_init()
+t_map **t_map_init()
 {
-    map_node *head;
+    t_map *head;
 
     head = m_list_new('1');
     m_listadd_back(&head, m_list_new('0'));
@@ -64,10 +67,10 @@ map_node **m_list_init()
     return (&head);
 }
 
-void m_list_free(map_node *head)
+void t_map_free(map_node *head)
 {
-    map_node *current;
-    map_node *next_node;
+    t_map *current;
+    t_map *next_node;
 
     current = head;
     while (current)

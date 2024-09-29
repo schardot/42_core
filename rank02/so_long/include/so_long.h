@@ -16,15 +16,18 @@ typedef struct v_list
 	void    *coinimage;
 	void    *exitimage;
 	void    *tileimage;
-} game_node;
+} t_game;
 
 typedef struct s_list
 {
-	char letter;
-	int	count;
-	s_list	*next;
-	s_list	*prev;
-}	map_node;
+	int	hei;
+	int wid;
+	int n_e;
+	int n_0;
+	int n_1;
+	int	n_p;
+	int	n_c;
+}	t_map;
 
 int ft_update(gamedata *g);
 gamedata *init_data(gamedata *data);
