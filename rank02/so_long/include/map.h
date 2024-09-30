@@ -65,27 +65,3 @@ char	**map_to_grid(t_maperr *merror, t_map *mstruct, char *file);
 void	check_borders(t_maperr *merror, t_map *mstruct);
 
 #endif
-
-1. init_map_structs(t_map *mstruct, t_maperr *merror)
-   |   --> no errors
-   |
-   └─> check_map(t_maperr *merror, t_map *mstruct, char *file)
-		|   --> no errors
-		|
-		├──> initial_map_check(t_maperr *merror, t_map *mstruct, char *file)
-		|    |   --> TWO ERRORS (notber, cantopen) -- dont need to free
-		|    |
-		|    └─> check_line(t_maperr *merror, t_map *mstruct, char *line)
-		|         |   --> ONE ERROR (linelen) -- free line
-		|         |
-		|         └─> check_char(char line, t_map *mstruct, t_maperr *merror)
-		|             |   --> ONE ERROR (count_inv) -- free line
-		|
-		├──> check_map_errors(t_maperr *merror)
-		|    |   -->
-		|
-		└──> map_to_grid(t_maperr *merror, t_map *mstruct, char *file)
-			 |   --> TWO ERRORS (cantopen, cantallocate) - n precisa free nd
-			 |
-			 └─> check_borders(t_maperr *merror, t_map *mstruct)
-			     |   --> TWO ERRORS (borderinv) -- tem q free o map
