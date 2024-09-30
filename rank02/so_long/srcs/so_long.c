@@ -7,11 +7,11 @@
 #include <errno.h>
 #include <string.h>
 
-int ft_update(gamedata *g);
+int ft_update(t_game *g);
 
 int main(int argc, char **argv)
 {
-    gamedata *data;
+    t_game *data;
     char **grid;
 
     //antes de inicializar struct, arg check
@@ -19,14 +19,14 @@ int main(int argc, char **argv)
     data = init_data(data);
 }
 
-int ft_update(gamedata *g)
+int ft_update(t_game *g)
 {
     mlx_put_image_to_window(g->connection, g->window, g->img, 100, 100);
     return (0);
 }
-gamedata *init_data(gamedata *data)
+t_game *init_data(t_game *data)
 {
-    data = (gamedata *)malloc(1 * sizeof(gamedata));
+    data = (t_game *)malloc(1 * sizeof(t_game));
     data->connection = mlx_init();
     if (!data->connection)
     {
@@ -44,7 +44,7 @@ gamedata *init_data(gamedata *data)
     mlx_loop(data->connection);
     return (data);
 }
-void put_file_to_image(gamedata *data)
+void put_file_to_image(t_game *data)
 {
     //tem q initializar data?
     int size = 32;
@@ -111,9 +111,9 @@ int check_file(char *filename)
 void    check_chars(char *line, int linelen)
 {
     int i;
-    map_aux *m_list;
+    map_aux *t_map;
 
-    init_m_list(m_list);
+    init_m_list(t_map);
     i = 0;
     if (line[0] != '1' || line[linelen - 1] != 1)
     {
@@ -167,21 +167,3 @@ char    **create_map()
     // -------------------- V) ver se tem path valido e ver se a primeira e ultima linha sao '1'
     nao quero fazer isso agora
     // -------------------
-
-void    init_m_list(map_aux *m_list)
-{
-    char *chars = "01EPC"
-    int i;
-    m_list = (map_aux *)malloc(5 * sizeof(map_aux));
-    if (!m_list)
-    {
-        ft_printf("Couldnt create m_list");
-        exit (1); ///nao da certo pq tem outras coisas pra free
-    }
-    i = 0;
-    while (i < 5)
-    {
-        m_list->letter = chars[i];
-        count
-    }
-}
