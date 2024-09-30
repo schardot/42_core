@@ -28,6 +28,7 @@ typedef struct s_list
 # include <fcntl.h>
 # include <stddef.h>
 # include "../include/libft/libft.h"
+# include "../include/so_long.h"
 
 /*
 1. init_map_structs(t_map *mstruct, t_maperr *merror)
