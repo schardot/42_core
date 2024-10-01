@@ -68,7 +68,7 @@ void	check_char(char line, t_map *mstruct, t_maperr *merror)
 	check_map_errors(merror, mstruct);
 }
 
-void check_count_char(t_map *mstruct, t_maperr *merror)
+void	check_count_char(t_map *mstruct, t_maperr *merror)
 {
 	if (mstruct->count_E != 1)
 		ft_putstr_fd("There is more than one exit, please check map.", 2);
@@ -81,7 +81,7 @@ void check_count_char(t_map *mstruct, t_maperr *merror)
 	exit (1);
 }
 
-void init_map_structs(t_map *mstruct, t_maperr *merror)
+void	init_map_structs(t_map *mstruct, t_maperr *merror)
 {
 	merror->linelen = 0;
 	merror->count_inv = 0;
@@ -102,24 +102,24 @@ void init_map_structs(t_map *mstruct, t_maperr *merror)
 void    check_map_errors(t_maperr *m, t_map *mp)
 {
 	if (m->notber == 1)
-		ft_putstr_fd("Error: check map extension", 2);
+		ft_putstr_fd("Error: check map extension\n", 2);
 	else if (m->cantopen == 1)
-		perror("Error: Could not open the file.");
+		perror("Error: Could not open the file.\n");
 	else if (m->linelen == 1)
 	{
-		ft_putstr_fd("Error: all lines should have the same length", 2);
+		ft_putstr_fd("Error: all lines should have the same length\n", 2);
 		free (mp->line);
 	}
 	else if (m->count_inv == 1)
 	{
-		ft_putstr_fd("Error: map contains invalid character", 2);
+		ft_putstr_fd("Error: map contains invalid character\n", 2);
 		free(mp->line);
 	}
 	else if (m->cantallocate == 1)
-		perror("Error: Memory allocation failed.");
+		perror("Error: Memory allocation failed.\n");
 	else if (m->borderinv == 1)
 	{
-		ft_putstr_fd("Error: borders are invalid", 2);
+		ft_putstr_fd("Error: borders are invalid\n", 2);
 		free(mp->map);
 	}
 	if (m->notber || m->cantopen || m->cantallocate || m->linelen || m->borderinv || m->count_inv)
@@ -205,17 +205,19 @@ void	get_player_xy(t_map *m)
 void check_valid_path(char **map, int h, int w, int count_C)
 {
 	static int coin = 0;
+	int	found_exit;
 
 	if (check_neighbour(map, h, w))
 	{
-		if (if the neighbour is == 'C')
+		if (map[h][w] == 'C')
 			coin ++;
 		map[h][w] = 'V'; //mark current place as visited
-		return (check_valid_path(map, h - 1, w, count_C) || check_valid_path(map, h, w + 1, count_C) /
-				|| check_valid_path(map, h + 1, w, count_C) || check_valid_path(map, h, w - 1, count_C));
+		found_exit = check_valid_path(map, h - 1, w, count_C) || check_valid_path(map, h, w + 1, count_C) ||
+				check_valid_path(map, h + 1, w, count_C) || check_valid_path(map, h, w - 1, count_C);
+		if (map[h][w] == 'E' && coin == count_C)
+			return (1);
+		return (found_exit);
 	}
-	if (map[h][w] == 'E' && coin = count_C)
-		return (1);
 	return (0);
 }
 
@@ -223,11 +225,11 @@ int	check_neighbour(char **map, int h, int w)
 {
 	if (h > 0 && ft_strchr("0C", map[h - 1][w]))
 		return (1);
-	else if (map[h + 1] && ft_strchr("0C", map[h + 1][w]))
+	if (map[h + 1] && ft_strchr("0C", map[h + 1][w]))
 		return (1);
-	else if (map[h][w + 1] && ft_strchr("0C", map[h][w + 1]))
+	if (map[h][w + 1] && ft_strchr("0C", map[h][w + 1]))
 		return (1);
-	else if (map[h][w - 1] && ft_strchr("0C", map[h][w - 1]))
+	if (map[h][w - 1] && ft_strchr("0C", map[h][w - 1]))
 		return (1);
 	return (0);
 }
