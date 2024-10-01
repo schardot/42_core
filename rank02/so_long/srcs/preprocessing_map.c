@@ -70,11 +70,11 @@ void	check_char(char line, t_map *mstruct, t_maperr *merror)
 void	check_count_char(t_map *mstruct, t_maperr *merror)
 {
 	if (mstruct->count_E != 1)
-		ft_putstr_fd("There is more than one exit, please check map.", 2);
+		ft_putstr_fd("There is more than one exit, please check map.\n", 2);
 	else if (mstruct->count_P != 1)
-		ft_putstr_fd("There is more than one player, please check map.", 2);
+		ft_putstr_fd("There is more than one player, please check map.\n", 2);
 	else if (mstruct->count_C < 1)
-		ft_putstr_fd("There needs to be at least one collectible, please check map.", 2);
+		ft_putstr_fd("There needs to be at least one collectible, please check map.\n", 2);
 	else
 		return ;
 	exit (1);
