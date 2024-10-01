@@ -6,7 +6,7 @@ char	**check_map(t_maperr *merror, t_map *mstruct, char *file)
 	check_map_errors(merror, mstruct);
 	mstruct->map = map_to_grid(merror, mstruct, file);
 	get_player_xy(mstruct);
-	check_valid_path(mstruct->map, mstruct->ply, mstruct->pl_x, mstruct->count_C)
+	check_valid_path(mstruct->map, mstruct->pl_y, mstruct->pl_x, mstruct->count_C);
 	return (mstruct->map);
 }
 

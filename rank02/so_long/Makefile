@@ -3,7 +3,7 @@ CFLAGS = -g -framework OpenGL -framework AppKit
 
 SRC_DIR = srcs
 SRCS = $(SRC_DIR)/so_long.c \
-       $(SRC_DIR)/map_utils.c
+       $(SRC_DIR)/preprocessing_map.c
 
 OBJS = $(SRCS:.c=.o)
 
