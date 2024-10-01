@@ -80,25 +80,32 @@ void	check_count_char(t_map *mstruct, t_maperr *merror)
 	exit (1);
 }
 
-void	init_map_structs(t_map *mstruct, t_maperr *merror)
+void	init_map_structs(t_map **mstruct, t_maperr **merror)
 {
-	merror->linelen = 0;
-	merror->count_inv = 0;
-	merror->cantallocate = 0;
-	merror-> cantopen = 0;
-	merror->notber = 0;
-	merror->borderinv = 0;
-	mstruct->len = 0;
-	mstruct->height = 0;
-	mstruct->count_1 = 0;
-	mstruct->count_0 = 0;
-	mstruct->count_E = 0;
-	mstruct->count_P = 0;
-	mstruct->count_C = 0;
-	mstruct->map = NULL;
-	mstruct->line = NULL;
-	mstruct->pl_x = 0;
-	mstruct->pl_y = 0;
+	*mstruct = (t_map *)malloc(sizeof(t_map));
+	*merror = (t_maperr *)malloc(sizeof(t_maperr));
+	if (!(*mstruct) || !(*merror))
+	{
+		perror("Error allocating memory for map structures");
+		exit(EXIT_FAILURE);
+	}
+	(*merror)->linelen = 0;
+	(*merror)->count_inv = 0;
+	(*merror)->cantallocate = 0;
+	(*merror)->cantopen = 0;
+	(*merror)->notber = 0;
+	(*merror)->borderinv = 0;
+	(*mstruct)->len = 0;
+	(*mstruct)->height = 0;
+	(*mstruct)->count_1 = 0;
+	(*mstruct)->count_0 = 0;
+	(*mstruct)->count_E = 0;
+	(*mstruct)->count_P = 0;
+	(*mstruct)->count_C = 0;
+	(*mstruct)->map = NULL;
+	(*mstruct)->line = NULL;
+	(*mstruct)->pl_x = 0;
+	(*mstruct)->pl_y = 0;
 }
 
 void    check_map_errors(t_maperr *m, t_map *mp)
@@ -106,7 +113,7 @@ void    check_map_errors(t_maperr *m, t_map *mp)
 	if (m->notber == 1)
 		ft_putstr_fd("Error: check map extension\n", 2);
 	else if (m->cantopen == 1)
-		perror("Error: Could not open the file.\n");
+		perror("Error");
 	else if (m->linelen == 1)
 	{
 		ft_putstr_fd("Error: all lines should have the same length\n", 2);
@@ -118,7 +125,7 @@ void    check_map_errors(t_maperr *m, t_map *mp)
 		free(mp->line);
 	}
 	else if (m->cantallocate == 1)
-		perror("Error: Memory allocation failed.\n");
+		perror("Error");
 	else if (m->borderinv == 1)
 	{
 		ft_putstr_fd("Error: borders are invalid\n", 2);
