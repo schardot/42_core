@@ -18,7 +18,7 @@ typedef struct v_list
 } t_map;
 
 // Struct used to store error information while reading the file and dealing with errors properly in its very own function.
-typedef struct s_list
+typedef struct x_list
 {
 	int linelen;	  // Flag for inconsistent line lengths
 	int count_inv;	  // Flag for invalid characters in the map
@@ -33,6 +33,7 @@ typedef struct s_list
 #include <stdio.h>					// For perror() and printf()
 #include <unistd.h>					// For close() and read()
 #include "../include/libft/libft.h"
+#include "../include/libft/get_next_line/get_next_line.h"
 #include "../include/so_long.h"
 
 /*
@@ -71,7 +72,7 @@ typedef struct s_list
 */
 
 // Function prototypes
-void init_map_structs(t_map *mstruct, t_maperr *merror);
+void init_map_structs(t_map **mstruct, t_maperr **merror);
 char **check_map(t_maperr *merror, t_map *mstruct, char *file);
 void initial_map_check(t_maperr *merror, t_map *mstruct, char *file);
 void check_line(t_maperr *merror, t_map *mstruct, char *line);
@@ -80,7 +81,8 @@ void check_map_errors(t_maperr *merror, t_map *mstruct);
 char **map_to_grid(t_maperr *merror, t_map *mstruct, char *file);
 void check_borders(t_maperr *merror, t_map *mstruct);
 void get_player_xy(t_map *mstruct);							  // Added to retrieve player coordinates
-void check_valid_path(char **map, int h, int w, int count_C); // Added to validate path to exit
+int check_valid_path(char **map, int h, int w, int count_C); // Added to validate path to exit
 int check_neighbour(char **map, int h, int w);				  // Added to check neighboring cells for valid moves
+void check_count_char(t_map *mstruct, t_maperr *merror);
 
 #endif

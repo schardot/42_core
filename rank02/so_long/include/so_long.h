@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <errno.h>
 #include "../include/libft/libft.h"
-#include "../include/libft/get_next_line/get_next_line.h"
 #include "../include/map.h"
 #include <string.h>
 
@@ -17,15 +16,15 @@
 #define RIGHT 65363
 #define DOWN 65364
 
-typedef struct v_list
+typedef struct y_list
 {
 	void    *cnct;
 	void    *win;
-	void    *wallimage;
-	void    *playerimage;
-	void    *coinimage;
-	void    *exitimage;
-	void    *tileimage;
+	void    *wallimg;
+	void    *playerimg;
+	void    *coinimg;
+	void    *exitimg;
+	void    *tileimg;
 	int		size;
 	char	**map;
 	int		pl_x;
@@ -37,12 +36,14 @@ typedef struct a_list
 {
 	int	cnct; //no connection
 	int	win; //no window
-	int image;
+	int img;
 } t_gerr;
 
-int ft_update(t_game *g);
-t_game *init_data(t_game *data);
-void put_file_to_image(t_game *data);
-void grid_to_img(char **map, t_game *d);
+int key_press(int key, t_game *gm);
+void check_next_move(char *next, t_game *gm);
+char *check_next_obj(t_game *gm, int key);
+int main_loop(t_game *gm);
+void render_game(char **map, t_game *gm);
+void init_game_struct(t_game *gm, t_gerr *er, t_map *m);
 
 #endif
