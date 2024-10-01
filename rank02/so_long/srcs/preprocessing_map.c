@@ -96,6 +96,9 @@ void	init_map_structs(t_map *mstruct, t_maperr *merror)
 	mstruct->count_P = 0;
 	mstruct->count_C = 0;
 	mstruct->map = NULL;
+	mstruct->line = NULL;
+	mstruct->pl_x = 0;
+	mstruct->pl_y = 0;
 }
 
 void    check_map_errors(t_maperr *m, t_map *mp)
