@@ -30,6 +30,7 @@ typedef struct s_list
 
 # include <fcntl.h>
 # include <stddef.h>
+# include <stdio.h>
 # include "../include/libft/libft.h"
 # include "../include/so_long.h"
 

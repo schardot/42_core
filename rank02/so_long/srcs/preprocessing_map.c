@@ -104,7 +104,7 @@ void    check_map_errors(t_maperr *m, t_map *mp)
 	if (m->notber == 1)
 		ft_putstr_fd("Error: check map extension", 2);
 	else if (m->cantopen == 1)
-		ft_putstr_fd("Error: can't open file", 2);
+		perror("Error: Could not open the file.");
 	else if (m->linelen == 1)
 	{
 		ft_putstr_fd("Error: all lines should have the same length", 2);
@@ -116,15 +116,14 @@ void    check_map_errors(t_maperr *m, t_map *mp)
 		free(mp->line);
 	}
 	else if (m->cantallocate == 1)
-		ft_putstr_fd("Error: can't allocate map", 2);
+		perror("Error: Memory allocation failed.");
 	else if (m->borderinv == 1)
 	{
 		ft_putstr_fd("Error: borders are invalid", 2);
 		free(mp->map);
 	}
-	else
-		return (0);
-	exit (1);
+	if (m->notber || m->cantopen || m->cantallocate || m->linelen || m->borderinv || m->count_inv)
+		exit(EXIT_FAILURE);
 }
 
 char	**map_to_grid(t_maperr *merror, t_map *mstruct, char *file)
@@ -166,16 +165,16 @@ void	check_borders(t_maperr *merror, t_map *mstruct)
 	len = mstruct->len;
 	first = mstruct->map[0];
 	last = mstruct->map[mstruct->height - 1];
-	while (*first & *last)
+	while (i < len)
 	{
-		if (*first != '1' || *last != '1')
+		if (first[i] != '1' || last[i] != '1')
 			merror->borderinv = 1;
-		first ++;
-		last ++;
+		i ++;
 	}
-	while(mstruct->map[i])
+	i = 1;
+	while (i < mstruct->height - 1)
 	{
-		if (mstruct->map[i][0] != '1' || mstruct->map[i][len - 1])
+		if (mstruct->map[i][0] != '1' || mstruct->map[i][len - 1] != '1')
 			merror->borderinv = 1;
 		i ++;
 	}
