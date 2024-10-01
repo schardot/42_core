@@ -4,23 +4,26 @@
 //Struct used to store information on the map, used later to open window and transform file to a 2d array (grid)
 typedef struct v_list
 {
-	int len;
-	int height;
-	int count_1;
-	int count_0;
-	int count_E;
-	int count_P;
-	int count_C;
-	char **map;
+	int		len;
+	int		height;
+	int		count_1;
+	int		count_0;
+	int		count_E;
+	int		count_P;
+	int		count_C;
+	char	**map;
+	char	*line;
+	int		pl_y;
+	int		pl_x;
 } t_map;
 
 //Struct used to store error information while reading the file and dealing with the error properly in its very own function.
 typedef struct s_list
 {
-	int linelen;
-	int count_inv;
-	int cantallocate;
-	int cantopen;
+	int	linelen;
+	int	count_inv;
+	int	cantallocate;
+	int	cantopen;
 	int	notber;
 	int	borderinv;
 } t_maperr;
@@ -61,7 +64,7 @@ char	**check_map(t_maperr *merror, t_map *mstruct, char *file);
 void	initial_map_check(t_maperr *merror, t_map *mstruct, char *file);
 void	check_line(t_maperr *merror, t_map *mstruct, char *line);
 void	check_char(char line, t_map *mstruct, t_maperr *merror);
-void	check_map_errors(t_maperr *merror);
+void	check_map_errors(t_maperr *merror, t_map *mstruct);
 char	**map_to_grid(t_maperr *merror, t_map *mstruct, char *file);
 void	check_borders(t_maperr *merror, t_map *mstruct);
 
