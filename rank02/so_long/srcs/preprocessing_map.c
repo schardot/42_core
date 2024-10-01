@@ -205,14 +205,14 @@ void	get_player_xy(t_map *m)
 }
 int	check_valid_path(char **map, int h, int w, int count_C)
 {
-	static int coin = 0;
-	int	found_exit;
+	static int	coin = 0;
+	int			found_exit;
 
 	if (check_neighbour(map, h, w))
 	{
 		if (map[h][w] == 'C')
 			coin ++;
-		map[h][w] = 'V'; //mark current place as visited
+		map[h][w] = 'V';
 		found_exit = check_valid_path(map, h - 1, w, count_C) || check_valid_path(map, h, w + 1, count_C) ||
 				check_valid_path(map, h + 1, w, count_C) || check_valid_path(map, h, w - 1, count_C);
 		if (map[h][w] == 'E' && coin == count_C)

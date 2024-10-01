@@ -30,6 +30,7 @@ typedef struct v_list
 	char	**map;
 	int		pl_x;
 	int		pl_y;
+	int		count_C;
 } t_game;
 
 typedef struct a_list
