@@ -9,7 +9,8 @@ int main(int argc, char **argv)
 	t_gerr		*gerr;
 	char		**map;
 
-	init_map_structs(mstruct, merror);
+
+	init_map_structs(&mstruct, &merror);
 	gm->map = check_map(merror, mstruct, argv[1]);
 	// Initialize game structure, window, images, etc.
 	init_game_struct(gm, gerr, mstruct);
