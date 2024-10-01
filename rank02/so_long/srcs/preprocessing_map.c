@@ -42,11 +42,11 @@ void	check_line(t_maperr *merror, t_map *mstruct, char *line)
 	while (*line)
 	{
 		check_char(*line, mstruct, merror);
+		check_map_errors(merror, mstruct);
 		if (*line == 'P')
 			mstruct->pl_y = mstruct->height;
 		line ++;
 	}
-	free (line);
 	check_count_char(mstruct, merror);
 	mstruct->height++;
 }
@@ -65,7 +65,6 @@ void	check_char(char line, t_map *mstruct, t_maperr *merror)
 		mstruct->count_C++;
 	else if (line != '\n')
 		merror->count_inv = 1;
-	check_map_errors(merror, mstruct);
 }
 
 void	check_count_char(t_map *mstruct, t_maperr *merror)
@@ -200,9 +199,8 @@ void	get_player_xy(t_map *m)
 		}
 		h ++;
 	}
-	free (m->map);
 }
-void check_valid_path(char **map, int h, int w, int count_C)
+int	check_valid_path(char **map, int h, int w, int count_C)
 {
 	static int coin = 0;
 	int	found_exit;
