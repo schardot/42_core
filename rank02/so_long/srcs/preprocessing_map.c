@@ -1,39 +1,30 @@
 #include "../include/map.h"
 
-int	main(int argc, char **argv)
-{
-	t_maperr	*merror;
-	t_map		*mstruct;
-	char		**map;
-
-	init_map_structs(mstruct, merror);
-	map = check_map(merror, mstruct, argv[1]);
-	continuar(map);
-}
-
 char	**check_map(t_maperr *merror, t_map *mstruct, char *file)
 {
 	initial_map_check(merror, mstruct, file);
-	check_map_errors(merror);
+	check_map_errors(merror, mstruct);
 	mstruct->map = map_to_grid(merror, mstruct, file);
+	get_player_xy(mstruct);
+	check_valid_path(mstruct->map, mstruct->ply, mstruct->pl_x, mstruct->count_C)
+	return (mstruct->map);
 }
 
 void	initial_map_check(t_maperr *merror, t_map *mstruct, char *file)
 {
 	int		fd;
-	char	*line;
 
 	if(!ft_strnstr(file, ".ber\0", ft_strlen(file)))
-		merror->notber = 1; //*****
+		merror->notber = 1;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		merror->cantopen = 1; //*** */
-	//check_error
-	line = "a";
-	while (fd > 0 && line)
+		merror->cantopen = 1;
+	check_map_errors(merror, mstruct);
+	mstruct->line = "a";
+	while (fd > 0 && mstruct->line)
 	{
-		line = get_next_line(fd);
-		check_line(merror, mstruct, line);
+		mstruct->line = get_next_line(fd);
+		check_line(merror, mstruct, mstruct->line);
 	}
 	close(fd);
 }
@@ -47,12 +38,16 @@ void	check_line(t_maperr *merror, t_map *mstruct, char *line)
 		else
 			merror->linelen = 1;
 	}
+	check_map_errors(merror, mstruct);
 	while (*line)
 	{
 		check_char(*line, mstruct, merror);
+		if (*line == 'P')
+			mstruct->pl_y = mstruct->height;
 		line ++;
 	}
 	free (line);
+	check_count_char(mstruct, merror);
 	mstruct->height++;
 }
 
@@ -69,10 +64,24 @@ void	check_char(char line, t_map *mstruct, t_maperr *merror)
 	else if (line == 'C')
 		mstruct->count_C++;
 	else if (line != '\n')
-		merror->count_inv ++;
+		merror->count_inv = 1;
+	check_map_errors(merror, mstruct);
 }
 
-void	init_map_structs(t_map *mstruct, t_maperr *merror)
+void check_count_char(t_map *mstruct, t_maperr *merror)
+{
+	if (mstruct->count_E != 1)
+		ft_putstr_fd("There is more than one exit, please check map.", 2);
+	else if (mstruct->count_P != 1)
+		ft_putstr_fd("There is more than one player, please check map.", 2);
+	else if (mstruct->count_C < 1)
+		ft_putstr_fd("There needs to be at least one collectible, please check map.", 2);
+	else
+		return ;
+	exit (1);
+}
+
+void init_map_structs(t_map *mstruct, t_maperr *merror)
 {
 	merror->linelen = 0;
 	merror->count_inv = 0;
@@ -90,42 +99,56 @@ void	init_map_structs(t_map *mstruct, t_maperr *merror)
 	mstruct->map = NULL;
 }
 
-void    check_map_errors(t_maperr *m)
+void    check_map_errors(t_maperr *m, t_map *mp)
 {
 	if (m->notber == 1)
 		ft_putstr_fd("Error: check map extension", 2);
-	if (m->cantopen == 1)
+	else if (m->cantopen == 1)
 		ft_putstr_fd("Error: can't open file", 2);
-	if (m->linelen == 1)
-		ft_putstr_fd("Error: all lines should have the same length", 2); //freeline
-	if (m->count_inv == 1)
-		ft_putstr_fd("Error: map contains invalid character", 2); //free line
-	if (m->cantallocate == 1)
+	else if (m->linelen == 1)
+	{
+		ft_putstr_fd("Error: all lines should have the same length", 2);
+		free (mp->line);
+	}
+	else if (m->count_inv == 1)
+	{
+		ft_putstr_fd("Error: map contains invalid character", 2);
+		free(mp->line);
+	}
+	else if (m->cantallocate == 1)
 		ft_putstr_fd("Error: can't allocate map", 2);
-	if (m->borderinv == 1)
-		ft_putstr_fd("Error: borders are invalid", 2); //free map
+	else if (m->borderinv == 1)
+	{
+		ft_putstr_fd("Error: borders are invalid", 2);
+		free(mp->map);
+	}
+	else
+		return (0);
+	exit (1);
 }
 
 char	**map_to_grid(t_maperr *merror, t_map *mstruct, char *file)
 {
 	char	**map;
-	char	*line;
 	int		m;
 	int		fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		merror->cantopen = 1;
-	line = file;
+	check_map_errors(merror, mstruct);
+	mstruct->line = file;
 	map = (char **)malloc(sizeof(char *) * (mstruct->height));
 	if (!map)
 		merror->cantallocate = 1;
+	check_map_errors(merror, mstruct);
 	m = 0;
-	while (line)
+	while (mstruct->line)
 	{
-		line = get_next_line(fd);
-		map[m] = ft_strdup(line);
+		mstruct->line = get_next_line(fd);
+		map[m] = ft_strdup(mstruct->line);
 		m++;
+		free(mstruct->line);
 	}
 	close(fd);
 	check_borders(merror, mstruct);
@@ -145,7 +168,7 @@ void	check_borders(t_maperr *merror, t_map *mstruct)
 	last = mstruct->map[mstruct->height - 1];
 	while (*first & *last)
 	{
-		if (*first != '1' || *last != '1') // If any character is not '1', return 0 (false)
+		if (*first != '1' || *last != '1')
 			merror->borderinv = 1;
 		first ++;
 		last ++;
@@ -156,4 +179,56 @@ void	check_borders(t_maperr *merror, t_map *mstruct)
 			merror->borderinv = 1;
 		i ++;
 	}
+	check_map_errors(merror, mstruct);
+}
+void	get_player_xy(t_map *m)
+{
+	int	h;
+	int	w;
+
+	h = 0;
+	while (m->map[h])
+	{
+		w = 0;
+		while (m->map[h][w])
+		{
+			if (m->map[h][w] == 'P')
+			{
+				m->pl_y = h;
+				m->pl_x = w;
+			}
+			w ++;
+		}
+		h ++;
+	}
+	free (m->map);
+}
+void check_valid_path(char **map, int h, int w, int count_C)
+{
+	static int coin = 0;
+
+	if (check_neighbour(map, h, w))
+	{
+		if (if the neighbour is == 'C')
+			coin ++;
+		map[h][w] = 'V'; //mark current place as visited
+		return (check_valid_path(map, h - 1, w, count_C) || check_valid_path(map, h, w + 1, count_C) /
+				|| check_valid_path(map, h + 1, w, count_C) || check_valid_path(map, h, w - 1, count_C));
+	}
+	if (map[h][w] == 'E' && coin = count_C)
+		return (1);
+	return (0);
+}
+
+int	check_neighbour(char **map, int h, int w)
+{
+	if (h > 0 && ft_strchr("0C", map[h - 1][w]))
+		return (1);
+	else if (map[h + 1] && ft_strchr("0C", map[h + 1][w]))
+		return (1);
+	else if (map[h][w + 1] && ft_strchr("0C", map[h][w + 1]))
+		return (1);
+	else if (map[h][w - 1] && ft_strchr("0C", map[h][w - 1]))
+		return (1);
+	return (0);
 }
