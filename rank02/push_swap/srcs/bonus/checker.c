@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nleite-s <nleite-s@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 11:48:55 by nleite-s          #+#    #+#             */
-/*   Updated: 2024/09/26 11:48:56 by nleite-s         ###   ########.fr       */
+/*   Created: 2024/10/02 09:22:32 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/10/02 09:22:33 by nleite-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,18 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	preprocessing(argc, argv, &a);
-	instructions = get_next_line(0);
-	while (instructions != NULL)
+	if (a)
 	{
-		try_instructions(&a, &b, instructions);
-		free(instructions);
 		instructions = get_next_line(0);
+		while (instructions != NULL)
+		{
+			try_instructions(&a, &b, instructions);
+			free(instructions);
+			instructions = get_next_line(0);
+		}
+		if (check_sort(a) && b == NULL)
+			free_all(&a, &b, instructions, 0);
 	}
-	if (check_sort(a) && b == NULL)
-		free_all(&a, &b, instructions, 0);
 	ft_printf("KO\n");
 }
 
