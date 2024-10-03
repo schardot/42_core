@@ -1,7 +1,7 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "../include/minilibx_opengl_20191021/mlx.h"
+#include "../include/minilibx-linux/mlx.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>

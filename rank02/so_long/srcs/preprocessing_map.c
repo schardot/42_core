@@ -225,7 +225,7 @@ int	check_valid_path(char **map, int h, int w, int count_C)
 	static int	coin = 0;
 	int			found_exit;
 
-	if (h < 0 || w < 0 || !map[h] || map[h][w] == '\0')
+	if (h < 0 || w < 0 || !map[h] || ft_strchr("V1\0", map[h][w]))
 		return (0);
 	
 	if (check_neighbour(map, h, w))
