@@ -1,7 +1,6 @@
 CC = cc
-CFLAGS = -g -L/usr/X11/lib -lX11 -lXext -lXrandr
-#-framework OpenGL -framework AppKit
-
+CFLAGS = -g -framework OpenGL -framework AppKit
+#-L/usr/X11/lib -lX11 -lXext -lXrandr
 SRC_DIR = srcs
 SRCS = $(SRC_DIR)/so_long.c \
        $(SRC_DIR)/preprocessing_map.c
@@ -10,7 +9,7 @@ OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = include/libft
 PRINTF_DIR = include/libft/ft_printf
-MINILIBX_DIR = include/minilibx-linux
+MINILIBX_DIR = include/minilibx_opengl_20191021
 
 LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF = $(PRINTF_DIR)/libftprintf.a

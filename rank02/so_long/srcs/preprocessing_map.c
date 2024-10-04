@@ -2,13 +2,16 @@
 
 char	**check_map(t_maperr *merror, t_map *mstruct, char *file)
 {
+	char **map_copy;
 	initial_map_check(merror, mstruct, file);
 	check_map_errors(merror, mstruct);
 	mstruct->map = (char **)malloc(mstruct->height * sizeof(char *));
 	mstruct->map = map_to_grid(merror, mstruct, file);
 	check_borders(merror, mstruct);
 	get_player_xy(mstruct);
-	check_valid_path(mstruct->map, mstruct->pl_y, mstruct->pl_x, mstruct->count_C);
+	map_copy = ft_grddup(mstruct->map, mstruct->height);
+	check_valid_path(map_copy, mstruct->pl_y, mstruct->pl_x, mstruct->count_C);
+	mstruct->len --;
 	return (mstruct->map);
 }
 

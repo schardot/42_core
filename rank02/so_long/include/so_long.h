@@ -11,11 +11,11 @@
 #include "../include/map.h"
 #include <string.h>
 
-#define ESC 65307
-#define LEFT 65361
-#define UP 65362
-#define RIGHT 65363
-#define DOWN 65364
+#define ESC 53
+#define LEFT 123
+#define UP 126
+#define RIGHT 124
+#define DOWN 125
 
 	typedef struct y_list
 {
