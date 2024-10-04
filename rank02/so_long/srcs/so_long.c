@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	init_map_structs(&mstruct, &merror);
 	gm->map = check_map(merror, mstruct, argv[1]);
 	// Initialize game structure, window, images, etc.
-	init_game_struct(gm, gerr, mstruct);
+	init_game_struct(&gm, &gerr, mstruct);
 
 	// Set up the loop hook
 	mlx_loop_hook(gm->cnct, main_loop, &gm);
@@ -122,23 +122,34 @@ void	render_game(char **map, t_game *gm)
 }
 
 
-void init_game_struct(t_game *gm, t_gerr *er, t_map *m)
+void init_game_struct(t_game **gm, t_gerr **er, t_map *m)
 {
-	gm->size = 32;
-	gm->cnct = mlx_init();
-	if (!gm->cnct)
-		er->cnct = 1;
-	gm->win = mlx_new_window(gm->cnct, m->len, m->height, "so_long, farewell, auf wiedersehen goodbye!");
-	if (!gm->win)
-		er->win = 1;
-	gm->wallimg = mlx_xpm_file_to_image(gm->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/wall.xpm", &gm->size, &gm->size);
-	gm->playerimg = mlx_xpm_file_to_image(gm->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/player.xpm", &gm->size, &gm->size);
-	gm->coinimg = mlx_xpm_file_to_image(gm->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/collectible.xpm", &gm->size, &gm->size);
-	gm->exitimg = mlx_xpm_file_to_image(gm->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/exit.xpm", &gm->size, &gm->size);
-	gm->tileimg = mlx_xpm_file_to_image(gm->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/tile.xpm", &gm->size, &gm->size);
-	if (!gm->wallimg || !gm->playerimg || !gm->coinimg || !gm->exitimg || !gm->tileimg)
-		er->img = 1;
-	gm->pl_x = m->pl_x;
-	gm->pl_y = m->pl_y;
-	gm->count_C = m->count_C;
+	*gm = malloc(sizeof(t_game));
+	*er = malloc(sizeof(t_gerr));
+	if (!(*gm) || !(*er))
+	{
+		perror("Error allocating memory for map structures");
+		exit(EXIT_FAILURE);
+	}
+	(*gm)->size = 32;
+	(*gm)->cnct = mlx_init();
+	if (!(*gm)->cnct)
+	{
+		(*er)->cnct = 1;
+		ft_putstr_fd("Error: Failed to initialize connection to graphical environment\n", 2);
+		return;
+	}
+	(*gm)->win = mlx_new_window((*gm)->cnct, m->len * (*gm)->size, m->height * (*gm)->size, "so_long, farewell, auf wiedersehen goodbye!");
+	if (!(*gm)->win)
+		(*er)->win = 1;
+	(*gm)->wallimg = mlx_xpm_file_to_image((*gm)->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/wall.xpm", &(*gm)->size, &(*gm)->size);
+	(*gm)->playerimg = mlx_xpm_file_to_image((*gm)->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/player.xpm", &(*gm)->size, &(*gm)->size);
+	(*gm)->coinimg = mlx_xpm_file_to_image((*gm)->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/collectible.xpm", &(*gm)->size, &(*gm)->size);
+	(*gm)->exitimg = mlx_xpm_file_to_image((*gm)->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/exit.xpm", &(*gm)->size, &(*gm)->size);
+	(*gm)->tileimg = mlx_xpm_file_to_image((*gm)->cnct, "/Users/nataliaschardosim/42_core/rank02/so_long/sprites/tile.xpm", &(*gm)->size, &(*gm)->size);
+	if (!(*gm)->wallimg || !(*gm)->playerimg || !(*gm)->coinimg || !(*gm)->exitimg || !(*gm)->tileimg)
+		(*er)->img = 1;
+	(*gm)->pl_x = m->pl_x;
+	(*gm)->pl_y = m->pl_y;
+	(*gm)->count_C = m->count_C;
 }

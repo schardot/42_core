@@ -1,7 +1,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "../include/minilibx-linux/mlx.h"
+//#include "../include/minilibx-linux/mlx.h"
+#include "../include/minilibx_opengl_20191021/mlx.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,7 +17,7 @@
 #define RIGHT 65363
 #define DOWN 65364
 
-typedef struct y_list
+	typedef struct y_list
 {
 	void    *cnct;
 	void    *win;
@@ -44,6 +45,6 @@ void check_next_move(char *next, t_game *gm);
 char *check_next_obj(t_game *gm, int key);
 int main_loop(t_game *gm);
 void render_game(char **map, t_game *gm);
-void init_game_struct(t_game *gm, t_gerr *er, t_map *m);
+void init_game_struct(t_game **gm, t_gerr **er, t_map *m);
 
 #endif
