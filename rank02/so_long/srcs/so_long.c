@@ -21,16 +21,6 @@ int main(int argc, char **argv)
 	init_map_structs(&mstruct, &merror);
 	check_map(merror, mstruct, argv[1]);
 	gm->map = mstruct->map;
-	//free(mstruct->map);
-	/*
-	 **  hook funct are called as follow :
-	 **
-	 **   expose_hook(void *param);
-	 **   key_hook(int keycode, void *param);
-	 **   mouse_hook(int button, int x,int y, void *param);
-	 **   loop_hook(void *param);
-	 **
-	 */
 	init_game_struct(&gm, &gerr, mstruct);
 	//mlx_expose_hook(gm->win, main_loop, (void *)gm);
 	render_game(gm->map, gm);
@@ -44,6 +34,8 @@ int	key_press(int key, t_game *gm)
 	char	*next;
 
 	next = check_next_obj(gm, key);
+	if (!next)
+		return (0);
 	check_next_move(next, gm);
 	render_game(gm->map, gm);
 	return (0);
@@ -60,7 +52,10 @@ void	check_next_move(char *next, t_game *g)
 		coin ++;
 		*next = 'P';
 		if (put_exit)
+		{
 			g->map[g->pl_y][g->pl_x] = 'E';
+			put_exit = 0;
+		}
 		else
 			g->map[g->pl_y][g->pl_x] = '0';
 	}
@@ -68,7 +63,10 @@ void	check_next_move(char *next, t_game *g)
 	{
 		*next = 'P';
 		if (put_exit)
+		{
 			g->map[g->pl_y][g->pl_x] = 'E';
+			put_exit = 0;
+		}
 		else
 			g->map[g->pl_y][g->pl_x] = '0';
 	}
@@ -96,24 +94,26 @@ char	*check_next_obj(t_game *gm, int key)
 	else if (key == DOWN)
 		return (&gm->map[gm->pl_y - 1][gm->pl_x]);
 	else if (key == ESC)
+	{
 		mlx_destroy_window(gm->cnct, gm->win);
+		exit(0); // Exit the program after window destruction
+	}
 	return (NULL);
 }
 
 int main_loop(t_game *gm)
 {
+	if(!gm || !gm->map)
+		exit (1);
 	render_game(gm->map, gm);
 	return (0);
 }
 
 void	render_game(char **map, t_game *gm)
 {
-	void	*img;
 	int		h;
 	int		w;
 
-	if (!map || !gm)
-		return;
 	h = 0;
 	while (map[h])
 	{
@@ -122,24 +122,18 @@ void	render_game(char **map, t_game *gm)
 		{
 			if (map[h][w] == '1')
 				mlx_put_image_to_window(gm->cnct, gm->win, gm->wallimg, w * gm->size, h * gm->size);
-			//img = gm->wallimg;
 			else if (map[h][w] == '0')
 				mlx_put_image_to_window(gm->cnct, gm->win, gm->tileimg, w * gm->size, h * gm->size);
-			//img = gm->tileimg;
 			else if (map[h][w] == 'C')
 				mlx_put_image_to_window(gm->cnct, gm->win, gm->coinimg, w * gm->size, h * gm->size);
-			// img = gm->coinimg;
 			else if (map[h][w] == 'E')
 				mlx_put_image_to_window(gm->cnct, gm->win, gm->exitimg, w * gm->size, h * gm->size);
-			//	img = gm->exitimg;
 			else if (map[h][w] == 'P')
 			{
 				mlx_put_image_to_window(gm->cnct, gm->win, gm->playerimg, w * gm->size, h * gm->size);
-				// img = gm->playerimg;
 				gm->pl_x = w;
 				gm->pl_y = h;
 			}
-			// mlx_put_image_to_window(gm->cnct, gm->win, img, w * gm->size, h * gm->size);
 			w ++;
 		}
 		h ++;
@@ -160,11 +154,6 @@ void	init_game_struct(t_game **gm, t_gerr **er, t_map *m)
 	if (!(*gm)->win)
 		(*er)->win = 1;
 
-	(*gm)->wallimg = NULL;
-	(*gm)->playerimg = NULL;
-	(*gm)->coinimg = NULL;
-	(*gm)->exitimg = NULL;
-	(*gm)->tileimg = NULL;
 	(*gm)->wallimg = mlx_xpm_file_to_image((*gm)->cnct, "sprites/wall.xpm", &(*gm)->size, &(*gm)->size);
 	(*gm)->playerimg = mlx_xpm_file_to_image((*gm)->cnct, "sprites/player.xpm", &(*gm)->size, &(*gm)->size);
 	(*gm)->coinimg = mlx_xpm_file_to_image((*gm)->cnct, "sprites/collectible.xpm", &(*gm)->size, &(*gm)->size);

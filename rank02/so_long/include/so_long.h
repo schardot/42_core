@@ -13,11 +13,11 @@
 
 #define ESC 53
 #define LEFT 123
-#define UP 126
+#define UP 125
 #define RIGHT 124
-#define DOWN 125
+#define DOWN 126
 
-	typedef struct y_list
+typedef struct y_list
 {
 	void    *cnct;
 	void    *win;
