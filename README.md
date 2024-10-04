@@ -32,7 +32,7 @@ Here is a list of some of the projects included in this repository:
 
    - **Tech stack:** Shell, Debian, UFW (Uncomplicated Firewall), VirtualBox, SSH, cron, rsync, sudo, systemd, User and Permission Management, Network Configuration, Monitoring Tools
 
-   ![Static Badge](https://img.shields.io/badge/moulinette-120%25-brightgreen?style=flat-square)
+   ![Static Badge](https://img.shields.io/badge/approved-120%25-brightgreen?style=flat-square)
 
 
 **Rank 02 - [push_swap](./rank02/push_swap)**
@@ -40,20 +40,23 @@ Here is a list of some of the projects included in this repository:
      
    - **Tech stack:**  C, Sorting algorithms, Stack manipulation
 
-   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+   ![Static Badge](https://img.shields.io/badge/approved-108%25-brightgreen?style=flat-square)
+
+   
+**Rank 02 - [minitalk](./rank02/minitalk)**
+   - The Minitalk project creates a communication system between processes using Unix signals, enabling string transfers in a secure and efficient way.
+
+   - **Tech stack:** C, Unix signals, IPC (Inter-Process Communication)
+
+  ![Static Badge](https://img.shields.io/badge/approved-125%25-brightgreen?style=flat-square)
+
 
 **Rank 02 - [so_long](./rank02/so_long)**
    - So_long is a 2D maze game developed using the minilibX graphics library. The project involves creating a small game where the player collects items and navigates through a map.
 
    - **Tech stack:**  C, Game development, minilibX
 
-   ![Static Badge](https://img.shields.io/badge/moulinette-pending-yellow?style=flat-square)
+   ![Static Badge](https://img.shields.io/badge/project-inprogress-yellow?style=flat-square)
 
-**Rank 02 - [minitalk](./rank02/minitalk)**
-   - The Minitalk project creates a communication system between processes using Unix signals, enabling string transfers in a secure and efficient way.
-
-   - **Tech stack:** C, Unix signals, IPC (Inter-Process Communication)
-
-  ![Static Badge](https://img.shields.io/badge/moulinette-125%25-brightgreen?style=flat-square)
 
 
