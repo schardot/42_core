@@ -4,7 +4,7 @@ char	**check_map(t_maperr *merror, t_map *mstruct, char *file)
 {
 	initial_map_check(merror, mstruct, file);
 	check_map_errors(merror, mstruct);
-	mstruct->map = (char **)malloc(2 * sizeof(char *));
+	mstruct->map = (char **)malloc(mstruct->height * sizeof(char *));
 	mstruct->map = map_to_grid(merror, mstruct, file);
 	check_borders(merror, mstruct);
 	get_player_xy(mstruct);
