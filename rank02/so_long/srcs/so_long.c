@@ -9,20 +9,22 @@ int main(int argc, char **argv)
 	t_gerr		*gerr;
 	char		**map;
 
+	gm = malloc(sizeof(t_game *));
+	gerr = malloc(sizeof(t_gerr *));
+	if (!gm || !gerr)
+	{
+		perror("Error allocating memory for map structures");
+		exit(EXIT_FAILURE);
+	}
 	if (argc != 2)
 		return (1);
 	init_map_structs(&mstruct, &merror);
-	gm->map = check_map(merror, mstruct, argv[1]);
-	// Initialize game structure, window, images, etc.
+	check_map(merror, mstruct, argv[1]);
+	gm->map = mstruct->map;
+	free(mstruct->map);
 	init_game_struct(&gm, &gerr, mstruct);
-
-	// Set up the loop hook
-	mlx_loop_hook(gm->cnct, main_loop, &gm);
-
-	// Register the key press event handler
-	mlx_key_hook(gm->win, key_press, &gm);
-
-	// Start the main event loop
+	mlx_loop_hook(gm->cnct, main_loop, (void *)gm);
+	mlx_key_hook(gm->win, key_press, (void *)gm);
 	mlx_loop(gm->cnct);
 }
 int	key_press(int key, t_game *gm)
@@ -33,6 +35,7 @@ int	key_press(int key, t_game *gm)
 	check_next_move(next, gm);
 	return (0);
 }
+
 void	check_next_move(char *next, t_game *g)
 {
 	static int	coin = 0;
@@ -96,6 +99,8 @@ void	render_game(char **map, t_game *gm)
 	int		h;
 	int		w;
 
+	if (!map || !gm)
+		return;
 	h = -1;
 	while (map[++h])
 	{
@@ -121,16 +126,8 @@ void	render_game(char **map, t_game *gm)
 	}
 }
 
-
 void init_game_struct(t_game **gm, t_gerr **er, t_map *m)
 {
-	*gm = malloc(sizeof(t_game));
-	*er = malloc(sizeof(t_gerr));
-	if (!(*gm) || !(*er))
-	{
-		perror("Error allocating memory for map structures");
-		exit(EXIT_FAILURE);
-	}
 	(*gm)->size = 32;
 	(*gm)->cnct = mlx_init();
 	if (!(*gm)->cnct)
@@ -152,4 +149,10 @@ void init_game_struct(t_game **gm, t_gerr **er, t_map *m)
 	(*gm)->pl_x = m->pl_x;
 	(*gm)->pl_y = m->pl_y;
 	(*gm)->count_C = m->count_C;
+	(*gm)->map = (char **)malloc(m->height * sizeof(char *));
+	if (!(*gm)->map)
+	{
+		ft_putstr_fd("Error: Couldnt alloc map\n", 2);
+		return ;
+	}
 }
