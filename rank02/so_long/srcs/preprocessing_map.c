@@ -4,6 +4,7 @@ char	**check_map(t_maperr *merror, t_map *mstruct, char *file)
 {
 	initial_map_check(merror, mstruct, file);
 	check_map_errors(merror, mstruct);
+	mstruct->map = (char **)malloc(2 * sizeof(char *));
 	mstruct->map = map_to_grid(merror, mstruct, file);
 	check_borders(merror, mstruct);
 	get_player_xy(mstruct);
@@ -36,7 +37,12 @@ void	check_line(t_maperr *merror, t_map *mstruct, char *line)
 {
 	if (ft_strlen(line) != mstruct->len)
 	{
-		if (mstruct->len == 0)
+		if (line[ft_strlen(line) - 1] == '1' && line[ft_strlen(line)] == '\0')
+		{
+			if ((ft_strlen(line)) != mstruct->len - 1)
+				merror->linelen = 1;
+		}
+		else if (mstruct->len == 0)
 			mstruct->len = ft_strlen(line);
 		else
 			merror->linelen = 1;
@@ -227,7 +233,7 @@ int	check_valid_path(char **map, int h, int w, int count_C)
 
 	if (h < 0 || w < 0 || !map[h] || ft_strchr("V1\0", map[h][w]))
 		return (0);
-	
+
 	if (check_neighbour(map, h, w))
 	{
 		if (map[h][w] == 'C')
