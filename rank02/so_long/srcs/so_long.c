@@ -1,7 +1,7 @@
 #include "../include/so_long.h"
 #include "../include/map.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_maperr	*merror;
 	t_map		*mstruct;
@@ -22,7 +22,6 @@ int main(int argc, char **argv)
 	check_map(merror, mstruct, argv[1]);
 	gm->map = mstruct->map;
 	init_game_struct(&gm, &gerr, mstruct);
-	//mlx_expose_hook(gm->win, main_loop, (void *)gm);
 	render_game(gm->map, gm);
 	mlx_key_hook(gm->win, key_press, (void *)gm);
 	mlx_loop_hook(gm->cnct, main_loop, (void *)gm);
@@ -45,22 +44,12 @@ void	check_next_move(char *next, t_game *g)
 {
 	static int	coin = 0;
 	static int	put_exit = 0;
+	static int	move = 0;
 
-
-	if (*next == 'C')
+	if (*next == 'C' || *next == '0')
 	{
-		coin ++;
-		*next = 'P';
-		if (put_exit)
-		{
-			g->map[g->pl_y][g->pl_x] = 'E';
-			put_exit = 0;
-		}
-		else
-			g->map[g->pl_y][g->pl_x] = '0';
-	}
-	else if (*next == '0')
-	{
+		if (*next == 'C')
+			coin++;
 		*next = 'P';
 		if (put_exit)
 		{
@@ -73,7 +62,7 @@ void	check_next_move(char *next, t_game *g)
 	else if (*next == 'E')
 	{
 		if (coin == g->count_C)
-			mlx_destroy_window(g->cnct, g->win);
+			mlx_destroy_window(g->cnct, g->win); //tem que acabar o jogo direito!
 		else
 		{
 			*next = 'P';
@@ -81,17 +70,22 @@ void	check_next_move(char *next, t_game *g)
 			put_exit = 1;
 		}
 	}
+	if (*next != '1')
+	{
+		move ++;
+		ft_printf("Number of movements: %d\n", move);
+	}
 }
 
 char	*check_next_obj(t_game *gm, int key)
 {
-	if (key == RIGHT)
+	if (key == RIGHT || key == D)
 		return (&gm->map[gm->pl_y][gm->pl_x + 1]);
-	else if (key == LEFT)
+	else if (key == LEFT || key == A)
 		return (&gm->map[gm->pl_y][gm->pl_x - 1]);
-	else if (key == UP)
+	else if (key == UP || key == W)
 		return (&gm->map[gm->pl_y + 1][gm->pl_x]);
-	else if (key == DOWN)
+	else if (key == DOWN || key == S)
 		return (&gm->map[gm->pl_y - 1][gm->pl_x]);
 	else if (key == ESC)
 	{
