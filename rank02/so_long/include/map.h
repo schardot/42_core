@@ -1,5 +1,5 @@
 #ifndef MAP_H
-#define MAP_H
+# define MAP_H
 
 // Struct used to store information on the map, used later to open window and transform file to a 2D array (grid)
 typedef struct v_list
@@ -64,7 +64,7 @@ typedef struct x_list
 		├──> get_player_xy(t_map *mstruct)
 		|    |   --> Retrieves the coordinates of the player in the map.
 		|
-		├──> check_valid_path(char **map, int h, int w, int count_C)
+		├──> check_valid_path(char **map, int h, int w, int sum_C)
 		|    |   --> Checks if there is a valid path from the player to the exit while collecting all collectibles.
 		     |
 			 └──> check_neighbour(char **map, int h, int w)
@@ -81,8 +81,8 @@ void check_map_errors(t_maperr *merror, t_map *mstruct);
 char **map_to_grid(t_maperr *merror, t_map *mstruct, char *file);
 void check_borders(t_maperr *merror, t_map *mstruct);
 void get_player_xy(t_map *mstruct);							  // Added to retrieve player coordinates
-int check_valid_path(char **map, int h, int w, int count_C); // Added to validate path to exit
+int check_path(char **map, int h, int w, int sum_C); // Added to validate path to exit
 int check_neighbour(char **map, int h, int w);				  // Added to check neighboring cells for valid moves
-void check_count_char(t_map *mstruct, t_maperr *merror);
+void check_count_chars(t_map *mstruct, t_maperr *merror);
 
 #endif
