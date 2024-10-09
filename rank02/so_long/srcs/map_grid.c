@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_grid.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/09 15:17:11 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/10/09 15:17:14 by nataliascha      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/map.h"
 
 char	**map_to_grid(t_maperr *merror, t_map *gm, char *file)
@@ -34,13 +46,11 @@ void	check_borders(t_maperr *merror, t_map *gm)
 	char	*first;
 	char	*last;
 	int		i;
-	int		len;
 
 	i = 0;
-	len = gm->len;
 	first = ft_strdup(gm->map[0]);
 	last = ft_strdup(gm->map[gm->height - 1]);
-	while (i < len - 1)
+	while (i < gm->len - 1)
 	{
 		if (!ft_strchr("1\n", first[i]) || !ft_strchr("1\n", last[i]))
 			merror->border = 1;
@@ -49,9 +59,10 @@ void	check_borders(t_maperr *merror, t_map *gm)
 	i = 1;
 	while (i < gm->height - 1)
 	{
-		if (!ft_strchr("1\n", gm->map[i][0]) || !ft_strchr("1\n", gm->map[i][len - 2]))
+		if (!ft_strchr("1\n", gm->map[i][0]) || \
+		!ft_strchr("1\n", gm->map[i][gm->len - 2]))
 			merror->border = 1;
-		i++;
+		i ++;
 	}
 	free(first);
 	free(last);
@@ -83,7 +94,7 @@ void	get_player_xy(t_map *m)
 	}
 }
 
-int	check_valid_path(char **map, int h, int w, int count_C)
+int	check_path(char **map, int h, int w, int C_sum)
 {
 	static int	coin = 0;
 	static int	found_exit = 0;
@@ -98,13 +109,12 @@ int	check_valid_path(char **map, int h, int w, int count_C)
 	map[h][w] = 'V';
 	if (check_neighbour(map, h, w))
 	{
-		// if (map[h][w] == 'C')
-		// 	coin ++;
-		// map[h][w] = 'V';
-		return (check_valid_path(map, h - 1, w, count_C) || check_valid_path(map, h, w + 1, count_C) ||
-				check_valid_path(map, h + 1, w, count_C) || check_valid_path(map, h, w - 1, count_C));
+		return (check_path(map, h - 1, w, C_sum) || \
+			check_path(map, h, w + 1, C_sum) || \
+			check_path(map, h + 1, w, C_sum) || \
+			check_path(map, h, w - 1, C_sum));
 	}
-	if (found_exit && coin == count_C)
+	if (found_exit && coin == C_sum)
 		valid = 1;
 	return (valid);
 }

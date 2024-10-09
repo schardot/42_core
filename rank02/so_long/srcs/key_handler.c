@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_handler.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/09 15:19:17 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/10/09 15:19:19 by nataliascha      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 #include "../include/map.h"
 
@@ -7,7 +19,7 @@ int	key_press(int key, t_game *gm)
 
 	next = check_next_obj(gm, key);
 	if (!next)
-		return (0);
+		exit_and_free(gm);
 	check_next_move(next, gm);
 	render_game(gm->map, gm);
 	return (0);
@@ -20,7 +32,7 @@ void	check_next_move(char *next, t_game *g)
 	if (*next == 'C' || *next == '0' || *next == 'E')
 	{
 		if (*next == 'C')
-			g->coins_collected ++;
+			g->C_collected ++;
 		if (g->put_exit)
 			check_put_exit(g);
 		else
@@ -29,12 +41,8 @@ void	check_next_move(char *next, t_game *g)
 		ft_printf("Number of movements: %d\n", g->move_count);
 		if (*next == 'E')
 		{
-			if (g->coins_collected == g->count_C)
-			{
-				ft_printf("Congratulations! You completed the game in %d moves.\n", g->move_count);
-				mlx_destroy_window(g->cn, g->wn); // Exit the game gracefully
-				exit(0);						  // Ensure the program ends cleanly
-			}
+			if (g->C_collected == g->C_sum)
+				exit_and_free(g);
 			else
 				g->put_exit = 1;
 		}
@@ -62,9 +70,6 @@ char	*check_next_obj(t_game *gm, int key)
 	else if (key == DOWN || key == S)
 		return (&gm->map[gm->pl_y + 1][gm->pl_x]);
 	else if (key == ESC)
-	{
-		mlx_destroy_window(gm->cn, gm->wn);
-		exit(0);
-	}
+		exit_and_free(gm);
 	return (NULL);
 }

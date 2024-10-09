@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_file.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/09 15:18:42 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/10/09 15:18:44 by nataliascha      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/map.h"
 
 void	initial_map_check(t_maperr *merror, t_map *gm, char *file)
@@ -17,7 +29,7 @@ void	initial_map_check(t_maperr *merror, t_map *gm, char *file)
 		if (gm->line)
 			check_line(merror, gm, gm->line);
 	}
-	check_count_char(gm, merror);
+	check_count_chars(gm, merror);
 	close(fd);
 }
 
@@ -63,7 +75,7 @@ void	check_char(char line, t_map *gm, t_maperr *merror)
 		merror->chars = 1;
 }
 
-void	check_count_char(t_map *gm, t_maperr *merror)
+void	check_count_chars(t_map *gm, t_maperr *merror)
 {
 	if (gm->count_E > 1)
 		ft_putstr_fd("There is more than one exit, please check map.\n", 2);
@@ -76,6 +88,6 @@ void	check_count_char(t_map *gm, t_maperr *merror)
 	else if (gm->count_C < 1)
 		ft_putstr_fd("There needs to be at least one collectible\n", 2);
 	else
-		return;
+		return ;
 	exit(1);
 }
