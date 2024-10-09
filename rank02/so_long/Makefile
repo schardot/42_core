@@ -2,11 +2,12 @@ CC = cc
 CFLAGS = -g -framework OpenGL -framework AppKit
 #-L/usr/X11/lib -lX11 -lXext -lXrandr
 SRC_DIR = srcs
-SRCS = $(SRC_DIR)/so_long.c \
-       $(SRC_DIR)/preprocessing_map.c \
-	   $(SRC_DIR)/key_handler.c \
+SRCS = $(SRC_DIR)/new_game.c \
+       $(SRC_DIR)/map_check.c \
 	   $(SRC_DIR)/map_file.c \
-	   $(SRC_DIR)/map_grid.c
+	   $(SRC_DIR)/map_grid.c \
+	   $(SRC_DIR)/render_game.c \
+	    $(SRC_DIR)/key_handler.c
 
 OBJS = $(SRCS:.c=.o)
 
