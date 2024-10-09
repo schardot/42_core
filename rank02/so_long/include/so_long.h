@@ -16,17 +16,20 @@
 #define UP 125
 #define RIGHT 124
 #define DOWN 126
-
+#define A 0
+#define W 1
+#define S 13
+#define D 2
+#define SIZE 96
 typedef struct y_list
 {
-	void    *cnct;
-	void    *win;
-	void    *wallimg;
-	void    *playerimg;
-	void    *coinimg;
-	void    *exitimg;
-	void    *tileimg;
-	int		size;
+	void    *cn;
+	void    *wn;
+	void    *wimg;
+	void    *pimg;
+	void    *cimg;
+	void    *eimg;
+	void    *timg;
 	char	**map;
 	int		pl_x;
 	int		pl_y;

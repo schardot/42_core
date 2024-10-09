@@ -21,11 +21,11 @@ typedef struct v_list
 typedef struct x_list
 {
 	int linelen;	  // Flag for inconsistent line lengths
-	int count_inv;	  // Flag for invalid characters in the map
-	int cantallocate; // Flag for memory allocation failures
-	int cantopen;	  // Flag for failed file opening
+	int chars;	  // Flag for invalid characters in the map
+	int alloc; // Flag for memory allocation failures
+	int open;	  // Flag for failed file opening
 	int notber;		  // Flag for incorrect file extension
-	int borderinv;	  // Flag for invalid borders
+	int border;	  // Flag for invalid borders
 } t_maperr;
 
 #include <fcntl.h>					// For open()
