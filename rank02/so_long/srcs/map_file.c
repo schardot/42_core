@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:42 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 09:16:12 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/11 09:54:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	initial_map_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 	if (!aux)
 	{
 		ft_putstr_fd("Error: check map extension\n", 2);
-		free (aux);
 		exit_and_free(gm, mstr, merr);
 	}
 	fd = open(file, O_RDONLY);
