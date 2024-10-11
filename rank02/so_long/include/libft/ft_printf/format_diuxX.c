@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   format_diuxX.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 22:23:14 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/05/29 22:23:17 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/05/29 22:23:14 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/10/11 09:26:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_putnbr_base(unsigned int nbr, const char *base)
 	unsigned int	base_len;
 
 	len = 0;
-	base_len = ft_strlen(base);
+	base_len = pft_strlen(base);
 	if (nbr < base_len)
 		len += ft_printchar(base[nbr]);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:19:17 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/10 17:01:49 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 09:25:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,54 @@ int	key_press(int key, t_game *gm)
 
 	next = check_next_obj(gm, key);
 	if (!next)
-		exit_and_free(gm);
+	{
+		free (gm->map);
+		free (gm);
+		mlx_destroy_window(gm->cn, gm->wn);
+		exit(1);
+	}
 	check_next_move(next, gm);
 	render_game(gm->map, gm);
 	return (0);
 }
 
-void	check_next_move(char *next, t_game *g)
+void	check_next_move(char *next, t_game *gm)
 {
-	if (!next || !g || !g->map)
+	if (!next || !gm || !gm->map)
 		return ;
 	if (*next == 'C' || *next == '0' || *next == 'E')
 	{
 		if (*next == 'C')
-			g->C_collected ++;
-		if (g->put_exit)
-			check_put_exit(g);
+			gm->C_collected ++;
+		if (gm->put_exit)
+			check_put_exit(gm);
 		else
-			g->map[g->pl_y][g->pl_x] = '0';
-		g->move_count ++;
-		ft_printf("Number of movements: %d\n", g->move_count);
+			gm->map[gm->pl_y][gm->pl_x] = '0';
+		gm->move_count ++;
+		ft_printf("Number of movements: %d\n", gm->move_count);
 		if (*next == 'E')
 		{
-			if (g->C_collected == g->C_sum)
-				exit_and_free(g);
+			if (gm->C_collected == gm->C_sum)
+			{
+				ft_printf("Nice! You completed the game in %d moves\n", gm->move_count);
+				free(gm->map);
+				free(gm);
+				mlx_destroy_window(gm->cn, gm->wn);
+				exit (0);
+			}
 			else
-				g->put_exit = 1;
+				gm->put_exit = 1;
 		}
 		*next = 'P';
 	}
 }
 
-void	check_put_exit(t_game *g)
+void	check_put_exit(t_game *gm)
 {
-	if (g->put_exit)
+	if (gm->put_exit)
 	{
-		g->map[g->pl_y][g->pl_x] = 'E';
-		g->put_exit = 0;
+		gm->map[gm->pl_y][gm->pl_x] = 'E';
+		gm->put_exit = 0;
 	}
 }
 
@@ -70,6 +81,11 @@ char	*check_next_obj(t_game *gm, int key)
 	else if (key == DOWN || key == S)
 		return (&gm->map[gm->pl_y + 1][gm->pl_x]);
 	else if (key == ESC)
-		exit_and_free(gm);
+	{
+		free(gm->map);
+		free(gm);
+		mlx_destroy_window(gm->cn, gm->wn);
+		exit(1);
+	}
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 10:09:22 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 09:29:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,24 @@ int	main(int argc, char **argv)
 		return (1);
 	gm = malloc(sizeof(t_game));
 	mstr = malloc(sizeof(t_map));
-	merr = (t_maperr *)malloc(sizeof(t_maperr));
+	merr = malloc(sizeof(t_maperr));
 	if (!gm || !mstr || !merr)
 	{
 		perror("Error");
 		exit(EXIT_FAILURE);
 	}
 	check_map(merr, mstr, gm, argv[1]);
-	init_game_struct(gm, mstr);
+	init_game_struct(gm, mstr, merr);
 	render_game(gm->map, gm);
+	free(mstr);
+	free(merr);
 	mlx_key_hook(gm->wn, key_press, (void *)gm);
 	mlx_loop_hook(gm->cn, main_loop, (void *)gm);
 	mlx_hook(gm->wn, 17, 0, (void *)exit, 0);
 	mlx_loop(gm->cn);
 }
 
-void	init_game_struct(t_game *gm, t_map *mstr)
+void	init_game_struct(t_game *gm, t_map *mstr, t_maperr *merr)
 {
 	int		s;
 
@@ -47,12 +49,12 @@ void	init_game_struct(t_game *gm, t_map *mstr)
 	if (!gm->cn)
 	{
 		perror("Error");
-		exit_and_free(gm);
+		exit_and_free(gm, mstr, merr);
 	}
 	gm->wn = mlx_new_window(gm->cn, mstr->len * s, mstr->height * s, "so_long");
 	if (!gm->wn)
-		exit_and_free(gm);
-	files_to_images(gm);
+		exit_and_free(gm, mstr, merr);
+	files_to_images(gm, mstr, merr);
 	gm->C_sum = mstr->count_C;
 	gm->C_collected = 0;
 	gm->move_count = 0;
@@ -61,7 +63,7 @@ void	init_game_struct(t_game *gm, t_map *mstr)
 	gm->len = mstr->len;
 }
 
-void	files_to_images(t_game *gm)
+void	files_to_images(t_game *gm, t_map *mstr, t_maperr *merr)
 {
 	int	s;
 
@@ -72,16 +74,22 @@ void	files_to_images(t_game *gm)
 	gm->eimg = mlx_xpm_file_to_image(gm->cn, "sp/e.xpm", &s, &s);
 	gm->timg = mlx_xpm_file_to_image(gm->cn, "sp/t.xpm", &s, &s);
 	if (!gm->wimg || !gm->pimg || !gm->cimg || !gm->eimg || !gm->timg)
-		exit_and_free(gm);
+		exit_and_free(gm, mstr, merr);
 }
 
-void	exit_and_free(t_game *g)
+void	exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr)
 {
-	if (g->C_collected == g->C_sum)
-		ft_printf("Nice! You completed the game in %d moves\n", g->move_count);
-	mlx_destroy_window(g->cn, g->wn);
-	mlx_loop_end(g->cn);
-	free(g->map);
-	free(g);
+	if (gm->wn)
+		mlx_destroy_window(gm->cn, gm->wn);
+	if (gm->cn)
+		mlx_loop_end(gm->cn);
+	if (gm->map)
+		free(gm->map);
+	if (merr)
+		free (merr);
+	if (mstr)
+		free(mstr);
+	if (gm)
+		free(gm);
 	exit (0);
 }

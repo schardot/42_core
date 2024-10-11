@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <marvin@42.fr>           +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 22:23:32 by nataliaschard     #+#    #+#             */
-/*   Updated: 2024/05/29 22:23:34 by nataliaschard    ###   ########.fr       */
+/*   Created: 2024/05/29 22:23:32 by nataliascha       #+#    #+#             */
+/*   Updated: 2024/10/11 09:26:12 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_printaddr(void *ptr, char *base, bool first);
 int		ft_printnbr(int nb);
 int		ft_printnbr_unsigned(unsigned int nb);
 int		ft_putnbr_base(unsigned int nbr, const char *base);
-char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
+char	*pft_strchr(const char *s, int c);
+size_t	pft_strlen(const char *s);
 
 #endif
