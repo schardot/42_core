@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:17:11 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/10 16:55:20 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 10:13:50 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	map_to_grid(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 
 	gm->map = (char **)malloc((mstr->height + 1) * sizeof(char *));
 	if (!gm->map)
-		return;
+		return ;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		merr->open = 1;
@@ -104,9 +104,9 @@ int	check_path(char **map, int h, int w, t_map *mstr)
 	map[h][w] = 'V';
 	if (check_neighbour(map, h, w))
 	{
-		return (check_path(map, h - 1, w, mstr) ||
-				check_path(map, h, w + 1, mstr) ||
-				check_path(map, h + 1, w, mstr) ||
+		return (check_path(map, h - 1, w, mstr) || \
+				check_path(map, h, w + 1, mstr) || \
+				check_path(map, h + 1, w, mstr) || \
 				check_path(map, h, w - 1, mstr));
 	}
 	if (mstr->pc_exit && mstr->pc_coin == mstr->count_C)

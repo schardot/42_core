@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:42 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/10 17:39:48 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 10:11:55 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,9 @@ void	check_line(t_maperr *merr, t_map *mstr, t_game *gm, char *line)
 	{
 		check_char(*line, mstr, merr);
 		check_map_errors(merr, mstr, gm);
-		// if (*line == 'P')
-		// 	gm->pl_y = mstr->height;
 		line++;
 	}
 	mstr->height++;
-	//free (line);
 	line = "a";
 }
 

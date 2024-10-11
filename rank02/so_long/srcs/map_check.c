@@ -6,22 +6,16 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:56 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/10 18:24:36 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 10:11:13 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
 
-void check_map(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
+void	check_map(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 {
 	char	**map_copy;
-	// mstr = malloc(sizeof(t_map));
-	// merr = (t_maperr *)malloc(sizeof(t_maperr));
-	// if (!mstr || !merr)
-	// {
-	// 	perror("Error allocating memory for map structures");
-	// 	exit(EXIT_FAILURE);
-	// }
+
 	init_map_structs(mstr, merr);
 	initial_map_check(merr, mstr, gm, file);
 	check_map_errors(merr, mstr, gm); //verificar se precisa msm
@@ -38,7 +32,7 @@ void check_map(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 	mstr->len--;
 }
 
-void init_map_structs(t_map *mstr, t_maperr *merr)
+void	init_map_structs(t_map *mstr, t_maperr *merr)
 {
 	merr->linelen = 0;
 	merr->chars = 0;
@@ -80,6 +74,7 @@ void	check_map_errors(t_maperr *merr, t_map *mstr, t_game *gm)
 		ft_putstr_fd("Error: borders are invalid\n", 2);
 		free(gm->map);
 	}
-	if (merr->notber || merr->open || merr->alloc || merr->linelen || merr->border || merr->chars)
+	if (merr->notber || merr->open || merr->alloc || \
+	merr->linelen || merr->border || merr->chars)
 		exit (EXIT_FAILURE);
 }

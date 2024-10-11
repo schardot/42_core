@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 10:01:24 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 10:09:22 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char **argv)
 		perror("Error");
 		exit(EXIT_FAILURE);
 	}
-	// init_map_structs(&mstr, &merror);
 	check_map(merr, mstr, gm, argv[1]);
 	init_game_struct(gm, mstr);
 	render_game(gm->map, gm);
