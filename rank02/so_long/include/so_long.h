@@ -1,8 +1,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-//#include "../include/minilibx-linux/mlx.h"
-#include "../include/minilibx_opengl_20191021/mlx.h"
+#include "../include/minilibx-linux/mlx.h"
+//#include "../include/minilibx_opengl_20191021/mlx.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -40,6 +40,7 @@ typedef struct s_game
 	int		C_collected; // Number of collected collectibles
 	int		move_count;	 // Total number of moves made by the player
 	int		put_exit;	 // Flag to indicate if the exit can be shown
+
 } t_game;
 
 /*
@@ -116,9 +117,9 @@ int		main_loop(t_game *gm);
 void	render_game(char **map, t_game *gm);
 void	render_pos(char **map, t_game *gm, int w, int h);
 void	check_put_exit(t_game *g);
-void	init_game_struct(t_game *gm, t_map *m);
-void	files_to_images(t_game *gm);
-void	exit_and_free(t_game *g);
-void	render_pos(char **map, t_game *gm, int w, int h);
+void init_game_struct(t_game *gm, t_map *mstr, t_maperr *merr);
+void  files_to_images(t_game *gm, t_map *mstr, t_maperr *merr);
+void exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr);
+void render_pos(char **map, t_game *gm, int w, int h);
 
 #endif
