@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:26:30 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/09 15:27:32 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/10 17:42:40 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	render_game(char **map, t_game *gm)
 	int	w;
 
 	h = 0;
-	while (map[h])
+	while (h < gm->height)
 	{
 		w = 0;
-		while (map[h][w] && map[h][w] != '\n')
+		while (w < gm->len)
 		{
 			render_pos(map, gm, w, h);
-			w++;
+			w ++;
 		}
-		h++;
+		h ++;
 	}
 }
 
@@ -44,6 +44,8 @@ void	render_pos(char **map, t_game *gm, int w, int h)
 	int	w_size;
 	int	h_size;
 
+	if (h >= gm->height || w >= gm->len)
+		return ;
 	w_size = w * SIZE;
 	h_size = h * (SIZE);
 	if (map[h][w] == '1')

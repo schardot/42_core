@@ -1,88 +1,85 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   preprocessing_map.c                                :+:      :+:    :+:   */
+/*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:56 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/09 15:19:06 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/10 18:24:36 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
 
-char	**check_map(t_maperr *merror, t_map *gm, char *file)
+void check_map(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 {
 	char	**map_copy;
-
-	initial_map_check(merror, gm, file);
-	check_map_errors(merror, gm);
-	gm->map = (char **)malloc(gm->height * sizeof(char *));
-	gm->map = map_to_grid(merror, gm, file);
-	check_borders(merror, gm);
+	// mstr = malloc(sizeof(t_map));
+	// merr = (t_maperr *)malloc(sizeof(t_maperr));
+	// if (!mstr || !merr)
+	// {
+	// 	perror("Error allocating memory for map structures");
+	// 	exit(EXIT_FAILURE);
+	// }
+	init_map_structs(mstr, merr);
+	initial_map_check(merr, mstr, gm, file);
+	check_map_errors(merr, mstr, gm); //verificar se precisa msm
+	map_to_grid(merr, mstr, gm, file);
+	check_borders(merr, mstr, gm);
 	get_player_xy(gm);
-	map_copy = ft_grddup(gm->map, gm->height);
-	if (!check_valid_path(map_copy, gm->pl_y, gm->pl_x, gm->count_C))
+	map_copy = ft_grddup(gm->map, mstr->height);
+	if (!check_path(map_copy, gm->pl_y, gm->pl_x, mstr))
 	{
 		ft_printf("There's no valid path\n");
 		exit (1);
 	}
-	gm->len --;
-	return (gm->map);
+	free (map_copy);
+	mstr->len--;
 }
 
-void	init_map_structs(t_map **gm, t_maperr **merror)
+void init_map_structs(t_map *mstr, t_maperr *merr)
 {
-	*gm = (t_map *)malloc(sizeof(t_map));
-	*merror = (t_maperr *)malloc(sizeof(t_maperr));
-	if (!(*gm) || !(*merror))
-	{
-		perror("Error allocating memory for map structures");
-		exit(EXIT_FAILURE);
-	}
-	(*merror)->linelen = 0;
-	(*merror)->chars = 0;
-	(*merror)->alloc = 0;
-	(*merror)->open = 0;
-	(*merror)->notber = 0;
-	(*merror)->border = 0;
-	(*gm)->len = 0;
-	(*gm)->height = 0;
-	(*gm)->count_1 = 0;
-	(*gm)->count_0 = 0;
-	(*gm)->count_E = 0;
-	(*gm)->count_P = 0;
-	(*gm)->count_C = 0;
-	(*gm)->map = NULL;
-	(*gm)->line = NULL;
-	(*gm)->pl_x = 0;
-	(*gm)->pl_y = 0;
+	merr->linelen = 0;
+	merr->chars = 0;
+	merr->alloc = 0;
+	merr->open = 0;
+	merr->notber = 0;
+	merr->border = 0;
+	mstr->len = 0;
+	mstr->height = 0;
+	mstr->count_1 = 0;
+	mstr->count_0 = 0;
+	mstr->count_E = 0;
+	mstr->count_P = 0;
+	mstr->count_C = 0;
+	mstr->line = NULL;
+	mstr->pc_coin = 0;
+	mstr->pc_exit = 0;
+	mstr->pc_valid = 0;
 }
 
-void	check_map_errors(t_maperr *m, t_map *mp)
+void	check_map_errors(t_maperr *merr, t_map *mstr, t_game *gm)
 {
-	if (m->notber == 1)
-		ft_putstr_fd("Error: check map extension\n", 2);
-	else if (m->open == 1)
+	if (merr->open == 1)
 		perror("Error");
-	else if (m->linelen == 1)
+	else if (merr->linelen == 1)
 	{
 		ft_putstr_fd("Error: all lines should have the same length\n", 2);
-		free (mp->line);
+		free (mstr->line);
 	}
-	else if (m->chars == 1)
+	else if (merr->chars == 1)
 	{
 		ft_putstr_fd("Error: map contains invalid character\n", 2);
-		free(mp->line);
+		free(mstr->line);
 	}
-	else if (m->alloc == 1)
+	else if (merr->alloc == 1)
 		perror("Error");
-	else if (m->border == 1)
+	else if (merr->border == 1)
 	{
 		ft_putstr_fd("Error: borders are invalid\n", 2);
-		free(mp->map);
+		free(gm->map);
 	}
-	if (m->notber || m->open || m->alloc || m->linelen || m->border || m->chars)
+	if (merr->notber || merr->open || merr->alloc || merr->linelen || merr->border || merr->chars)
 		exit (EXIT_FAILURE);
 }
