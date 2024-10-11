@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:56 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 10:11:13 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 09:53:06 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	check_map_errors(t_maperr *merr, t_map *mstr, t_game *gm)
 	}
 	if (merr->notber || merr->open || merr->alloc || \
 	merr->linelen || merr->border || merr->chars)
-		exit (EXIT_FAILURE);
+		exit_and_free(gm, mstr, merr);
 }

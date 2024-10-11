@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 09:29:58 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/11 09:50:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ void	files_to_images(t_game *gm, t_map *mstr, t_maperr *merr)
 
 void	exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr)
 {
-	if (gm->wn)
-		mlx_destroy_window(gm->cn, gm->wn);
-	if (gm->cn)
-		mlx_loop_end(gm->cn);
-	if (gm->map)
-		free(gm->map);
+	// if (gm->wn)
+	// 	mlx_destroy_window(gm->cn, gm->wn);
+	// if (gm->cn)
+	// 	mlx_loop_end(gm->cn);
+	// if (gm->map)
+	// 	free(gm->map);
 	if (merr)
 		free (merr);
 	if (mstr)
