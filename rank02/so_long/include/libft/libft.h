@@ -6,7 +6,7 @@
 /*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:23:45 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/04 15:41:34 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 13:59:11 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	**ft_grdrealloc(char **ptr, size_t size);
 char	**ft_grddup(char **grid, int height);
+void	ft_free_grid(char **grid);
 
 #endif

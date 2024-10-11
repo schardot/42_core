@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:56 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 09:53:06 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/11 14:01:09 by nataliascha      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	check_map(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 		ft_printf("There's no valid path\n");
 		exit (1);
 	}
-	free (map_copy);
+	ft_free_grid(map_copy);
 	mstr->len--;
 }
 
@@ -72,7 +72,7 @@ void	check_map_errors(t_maperr *merr, t_map *mstr, t_game *gm)
 	else if (merr->border == 1)
 	{
 		ft_putstr_fd("Error: borders are invalid\n", 2);
-		free(gm->map);
+		ft_free_grid(gm->map);
 	}
 	if (merr->notber || merr->open || merr->alloc || \
 	merr->linelen || merr->border || merr->chars)
