@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 09:50:09 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/11 15:18:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr)
 	// 	mlx_loop_end(gm->cn);
 	// if (gm->map)
 	// 	free(gm->map);
+	if (gm && gm->map)
+		ft_free_grid(gm->map);
 	if (merr)
 		free (merr);
 	if (mstr)

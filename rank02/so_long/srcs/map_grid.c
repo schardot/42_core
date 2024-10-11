@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_grid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:17:11 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 10:13:50 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 14:49:12 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

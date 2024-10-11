@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nataliaschardosim <nataliaschardosim@st    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:19:17 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 14:00:51 by nataliascha      ###   ########.fr       */
+/*   Updated: 2024/10/11 14:52:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	key_press(int key, t_game *gm)
 	if (!next)
 	{
 		ft_free_grid(gm->map);
-		free (gm);
 		mlx_destroy_window(gm->cn, gm->wn);
 		exit(1);
 	}
@@ -50,7 +49,6 @@ void	check_next_move(char *next, t_game *gm)
 			{
 				ft_printf("Nice! You completed the game in %d moves\n", gm->move_count);
 				ft_free_grid(gm->map);
-				free(gm);
 				mlx_destroy_window(gm->cn, gm->wn);
 				exit (0);
 			}
@@ -83,7 +81,6 @@ char	*check_next_obj(t_game *gm, int key)
 	else if (key == ESC)
 	{
 		ft_free_grid(gm->map);
-		free(gm);
 		mlx_destroy_window(gm->cn, gm->wn);
 		exit(1);
 	}
