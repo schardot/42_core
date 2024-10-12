@@ -85,6 +85,6 @@ void	check_borders(t_maperr *merr, t_map *mstr, t_game *gm);
 void	get_player_xy(t_game *gm);
 int		check_path(char **map, int h, int w, t_map *m);
 int		check_neighbour(char **map, int h, int w);
-void	check_count_chars(t_map *mstr, t_maperr *merr);
+int		check_count_chars(t_map *mstr, t_maperr *merr);
 
 #endif

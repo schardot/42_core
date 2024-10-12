@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:42 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 09:54:58 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 09:34:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	initial_map_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 			mstr->line = "a";
 		}
 	}
-	check_count_chars(mstr, merr);
+	if (check_count_chars(mstr, merr))
+		exit_and_free(gm, mstr, merr);
 	close(fd);
 }
 
@@ -83,7 +84,7 @@ void	check_char(char line, t_map *mstr, t_maperr *merr)
 		merr->chars = 1;
 }
 
-void	check_count_chars(t_map *mstr, t_maperr *merr)
+int	check_count_chars(t_map *mstr, t_maperr *merr)
 {
 	if (mstr->count_E > 1)
 		ft_putstr_fd("There is more than one exit, please check map.\n", 2);
@@ -96,6 +97,6 @@ void	check_count_chars(t_map *mstr, t_maperr *merr)
 	else if (mstr->count_C < 1)
 		ft_putstr_fd("There needs to be at least one collectible\n", 2);
 	else
-		return ;
-	exit(1);
+		return (0);
+	return (1);
 }
