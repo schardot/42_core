@@ -1,0 +1,6 @@
+[submodule "path/to/so_long"]
+	path = path/to/so_long
+	url = https://github.com/schardot/so_long.git
+[submodule "rank02/so_longg"]
+	path = rank02/so_longg
+	url = https://github.com/schardot/so_long.git
