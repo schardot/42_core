@@ -40,10 +40,3 @@ The goal is to navigate through the maze, collect all collectibles, and reach th
 
 When the game starts, the player is placed at the designated starting position on the map. The player can use the arrow keys to move around the grid, collecting items as they go. Upon collecting all items, the player must reach the exit to complete the game.
 
-## Contributing
-
-Contributions are welcome! If you want to improve the project or fix any issues, please fork the repository and create a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
