@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 15:18:09 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 06:49:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,27 @@ void	files_to_images(t_game *gm, t_map *mstr, t_maperr *merr)
 void	exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr)
 {
 	// if (gm->wn)
-	// 	mlx_destroy_window(gm->cn, gm->wn);
-	// if (gm->cn)
-	// 	mlx_loop_end(gm->cn);
-	// if (gm->map)
-	// 	free(gm->map);
+	//  	mlx_destroy_window(gm->cn, gm->wn);
+	// // if (gm->cn)
+	// // 	mlx_loop_end(gm->cn);
+	// if (gm->wimg)
+	// 	mlx_destroy_image(gm->cn, gm->wimg);
+	// if (gm->pimg)
+	// 	mlx_destroy_image(gm->cn, gm->pimg);
+	// if (gm->cimg)
+	// 	mlx_destroy_image(gm->cn, gm->cimg);
+	// if (gm->eimg)
+	// 	mlx_destroy_image(gm->cn, gm->eimg);
+	// if (gm->timg)
+	// 	mlx_destroy_image(gm->cn, gm->timg);
 	if (gm && gm->map)
 		ft_free_grid(gm->map);
 	if (merr)
 		free (merr);
 	if (mstr)
 		free(mstr);
+	if (gm->cn)
+		free(gm->cn);
 	if (gm)
 		free(gm);
 	exit (0);

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:17:11 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 14:49:12 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 06:50:31 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	map_to_grid(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 
 	gm->map = (char **)malloc((mstr->height + 1) * sizeof(char *));
 	if (!gm->map)
-		return ;
+		merr->alloc = 1;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		merr->open = 1;
