@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:19:17 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/11 14:52:43 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 14:30:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ int	key_press(int key, t_game *gm)
 
 	next = check_next_obj(gm, key);
 	if (!next)
-	{
-		ft_free_grid(gm->map);
-		mlx_destroy_window(gm->cn, gm->wn);
-		exit(1);
-	}
+		exit_and_free_gm(gm);
 	check_next_move(next, gm);
 	render_game(gm->map, gm);
 	return (0);
@@ -48,9 +44,7 @@ void	check_next_move(char *next, t_game *gm)
 			if (gm->C_collected == gm->C_sum)
 			{
 				ft_printf("Nice! You completed the game in %d moves\n", gm->move_count);
-				ft_free_grid(gm->map);
-				mlx_destroy_window(gm->cn, gm->wn);
-				exit (0);
+				exit_and_free_gm(gm);
 			}
 			else
 				gm->put_exit = 1;
@@ -79,10 +73,6 @@ char	*check_next_obj(t_game *gm, int key)
 	else if (key == DOWN || key == S)
 		return (&gm->map[gm->pl_y + 1][gm->pl_x]);
 	else if (key == ESC)
-	{
-		ft_free_grid(gm->map);
-		mlx_destroy_window(gm->cn, gm->wn);
-		exit(1);
-	}
+		exit_and_free_gm(gm);
 	return (NULL);
 }

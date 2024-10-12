@@ -119,8 +119,9 @@ void	render_pos(char **map, t_game *gm, int w, int h);
 void	check_put_exit(t_game *g);
 void init_game_struct(t_game *gm, t_map *mstr, t_maperr *merr);
 void  files_to_images(t_game *gm, t_map *mstr, t_maperr *merr);
-void exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr);
+void exit_and_free_all(t_game *gm, t_map *mstr, t_maperr *merr);
 void render_pos(char **map, t_game *gm, int w, int h);
 void allocate_structs(t_game **gm, t_map **mstr, t_maperr **merr);
+void exit_and_free_gm(t_game *gm);
 
 #endif

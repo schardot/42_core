@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:17:11 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 08:17:11 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 14:47:06 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	map_to_grid(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 {
-	int		m;
 	int		fd;
 
 	gm->map = malloc((mstr->height + 1) * sizeof(char *));
@@ -24,7 +23,15 @@ void	map_to_grid(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 	if (fd < 0)
 		merr->open = 1;
 	mstr->line = file;
+	write_map_from_file(gm, mstr, fd);
 	check_map_errors(merr, mstr, gm);
+	close(fd);
+}
+
+void	write_map_from_file(t_game *gm, t_map *mstr, int fd)
+{
+	int	m;
+
 	m = 0;
 	while (mstr->line)
 	{
@@ -32,11 +39,9 @@ void	map_to_grid(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 		if (mstr->line)
 		{
 			gm->map[m] = ft_strdup(mstr->line);
-			if (!gm->map[m]) // Handle strdup failure
+			if (!gm->map[m])
 			{
-				while (m-- > 0)
-					free(gm->map[m]);
-				free(gm->map);
+				ft_free_grid(gm->map);
 				close(fd);
 				return;
 			}
@@ -44,7 +49,6 @@ void	map_to_grid(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 			free(mstr->line);
 		}
 	}
-	close(fd);
 	gm->map[m] = NULL;
 }
 
@@ -99,27 +103,6 @@ void	get_player_xy(t_game *gm)
 		}
 		h++;
 	}
-}
-
-int	check_path(char **map, int h, int w, t_map *mstr)
-{
-	if (h < 0 || w < 0 || !map[h] || ft_strchr("V1\0", map[h][w]))
-		return (0);
-	if (map[h][w] == 'C')
-		mstr->pc_coin++;
-	if (map[h][w] == 'E')
-		mstr->pc_exit = 1;
-	map[h][w] = 'V';
-	if (check_neighbour(map, h, w))
-	{
-		return (check_path(map, h - 1, w, mstr) || \
-				check_path(map, h, w + 1, mstr) || \
-				check_path(map, h + 1, w, mstr) || \
-				check_path(map, h, w - 1, mstr));
-	}
-	if (mstr->pc_exit && mstr->pc_coin == mstr->count_C)
-		mstr->pc_valid = 1;
-	return (mstr->pc_valid);
 }
 
 int	check_neighbour(char **map, int h, int w)

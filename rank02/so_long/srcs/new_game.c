@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 09:56:40 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 14:48:19 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	allocate_structs(t_game **gm, t_map **mstr, t_maperr **merr)
 	}
 	init_map_structs(*mstr, *merr);
 	(*gm)->map = NULL;
+	(*gm)->wn = NULL;
 }
-
 
 void	init_game_struct(t_game *gm, t_map *mstr, t_maperr *merr)
 {
@@ -70,11 +70,11 @@ void	init_game_struct(t_game *gm, t_map *mstr, t_maperr *merr)
 	if (!gm->cn)
 	{
 		perror("Error");
-		exit_and_free(gm, mstr, merr);
+		exit_and_free_all(gm, mstr, merr);
 	}
 	gm->wn = mlx_new_window(gm->cn, mstr->len * s, mstr->height * s, "so_long");
 	if (!gm->wn)
-		exit_and_free(gm, mstr, merr);
+		exit_and_free_all(gm, mstr, merr);
 	files_to_images(gm, mstr, merr);
 	gm->C_sum = mstr->count_C;
 	gm->C_collected = 0;
@@ -95,21 +95,5 @@ void	files_to_images(t_game *gm, t_map *mstr, t_maperr *merr)
 	gm->eimg = mlx_xpm_file_to_image(gm->cn, "sp/e.xpm", &s, &s);
 	gm->timg = mlx_xpm_file_to_image(gm->cn, "sp/t.xpm", &s, &s);
 	if (!gm->wimg || !gm->pimg || !gm->cimg || !gm->eimg || !gm->timg)
-		exit_and_free(gm, mstr, merr);
-}
-
-void	exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr)
-{
-	if (gm->map)
-	{
-		ft_free_grid(gm->map);
-		//free(gm->map);
-	}
-	if (merr)
-		free (merr);
-	if (mstr)
-		free(mstr);
-	if (gm)
-		free(gm);
-	exit (0);
+		exit_and_free_all(gm, mstr, merr);
 }

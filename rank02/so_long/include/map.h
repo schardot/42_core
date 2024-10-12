@@ -76,7 +76,7 @@ typedef struct s_game t_game;
 // Function prototypes:
 void	init_map_structs(t_map *mstr, t_maperr *merr);
 void	check_map(t_maperr *merr, t_map *mstr, t_game *gm, char *file);
-void	initial_map_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file);
+void	initial_file_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file);
 void	check_line(t_maperr *merr, t_map *mstr, t_game *gm, char *line);
 void	check_char(char line, t_map *mstr, t_maperr *merr);
 void	check_map_errors(t_maperr *merr, t_map *mstr, t_game *gm);
@@ -86,5 +86,7 @@ void	get_player_xy(t_game *gm);
 int		check_path(char **map, int h, int w, t_map *m);
 int		check_neighbour(char **map, int h, int w);
 int		check_count_chars(t_map *mstr, t_maperr *merr);
+void	write_map_from_file(t_game *gm, t_map *mstr, int fd);
+void	check_extension(t_game *gm, t_map *mstr, t_maperr *merr, char *file);
 
 #endif

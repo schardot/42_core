@@ -6,23 +6,17 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:18:42 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 09:34:50 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 14:45:07 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
 
-void	initial_map_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
+void	initial_file_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 {
 	int	fd;
-	char *aux;
 
-	aux = ft_strnstr(file, ".ber\0", ft_strlen(file));
-	if (!aux)
-	{
-		ft_putstr_fd("Error: check map extension\n", 2);
-		exit_and_free(gm, mstr, merr);
-	}
+	check_extension(gm, mstr, merr, file);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		merr->open = 1;
@@ -39,8 +33,20 @@ void	initial_map_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 		}
 	}
 	if (check_count_chars(mstr, merr))
-		exit_and_free(gm, mstr, merr);
+		exit_and_free_all(gm, mstr, merr);
 	close(fd);
+}
+
+void	check_extension(t_game *gm, t_map *mstr, t_maperr *merr, char *file)
+{
+	char *aux;
+
+	aux = ft_strnstr(file, ".ber\0", ft_strlen(file));
+	if (!aux)
+	{
+		ft_putstr_fd("Error: check map extension\n", 2);
+		exit_and_free_all(gm, mstr, merr);
+	}
 }
 
 void	check_line(t_maperr *merr, t_map *mstr, t_game *gm, char *line)
