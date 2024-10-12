@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 09:00:55 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 09:56:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr)
 	if (gm->map)
 	{
 		ft_free_grid(gm->map);
-		free(gm->map);
+		//free(gm->map);
 	}
 	if (merr)
 		free (merr);
