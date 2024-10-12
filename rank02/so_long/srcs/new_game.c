@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 06:49:57 by codespace        ###   ########.fr       */
+/*   Updated: 2024/10/12 09:00:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
-	gm = malloc(sizeof(t_game));
-	mstr = malloc(sizeof(t_map));
-	merr = malloc(sizeof(t_maperr));
-	if (!gm || !mstr || !merr)
-	{
-		perror("Error");
-		exit(EXIT_FAILURE);
-	}
+	allocate_structs(&gm, &mstr, &merr);
 	check_map(merr, mstr, gm, argv[1]);
 	init_game_struct(gm, mstr, merr);
 	render_game(gm->map, gm);
@@ -39,6 +32,34 @@ int	main(int argc, char **argv)
 	mlx_hook(gm->wn, 17, 0, (void *)exit, 0);
 	mlx_loop(gm->cn);
 }
+
+void	allocate_structs(t_game **gm, t_map **mstr, t_maperr **merr)
+{
+	*gm = malloc(sizeof(t_game));
+	if (!*gm)
+	{
+		perror("Error");
+		exit(EXIT_FAILURE);
+	}
+	*mstr = malloc(sizeof(t_map));
+	if (!*mstr)
+	{
+		perror("Error");
+		free(gm);
+		exit(EXIT_FAILURE);
+	}
+	*merr = malloc(sizeof(t_maperr));
+	if (!*merr)
+	{
+		perror("Error");
+		free (*gm);
+		free (*mstr);
+		exit (EXIT_FAILURE);
+	}
+	init_map_structs(*mstr, *merr);
+	(*gm)->map = NULL;
+}
+
 
 void	init_game_struct(t_game *gm, t_map *mstr, t_maperr *merr)
 {
@@ -79,28 +100,15 @@ void	files_to_images(t_game *gm, t_map *mstr, t_maperr *merr)
 
 void	exit_and_free(t_game *gm, t_map *mstr, t_maperr *merr)
 {
-	// if (gm->wn)
-	//  	mlx_destroy_window(gm->cn, gm->wn);
-	// // if (gm->cn)
-	// // 	mlx_loop_end(gm->cn);
-	// if (gm->wimg)
-	// 	mlx_destroy_image(gm->cn, gm->wimg);
-	// if (gm->pimg)
-	// 	mlx_destroy_image(gm->cn, gm->pimg);
-	// if (gm->cimg)
-	// 	mlx_destroy_image(gm->cn, gm->cimg);
-	// if (gm->eimg)
-	// 	mlx_destroy_image(gm->cn, gm->eimg);
-	// if (gm->timg)
-	// 	mlx_destroy_image(gm->cn, gm->timg);
-	if (gm && gm->map)
+	if (gm->map)
+	{
 		ft_free_grid(gm->map);
+		free(gm->map);
+	}
 	if (merr)
 		free (merr);
 	if (mstr)
 		free(mstr);
-	if (gm->cn)
-		free(gm->cn);
 	if (gm)
 		free(gm);
 	exit (0);
