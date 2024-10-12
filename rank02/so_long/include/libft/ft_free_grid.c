@@ -13,4 +13,5 @@ void    ft_free_grid(char **grid)
         i ++;
     }
     free (grid);
+    grid = NULL;
 }
