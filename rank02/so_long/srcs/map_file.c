@@ -1,16 +1,17 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 15:18:42 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 14:45:07 by codespace        ###   ########.fr       */
+/*   Created: 2024/10/14 11:26:53 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/10/14 11:26:54 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/map.h"
+#include "../include/so_long.h"
 
 void	initial_file_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 {
@@ -32,14 +33,14 @@ void	initial_file_check(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
 			mstr->line = "a";
 		}
 	}
-	if (check_count_chars(mstr, merr))
+	if (check_count_chars(mstr))
 		exit_and_free_all(gm, mstr, merr);
 	close(fd);
 }
 
 void	check_extension(t_game *gm, t_map *mstr, t_maperr *merr, char *file)
 {
-	char *aux;
+	char	*aux;
 
 	aux = ft_strnstr(file, ".ber\0", ft_strlen(file));
 	if (!aux)
@@ -51,11 +52,11 @@ void	check_extension(t_game *gm, t_map *mstr, t_maperr *merr, char *file)
 
 void	check_line(t_maperr *merr, t_map *mstr, t_game *gm, char *line)
 {
-	if (ft_strlen(line) != mstr->len)
+	if ((int)ft_strlen(line) != mstr->len)
 	{
 		if (line[ft_strlen(line) - 1] == '1' && line[ft_strlen(line)] == '\0')
 		{
-			if ((ft_strlen(line)) != mstr->len - 1)
+			if (((int)ft_strlen(line)) != mstr->len - 1)
 				merr->linelen = 1;
 		}
 		else if (mstr->len == 0)
@@ -90,7 +91,7 @@ void	check_char(char line, t_map *mstr, t_maperr *merr)
 		merr->chars = 1;
 }
 
-int	check_count_chars(t_map *mstr, t_maperr *merr)
+int	check_count_chars(t_map *mstr)
 {
 	if (mstr->count_E > 1)
 		ft_putstr_fd("There is more than one exit, please check map.\n", 2);

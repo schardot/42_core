@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 15:19:17 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 14:30:51 by codespace        ###   ########.fr       */
+/*   Created: 2024/10/14 11:26:38 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/10/14 11:26:39 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/so_long.h"
 #include "../include/map.h"
@@ -43,7 +43,7 @@ void	check_next_move(char *next, t_game *gm)
 		{
 			if (gm->C_collected == gm->C_sum)
 			{
-				ft_printf("Nice! You completed the game in %d moves\n", gm->move_count);
+				ft_printf("Nice! Game completed in %d moves\n", gm->move_count);
 				exit_and_free_gm(gm);
 			}
 			else
@@ -74,5 +74,5 @@ char	*check_next_obj(t_game *gm, int key)
 		return (&gm->map[gm->pl_y + 1][gm->pl_x]);
 	else if (key == ESC)
 		exit_and_free_gm(gm);
-	return (NULL);
+	return ("a");
 }

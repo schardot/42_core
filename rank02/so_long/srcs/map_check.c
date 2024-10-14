@@ -1,15 +1,16 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 15:18:56 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 14:47:12 by codespace        ###   ########.fr       */
+/*   Created: 2024/10/14 11:26:45 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/10/14 11:26:46 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
+#include "../include/so_long.h"
 #include "../include/map.h"
 
 void	check_map(t_maperr *merr, t_map *mstr, t_game *gm, char *file)
@@ -77,7 +78,7 @@ void	check_map_errors(t_maperr *merr, t_map *mstr, t_game *gm)
 		exit_and_free_all(gm, mstr, merr);
 }
 
-int check_path(char **map, int h, int w, t_map *mstr)
+int	check_path(char **map, int h, int w, t_map *mstr)
 {
 	if (h < 0 || w < 0 || !map[h] || ft_strchr("V1\0", map[h][w]))
 		return (0);
@@ -88,9 +89,9 @@ int check_path(char **map, int h, int w, t_map *mstr)
 	map[h][w] = 'V';
 	if (check_neighbour(map, h, w))
 	{
-		return (check_path(map, h - 1, w, mstr) ||
-				check_path(map, h, w + 1, mstr) ||
-				check_path(map, h + 1, w, mstr) ||
+		return (check_path(map, h - 1, w, mstr) || \
+				check_path(map, h, w + 1, mstr) || \
+				check_path(map, h + 1, w, mstr) || \
 				check_path(map, h, w - 1, mstr));
 	}
 	if (mstr->pc_exit && mstr->pc_coin == mstr->count_C)

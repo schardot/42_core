@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   new_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nleite-s <nleite-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/09 15:28:27 by nataliascha       #+#    #+#             */
-/*   Updated: 2024/10/12 14:48:19 by codespace        ###   ########.fr       */
+/*   Created: 2024/10/14 11:27:09 by nleite-s          #+#    #+#             */
+/*   Updated: 2024/10/14 11:27:10 by nleite-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "../include/so_long.h"
 #include "../include/map.h"
@@ -27,9 +27,9 @@ int	main(int argc, char **argv)
 	render_game(gm->map, gm);
 	free(mstr);
 	free(merr);
-	mlx_key_hook(gm->wn, key_press, (void *)gm);
 	mlx_loop_hook(gm->cn, main_loop, (void *)gm);
-	mlx_hook(gm->wn, 17, 0, (void *)exit, 0);
+	mlx_hook(gm->wn, 17, 0, (void *)exit_and_free_gm, (void *)gm);
+	mlx_key_hook(gm->wn, key_press, (void *)gm);
 	mlx_loop(gm->cn);
 }
 
