@@ -56,7 +56,7 @@ Here is a list of some of the projects included in this repository:
 
    - **Tech stack:**  C, Game development, minilibX
      
-![Static Badge](https://img.shields.io/badge/approved-125%25-brightgreen?style=flat-square)
+![Static Badge](https://img.shields.io/badge/approved-100%25-brightgreen?style=flat-square)
 
 
 
