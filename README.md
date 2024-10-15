@@ -55,8 +55,8 @@ Here is a list of some of the projects included in this repository:
    - So_long is a 2D maze game developed using the minilibX graphics library. The project involves creating a small game where the player collects items and navigates through a map.
 
    - **Tech stack:**  C, Game development, minilibX
-
-   ![Static Badge](https://img.shields.io/badge/project-inprogress-yellow?style=flat-square)
+     
+![Static Badge](https://img.shields.io/badge/approved-125%25-brightgreen?style=flat-square)
 
 
 
