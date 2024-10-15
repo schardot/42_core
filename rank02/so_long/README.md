@@ -1,4 +1,4 @@
-# so_long 🏞️🚶‍♂️
+# so_long 🏞️🚶‍♂️ ![Static Badge](https://img.shields.io/badge/approved-100%25-brightgreen?style=flat-square)
 
 ![Demo GIF](https://github.com/schardot/42_core/blob/main/rank02/so_long/schardot_so_long.gif)
 
