@@ -3,13 +3,13 @@
 A C function that reads a line from a file descriptor efficiently, returning one line at a time.
 
 ## 📜 Table of Contents
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Compilation](#compilation)
-- [Project Requirements](#project-requirements)
+- [Features](#-features)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Compilation](#-compilation)
+- [Project Requirements](#-project-requirements)
 - [Notes on Behavior](#notes-on-behavior)
-- [License](#license)
+- [License](#-license)
 
 ## 🚀 Features
 ✅ Reads one line at a time from a given file descriptor.
