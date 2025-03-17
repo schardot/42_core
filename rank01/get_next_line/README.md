@@ -8,7 +8,7 @@ A C function that reads a line from a file descriptor efficiently, returning one
 - [Usage](#-usage)
 - [Compilation](#-compilation)
 - [Project Requirements](#-project-requirements)
-- [Notes on Behavior](#notes-on-behavior)
+- [Notes on Behavior](#-notes-on-behavior)
 - [License](#-license)
 
 ## 🚀 Features
