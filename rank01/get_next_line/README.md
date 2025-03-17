@@ -1,33 +1,96 @@
-# get_next_line ![Static Badge](https://img.shields.io/badge/moulinette-105%25-brightgreen?style=flat-square)
+# **get_next_line**
 
-`get_next_line` is a C function designed to read a line from a file descriptor, allowing for efficient reading from both files and standard input. The function handles multiple calls and returns one line at a time, including the terminating newline character when applicable.
+A C function that reads a line from a file descriptor efficiently, returning one line at a time.
 
-## Features
+## 📜 Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Compilation](#compilation)
+- [Project Requirements](#project-requirements)
+- [Notes on Behavior](#notes-on-behavior)
+- [License](#license)
 
-- Repeated calls to `get_next_line()` read from the specified file descriptor one line at a time.
-- Returns the line read, or `NULL` if there's nothing left to read or an error occurs.
-- Supports reading from both files and standard input.
-- The returned line includes the terminating newline character, except when the end of the file is reached without a newline.
-  
-## Instructions
+## 🚀 Features
+✅ Reads one line at a time from a given file descriptor.
 
-| Status | Description |
-| --- | --- |
-| :green_circle: | Repeated calls should read the text file pointed to by the file descriptor, one line at a time. |
-| :green_circle: | Returns the line that was read, or `NULL` if no more data is available. |
-| :green_circle: | Functions correctly for both file and standard input. |
-| :green_circle: | Returned line includes a terminating newline character, unless at the end of the file. |
-| :green_circle: | The header file `get_next_line.h` must contain the prototype of the `get_next_line()` function. |
-| :green_circle: | Add all helper functions in `get_next_line_utils.c`. |
-| :green_circle: | Use the option `-D BUFFER_SIZE=n` in the compiler call to define the buffer size for `read()`. |
-| :green_circle: | Compile as follows (example with a buffer size of 42): `cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c` |
-| :green_circle: | Undefined behavior occurs if the file descriptor changes between calls without reaching EOF. |
-| :green_circle: | Undefined behavior may also occur when reading binary files. Logical handling is encouraged. |
+✅ Supports both file and standard input (`stdin`).
 
-## Installation
+✅ Handles multiple calls efficiently, preserving state between reads.
 
-To use the `get_next_line` function, include the header file in your project:
+✅ Returns `NULL` when EOF is reached or an error occurs.
 
+✅ Includes the newline character (`\n`), except at the end of the file if there's no trailing newline.
+
+✅ Configurable buffer size using `-D BUFFER_SIZE=n`.
+
+## 📥 Installation
+Clone the repository:
+```sh
+git clone https://github.com/yourusername/get_next_line.git
+cd get_next_line
+```
+
+## 📌 Usage
+
+### **Basic Example: Reading from a File**
 ```c
+#include <fcntl.h>
+#include <stdio.h>
 #include "get_next_line.h"
 
+int main(void)
+{
+    int fd = open("test.txt", O_RDONLY);
+    char *line;
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+    close(fd);
+    return 0;
+}
+```
+
+### **Standard Input Example (Reading User Input)**
+```c
+#include <stdio.h>
+#include "get_next_line.h"
+
+int main(void)
+{
+    char *line;
+
+    printf("Enter text (Ctrl+D to stop):\n");
+    while ((line = get_next_line(0)) != NULL)
+    {
+        printf("You entered: %s", line);
+        free(line);
+    }
+    return 0;
+}
+```
+
+## 🛠 Compilation  
+You can specify a custom buffer size when compiling:    
+```sh
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c -o gnl
+```
+If `BUFFER_SIZE` is **not defined**, the program defaults to a buffer size of **1**.
+
+## 📋 Project Requirements  
+- Must include `get_next_line.h` with function prototypes.  
+- Helper functions should be in `get_next_line_utils.c`.  
+- Function **must not leak memory** and should free dynamically allocated memory properly.  
+- **If `BUFFER_SIZE` is not explicitly defined, it defaults to 1.**  
+- Works with file descriptors and standard input.  
+
+## ⚠️ Notes on Behavior  
+- **Changing file descriptors** between calls before reaching EOF may cause unexpected behavior.  
+- **Binary files** are not explicitly supported but can be handled with modifications.  
+- **Performance consideration:** A small `BUFFER_SIZE` (e.g., `1`) can impact performance, while a larger value may improve efficiency.  
+
+## 📄 License  
+This project is licensed under the [MIT License](LICENSE).  
