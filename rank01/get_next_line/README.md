@@ -4,7 +4,6 @@ A C function that reads a line from a file descriptor efficiently, returning one
 
 ## 📜 Table of Contents
 - [Features](#-features)
-- [Installation](#-installation)
 - [Usage](#-usage)
 - [Compilation](#-compilation)
 - [Project Requirements](#-project-requirements)
@@ -23,13 +22,6 @@ A C function that reads a line from a file descriptor efficiently, returning one
 ✅ Includes the newline character (`\n`), except at the end of the file if there's no trailing newline.
 
 ✅ Configurable buffer size using `-D BUFFER_SIZE=n`.
-
-## 📥 Installation
-Clone the repository:
-```sh
-git clone https://github.com/yourusername/get_next_line.git
-cd get_next_line
-```
 
 ## 📌 Usage
 
@@ -87,7 +79,7 @@ If `BUFFER_SIZE` is **not defined**, the program defaults to a buffer size of **
 - **If `BUFFER_SIZE` is not explicitly defined, it defaults to 1.**  
 - Works with file descriptors and standard input.  
 
-## ⚠️ Notes on Behavior  
+## ⚠️ Notes on Behavior
 - **Changing file descriptors** between calls before reaching EOF may cause unexpected behavior.  
 - **Binary files** are not explicitly supported but can be handled with modifications.  
 - **Performance consideration:** A small `BUFFER_SIZE` (e.g., `1`) can impact performance, while a larger value may improve efficiency.  
